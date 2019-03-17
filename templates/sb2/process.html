@@ -1,0 +1,65 @@
+{% extends "sb2/base.html" %}
+{% block css %}
+{% endblock %}
+{% block content %}
+    <input name="fi" type="file" value="aaa">
+    <button name="bb" class="btn btn-danger up" onclick="f(this)">submit</button>
+
+{% endblock %}
+{% block js %}
+    <script type="text/javascript">
+        // 上传图片
+        function f(btn) {
+            let that = btn;
+            console.log($(that));
+            let file= $(that).prev()[0].files[0];
+            let formData = new FormData();
+            formData.append('passport', file);
+            console.log(formData);
+            $.ajax({
+                url: "/upload/",
+                type: "post",
+                data: formData,
+                xhrFields: {withCredentials: true},
+                contentType: false,
+                processData: false,
+                mimeType: "multipart/form-data",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+
+        }
+
+        function saveUser2() {
+            var id = $("#id").val().trim();
+            var uname = $("#uname").val().trim();
+            var pwd = $("#pwd").val().trim();
+            var file = document.getElementById("file").files[0];
+            var formData = new FormData();
+            formData.append('id', id);
+            formData.append('uname', uname);
+            formData.append('pwd', pwd);
+            formData.append('file', file);
+
+            $.ajax({
+                url: "/home/about",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                mimeType: "multipart/form-data",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+    </script>
+{% endblock %}
