@@ -112,5 +112,15 @@ def upload(request):
         with open(passport.name, "wb+") as f:
             for chunk in passport.chunks():  # 分块写入文件
                 f.write(chunk)
-        ret = demo(passport.name)
+        ret = json.loads(demo(passport.name))
+        print(ret.get("country"), ret.get("name"), ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
+              ret.get("issue_date"),
+              ret.get("expiry_date"))
         return HttpResponse(ret)
+# "country":"CHN" 国籍
+# "name":"MIERAILI.YUSUFU", 姓名
+# "sex":"M" 性别、称谓
+# "birth_date": "19891001" 出生日期
+# "passport_no": "E21160222", 护照号
+# "issue_date": "20130520", 签发日期
+# "expiry_date": "20230519",  有效期
