@@ -14,6 +14,9 @@
     .maxbutton{
         border-radius:90px;
     }
+    .sum-index{
+        text-align: center;
+    }
     </style>
 
 {#    粘贴进来的文件sta  #}
@@ -94,21 +97,31 @@
                     <td>护照封面和个人信息页</td>
                     <td>上传护照封面页 <input name="fi" type="file" value="aaa"></td>
                     <td>护照个人信息页 <input name="fi" type="file" value="aaa" class="index_input"></td>
-                    <td><button class="btn btn-info btn-icon-split maxbutton">
-                    <span class="text">上传</span>
-                    </button></td>
+                    <td>
+                        <button class="btn btn-info btn-icon-split maxbutton">
+                        <span class="text">上传</span>
+                        </button>
+                    </td>
 
                   </tr>
                    <tr>
                     <td>机票行程单</td>
                     <td>去程目的地机票 <input name="fi" type="file" value="aaa" class="index_input"></td>
                     <td>返程目的地机票 <input name="fi" type="file" value="aaa" class="index_input"></td>
-                    <td><button>上传</button></td>
+                    <td>
+                        <button class="btn btn-info btn-icon-split maxbutton">
+                        <span class="text">上传</span>
+                        </button>
+                    </td>
                   </tr>
                    <tr>
                     <td>酒店信息上传</td>
                     <td colspan="2">酒店订单<input name="fi" type="file" value="aaa" class="index_input"></td>
-                    <td><button>上传</button></td>
+                    <td>
+                        <button class="btn btn-info btn-icon-split maxbutton">
+                        <span class="text">上传</span>
+                        </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -243,7 +256,11 @@
                   <td>中国北京市海淀区苏州街18号</td>
                 </tbody>
               </table>
-          <div class="card-footer small text-muted "><button class="tijiao" value="提交信息">提交信息</button></div>
+          <div class="card-footer small text-muted sum-index ">
+              <button class="btn btn-success btn-icon-split maxbutton">
+                <span class="text">提交信息</span>
+                </button>
+          </div>
         </div>
 
       </div>
