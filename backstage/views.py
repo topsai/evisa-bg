@@ -50,7 +50,7 @@ def demo(img):
         print('Http status code: ', stat)
         print('Error msg in header: ', header['x-ca-error-message'] if 'x-ca-error-message' in header else '')
         print('Error msg in body: ', content)
-        exit()
+        content = None
     result_str = content
 
     print(result_str)
@@ -112,11 +112,19 @@ def upload(request):
         with open(passport.name, "wb+") as f:
             for chunk in passport.chunks():  # 分块写入文件
                 f.write(chunk)
-        ret = json.loads(demo(passport.name))
+        try:
+            ret = json.loads(demo(passport.name))
+        except:
+            return HttpResponse("1")
         print(ret.get("country"), ret.get("name"), ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
               ret.get("issue_date"),
               ret.get("expiry_date"))
-        return HttpResponse(ret)
+        firstname, lastname = ret.get("name").split(".")
+        data = [ret.get("country"), firstname, lastname, ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
+                ret.get("issue_date"),
+                ret.get("expiry_date")]
+        print(json.dumps(data))
+        return HttpResponse(json.dumps(data))
 # "country":"CHN" 国籍
 # "name":"MIERAILI.YUSUFU", 姓名
 # "sex":"M" 性别、称谓
