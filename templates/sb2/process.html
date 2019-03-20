@@ -3,418 +3,490 @@
 {% endblock %}
 {% block content %}
 
-<style>
-    .indexbox {
-        width: 100%;
-        margin: 0 auto;
-    }
+    <style>
+        .indexbox {
+            width: 100%;
+            margin: 0 auto;
+        }
 
-    .index_input {
-        width: 200px;
-    }
+        .index_input {
+            width: 200px;
+        }
 
-    .maxbutton {
-        border-radius: 90px;
-    }
+        .maxbutton {
+            border-radius: 90px;
+        }
 
-    .sum-index {
-        text-align: center;
-    }
-</style>
+        .sum-index {
+            text-align: center;
+        }
 
-{#    粘贴进来的文件sta  #}
-<div id="content-wrapper">
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
 
-    <div class="container-fluid indexbox">
+        .infobox {
+            width: 100%;
+        }
 
-        <!-- Breadcrumbs-->
-        <div class="card-header">
-            <i class="fas fa-table"></i>
-            签注进度查询
+        .infobox li {
+            border: 1px solid #f90;
+            font-size: 12px;
+            width: 33%;
+            float: left;
+        }
+
+        .row-img {
+            width: 49%;
+            height: 7rem;
+            border: 1px dotted #ccc;
+            background: url(../../static/img/img.jpg) no-repeat top center;
+            margin-bottom: 1rem !important;
+        }
+
+        .row-p {
+            margin-top: 3rem;
+            left: 20px;
+            text-align: center;
+            padding: 1rem 0 2rem;
+        }
+
+        .text-primary {
+            color: #999 !important;
+        }
+
+        .card-header {
+            color: #4e73df !important;
+        }
+    </style>
+
+    {#    粘贴进来的文件sta  #}
+    <div id="content-wrapper">
+
+        <div class="container-fluid indexbox">
+
+            <!-- Breadcrumbs-->
+            {#        <div class="card-header">#}
+            {#            <i class="fas fa-table"></i>#}
+            {#            签注进度查询#}
+            {#        </div>#}
+
+
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    基本资料
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <!-- Grow In Utility -->
+                        <div class="col-lg-4">
+
+                            <div class="card position-relative">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">上传护照副本</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="small mb-5 row-img">
+
+                                            <div class="row-p"><input name="passportphoto[]" type="file" value="1111"
+                                                                      style="width:100%;height:100%;">上传护照复印件<br/> (封面)
+                                            </div>
+                                        </div>
+                                        <div class="small md-2">&nbsp;&nbsp;</div>
+                                        <div class="small mb-5 row-img">
+                                            {#                          <input name="passportphoto[]" type="file" value="22222">#}
+                                            <div class="row-p">上传护照复印件<br/> (个人信息页)</div>
+                                        </div>
+                                        <p class="mb-0 small">*接受文件类型:pdf,jpg,jpeg,png,bmp，请确保文件大小大于100KB，小于2MB</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4">
+
+                            <div class="card position-relative">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">上传机票行程单</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="small mb-5 row-img">
+                                            {#                          <input name="passportphoto[]" type="file" value="aaa">#}
+                                            <div class="row-p">上传到达机票</div>
+                                        </div>
+                                        <div class="small md-2">&nbsp;&nbsp;</div>
+                                        <div class="small mb-5 row-img">
+                                            {#                          <input name="passportphoto[]" type="file" value="aaa">#}
+                                            <div class="row-p">上传返回机票</div>
+                                        </div>
+                                        <p class="mb-0 small">*接受文件类型:pdf,jpg,jpeg,png,bmp，请确保文件大小大于100KB，小于2MB</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4">
+
+                            <div class="card position-relative">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">上传酒店信息</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="small mb-5 row-img">
+                                            {#                          <input name="passportphoto[]" type="file" value="aaa">#}
+                                            <div class="row-p">上传酒店信息</div>
+                                        </div>
+                                        <p class="mb-0 small">*接受文件类型:pdf,jpg,jpeg,png,bmp，请确保文件大小大于100KB，小于2MB</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br/>
+                        <div class="row" style="width:100%;margin-top:1rem; ">
+                            <div class="col-lg-10"></div>
+                            <div class="col-lg-2" style="text-align: right">
+                                <a href="#" class="btn btn-success btn-icon-split">
+                        <span class="icon text-white-50">
+                          <i class="fas fa-check"></i>
+                        </span>
+                                    <span class="text">全部上传</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="card-body">
+
+                    <div class="col-lg-12">
+
+                        <div class="card position-relative">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">确认个人信息</h6>
+                            </div>
+                            <div class="card-body row">
+                                <div class="col-lg-3">
+                                    <label  >name<br/><input id="name" name="name"
+                                                                                        type="text" value=""></label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label  >last_name<br/>
+                                        <input id="last_name" name="last_name" type="text" value="">
+                                    </label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label >first_name<br/>
+                                        <input id="first_name" name="first_name" type="text" value=""></label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label >salutation<br/>
+                                        <input id="salutation" name="salutation" type="text" value=""></label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label >gender<br/>
+                                        <input id="gender" name="gender" type="text" value=""></label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>birth_date<br/>
+                                    <input id="birth_date" name="birth_date" type="text" value=""></label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>nationality<br/>
+                                   <input id="nationality" name="nationality" type="text" value=""></label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>nationality<br/>
+                                   <input id="nationality" name="nationality" type="text" value=""></label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>passport_number<br/>
+                                  <input id="passport_number" name="passport_number" type="text" value="">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>passport_issue<br/>
+                                  <input id="passport_issue" name="passport_issue" type="text" value="">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>passport_expiry<br/>
+                                  <input id="passport_expiry" name="passport_expiry" type="text" value="">
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+{#                    <div class="table-responsive">#}
+{#                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">#}
+{#                            <thead>#}
+{#                            <tr>#}
+{#                                <th colspan="13" class="th">核实确认个人信息</th>#}
+{#                            </tr>#}
+{#                            </thead>#}
+{##}
+{#                            <tbody>#}
+{#                            <tr class="th">#}
+{#                                <td>姓名</td>#}
+{#                                <td>姓</td>#}
+{#                                <td>名</td>#}
+{#                                <td>称谓</td>#}
+{#                                <td>性别</td>#}
+{#                                <td>出生日期</td>#}
+{#                                <td>国籍</td>#}
+{#                                <td>护照类型</td>#}
+{#                                <td>护照号</td>#}
+{#                                <td>护照发行日期</td>#}
+{#                                <td>护照到期日期</td>#}
+{##}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <td><input id="name" name="name" type="text" value=""></td>#}
+{#                                <td><input id="last_name" name="last_name" type="text" value=""></td>#}
+{#                                <td><input id="first_name" name="first_name" type="text" value=""></td>#}
+{#                                <td><input id="salutation" name="salutation" type="text" value=""></td>#}
+{#                                <td><input id="gender" name="gender" type="text" value=""></td>#}
+{#                                <td><input id="birth_date" name="birth_date" type="text" value=""></td>#}
+{#                                <td><input id="nationality" name="nationality" type="text" value=""></td>#}
+{#                                <td><input id="passport_type" name="passport_type" type="text" value="P"></td>#}
+{#                                <td><input id="passport_number" name="passport_number" type="text" value=""></td>#}
+{#                                <td><input id="passport_issue" name="passport_issue" type="text" value=""></td>#}
+{#                                <td><input id="passport_expiry" name="passport_expiry" type="text" value=""></td>#}
+{##}
+{#                            </tr>#}
+{#                            </tbody>#}
+{#                        </table>#}
+{##}
+{#                    </div>#}
+                </div>
+{#                <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">#}
+{#                    <thead>#}
+{#                    <tr class="th">#}
+{#                        <th>抵达机场</th>#}
+{#                        <th>抵达航班号</th>#}
+{#                        <th>抵达日期</th>#}
+{#                        <th>抵达时间</th>#}
+{#                        <th>返程日期</th>#}
+{#                        <th>返程时间</th>#}
+{#                        <th>返程航班号</th>#}
+{#                    </tr>#}
+{#                    </thead>#}
+{#                    <tbody>#}
+{#                    <td>清迈机场</td>#}
+{#                    <td>R123</td>#}
+{#                    <td>19/09/12</td>#}
+{#                    <td>10:20#}
+{#                    </th>#}
+{#                    <td>19/10/09</td>#}
+{#                    <td>20:00</td>#}
+{#                    <td>Y123</td>#}
+{#                    </tbody>#}
+{#                </table>#}
+{##}
+{##}
+{#                <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">#}
+{#                    <thead>#}
+{#                    <tr class="th">#}
+{#                        <th>酒店信息</th>#}
+{#                        <th>酒店名称</th>#}
+{#                        <th>酒店地址</th>#}
+{#                        <th>你的家庭住址</th>#}
+{#                    </tr>#}
+{#                    </thead>#}
+{#                    <tbody>#}
+{#                    <td></td>#}
+{#                    <td>Woodfield Resort Chiang Mai</td>#}
+{#                    <td>清迈</td>#}
+{#                    <td>中国北京市海淀区苏州街18号</td>#}
+{#                    </tbody>#}
+{#                </table>#}
+{#                <div class="card-footer small text-muted sum-index ">#}
+{#                    <button class="btn btn-success btn-icon-split maxbutton">#}
+{#                        <span class="text">提交信息</span>#}
+{#                    </button>#}
+{#                </div>#}
+            </div>
+
         </div>
+        <!-- /.container-fluid -->
 
-        <!-- Icon Cards-->
-        <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-3">
-                <div class="card text-white bg-primary o-hidden h-100">
-                    <div class="card-body">
-                        <div class="card-body-icon">
-                            <i class="fas fa-fw fa-comments"></i>
-                        </div>
-                        <div class="mr-5">1/上传护照信息</div>
-                    </div>
-                    <a class="card-footer text-white clearfix small z-1" href="#"></a>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-3">
-                <div class="card text-white bg-warning o-hidden h-100">
-                    <div class="card-body">
-                        <div class="card-body-icon">
-                            <i class="fas fa-fw fa-list"></i>
-                        </div>
-                        <div class="mr-5">2/确认信息提交</div>
-                    </div>
-                    <a class="card-footer text-white clearfix small z-1" href="#"> </a>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-3">
-                <div class="card text-white bg-success o-hidden h-100">
-                    <div class="card-body">
-                        <div class="card-body-icon">
-                            <i class="fas fa-fw fa-shopping-cart"></i>
-                        </div>
-                        <div class="mr-5">3/付款</div>
-                    </div>
-                    <a class="card-footer text-white clearfix small z-1" href="#"> </a>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-3">
-                <div class="card text-white bg-danger o-hidden h-100">
-                    <div class="card-body">
-                        <div class="card-body-icon">
-                            <i class="fas fa-fw fa-life-ring"></i>
-                        </div>
-                        <div class="mr-5">4/完成</div>
-                    </div>
-                    <a class="card-footer text-white clearfix small z-1" href="#"> </a>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- DataTables Example -->
-        <div class="card mb-3">
-            <div class="card-header">
-                <i class="fas fa-table"></i>
-                申请护照表格
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th colspan="4" class="th">1/上传护照信息</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>护照封面和个人信息页</td>
-                            <td>上传护照封面页 <input name="passportphoto[]" type="file" value="1111"></td>
-                            <td>护照个人信息页 <input name="passportphoto[]" type="file" value="22222" class="index_input"></td>
-                            <td>
-                                <button id="s1" onclick="f11(this)" class="btn btn-info btn-icon-split maxbutton">
-                                    <span  class="text">上传</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>机票行程单</td>
-                            <td>去程目的地机票 <input name="passportphoto[]" type="file" value="aaa" class="index_input"></td>
-                            <td>返程目的地机票 <input name="passportphoto[]" type="file" value="aaa" class="index_input"></td>
-                            <td>
-                                <button class="btn btn-info btn-icon-split maxbutton">
-                                    <span class="text">上传</span>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>酒店信息上传</td>
-                            <td colspan="2">酒店订单<input name="fi" type="file" value="aaa" class="index_input"></td>
-                            <td>
-                                <button class="btn btn-info btn-icon-split maxbutton">
-                                    <span class="text">上传</span>
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th colspan="4" class="th">2/个人信息填写</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>电子邮箱地址</td>
-                            <td><input type="text"/></td>
-                        </tr>
-                        <tr>
-                            <td>手机号</td>
-                            <td><input type="number"/></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th colspan="13" class="th">3/核实确认个人信息</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr class="th">
-                            <td>姓名</td>
-                            <td>姓</td>
-                            <td>名</td>
-                            <td>称谓</td>
-                            <td>性别</td>
-                            <td>出生日期</td>
-                            <td>国籍</td>
-                            <td>护照类型</td>
-                            <td>护照号</td>
-                            <td>护照发行日期</td>
-                            <td>护照到期日期</td>
-
-                        </tr>
-                        <tr>
-                            <td><input id="name" name="name" type="text" value=""></td>
-                            <td><input id="last_name" name="last_name" type="text" value=""></td>
-                            <td><input id="first_name" name="first_name" type="text" value=""></td>
-                            <td><input id="salutation" name="salutation" type="text" value=""></td>
-                            <td><input id="gender" name="gender" type="text" value=""></td>
-                            <td><input id="birth_date" name="birth_date" type="text" value=""></td>
-                            <td><input id="nationality" name="nationality" type="text" value=""></td>
-                            <td><input id="passport_type" name="passport_type" type="text" value="P"></td>
-                            <td><input id="passport_number" name="passport_number" type="text" value=""></td>
-                            <td><input id="passport_issue" name="passport_issue" type="text" value=""></td>
-                            <td><input id="passport_expiry" name="passport_expiry" type="text" value=""></td>
-
-                        </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-            <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
-                <thead>
-                <tr class="th">
-                    <th>抵达机场</th>
-                    <th>抵达航班号</th>
-                    <th>抵达日期</th>
-                    <th>抵达时间</th>
-                    <th>返程日期</th>
-                    <th>返程时间</th>
-                    <th>返程航班号</th>
-                </tr>
-                </thead>
-                <tbody>
-                <td>清迈机场</td>
-                <td>R123</td>
-                <td>19/09/12</td>
-                <td>10:20
-                </th>
-                <td>19/10/09</td>
-                <td>20:00</td>
-                <td>Y123</td>
-                </tbody>
-            </table>
-
-
-            <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
-                <thead>
-                <tr class="th">
-                    <th>酒店信息</th>
-                    <th>酒店名称</th>
-                    <th>酒店地址</th>
-                    <th>你的家庭住址</th>
-                </tr>
-                </thead>
-                <tbody>
-                <td></td>
-                <td>Woodfield Resort Chiang Mai</td>
-                <td>清迈</td>
-                <td>中国北京市海淀区苏州街18号</td>
-                </tbody>
-            </table>
-            <div class="card-footer small text-muted sum-index ">
-                <button class="btn btn-success btn-icon-split maxbutton">
-                    <span class="text">提交信息</span>
-                </button>
-            </div>
-        </div>
+        <!-- Sticky Footer -->
+{#        <footer class="sticky-footer">#}
+{#            <div class="container my-auto">#}
+{#                <div class="copyright text-center my-auto">#}
+{#                    <span>Copyright © Your Website 2019</span>#}
+{#                </div>#}
+{#            </div>#}
+{#        </footer>#}
 
     </div>
-    <!-- /.container-fluid -->
+    {#    粘贴进来的文件end #}
 
-    <!-- Sticky Footer -->
-    <footer class="sticky-footer">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright © Your Website 2019</span>
-            </div>
-        </div>
-    </footer>
-
-</div>
-{#    粘贴进来的文件end #}
-
-<input name="fi" type="file" value="aaa">
-<button name="bb" class="btn btn-danger up" onclick="f(this)">submit</button>
+{#    <input name="fi" type="file" value="aaa">#}
+{#    <button name="bb" class="btn btn-danger up" onclick="f(this)">submit</button>#}
 
 {% endblock %}
 {% block js %}
-<script type="text/javascript">
-    function f11(t) {
-        let that = t;
-        let f = $(that).parent().prev().children()[0];
-        console.log($(that).parent().prev().children().first().val());
-        console.log($(that).parent().prev().children()[0]);
+    <script type="text/javascript">
+        function f11(t) {
+            let that = t;
+            let f = $(that).parent().prev().children()[0];
+            console.log($(that).parent().prev().children().first().val());
+            console.log($(that).parent().prev().children()[0]);
 
-        let file = f.files[0];
-        if(!file){
-            alert("请先选择文件");
+            let file = f.files[0];
+            if (!file) {
+                alert("请先选择文件");
+            }
+            let formData = new FormData();
+            formData.append('passport', file);
+            console.log(formData);
+            $.ajax({
+                url: "/upload/",
+                type: "post",
+                data: formData,
+                xhrFields: {withCredentials: true},
+                contentType: false,
+                processData: false,
+                mimeType: "multipart/form-data",
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data.length != 8) {
+                        console.log("识别失败，请重新拍摄照片，保持画面清晰。");
+                        alert("识别失败，请重新拍摄照片，保持画面清晰。");
+                    } else {
+                        console.log("else");
+                        // data = [ret.get("country"), firstname, lastname, ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
+                        //     ret.get("issue_date"),
+                        //     ret.get("expiry_date")]
+                        console.log(data);
+                        // name="name" type="text" value="张三"></td>
+                        //         <td><input name="last_name" type="text" value="张"></td>
+                        //         <td><input name="first_name" type="text" value="三"></td>
+                        //         <td><input name="salutation" type="text" value="女士"></td>
+                        //         <td><input name="gender" type="text" value="女"></td>
+                        //         <td><input name="birth_date" type="text" value="19/09/12"></td>
+                        //         <td><input name="nationality" type="text" value="中国"></td>
+                        //         <td><input name="passport_type" type="text" value="普通"></td>
+                        //         <td><input name="passport_number" type="text" value="G890654356"></td>
+                        //         <td><input name="passport_issue" type="text" value="12/09/14"></td>
+                        //         <td><input name="passport_expiry
+                        $("#name").val(data[2] + '.' + data[1]);
+                        $("#last_name").val(data[2]);
+                        $("#first_name").val(data[1]);
+                        $("#salutation").val(data[3]);
+                        $("#gender").val(data[3]);
+                        $("#birth_date").val(data[4]);
+                        $("#nationality").val(data[0]);
+                        $("#passport_number").val(data[5]);
+                        $("#passport_issue").val(data[6]);
+                        $("#passport_expiry").val(data[7]);
+
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+
+
         }
-        let formData = new FormData();
-        formData.append('passport', file);
-        console.log(formData);
-        $.ajax({
-            url: "/upload/",
-            type: "post",
-            data: formData,
-            xhrFields: {withCredentials: true},
-            contentType: false,
-            processData: false,
-            mimeType: "multipart/form-data",
-            success: function (data) {
-                data = JSON.parse(data);
-                if (data.length != 8) {
-                    console.log("识别失败，请重新拍摄照片，保持画面清晰。");
-                    alert("识别失败，请重新拍摄照片，保持画面清晰。");
-                } else {
-                    console.log("else");
-                    // data = [ret.get("country"), firstname, lastname, ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
-                    //     ret.get("issue_date"),
-                    //     ret.get("expiry_date")]
+
+        // 上传图片
+        function f(btn) {
+            let that = btn;
+            console.log($(that));
+            let file = $(that).prev()[0].files[0];
+            let formData = new FormData();
+            formData.append('passport', file);
+            console.log(formData);
+            $.ajax({
+                url: "/upload/",
+                type: "post",
+                data: formData,
+                xhrFields: {withCredentials: true},
+                contentType: false,
+                processData: false,
+                mimeType: "multipart/form-data",
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data.length < 8) {
+                        alert("识别失败，请重新拍摄照片，保持画面清晰。")
+                    } else {
+                        // data = [ret.get("country"), firstname, lastname, ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
+                        //     ret.get("issue_date"),
+                        //     ret.get("expiry_date")]
+                        console.log(data);
+                        // name="name" type="text" value="张三"></td>
+                        //         <td><input name="last_name" type="text" value="张"></td>
+                        //         <td><input name="first_name" type="text" value="三"></td>
+                        //         <td><input name="salutation" type="text" value="女士"></td>
+                        //         <td><input name="gender" type="text" value="女"></td>
+                        //         <td><input name="birth_date" type="text" value="19/09/12"></td>
+                        //         <td><input name="nationality" type="text" value="中国"></td>
+                        //         <td><input name="passport_type" type="text" value="普通"></td>
+                        //         <td><input name="passport_number" type="text" value="G890654356"></td>
+                        //         <td><input name="passport_issue" type="text" value="12/09/14"></td>
+                        //         <td><input name="passport_expiry
+                        $("#name").val(data[2] + '.' + data[1]);
+                        $("#last_name").val(data[2]);
+                        $("#first_name").val(data[1]);
+                        $("#salutation").val(data[3]);
+                        $("#gender").val(data[3]);
+                        $("#birth_date").val(data[4]);
+                        $("#nationality").val(data[0]);
+                        $("#passport_number").val(data[5]);
+                        $("#passport_issue").val(data[6]);
+                        $("#passport_expiry").val(data[7]);
+
+                    }
+                },
+                error: function (data) {
                     console.log(data);
-                    // name="name" type="text" value="张三"></td>
-                    //         <td><input name="last_name" type="text" value="张"></td>
-                    //         <td><input name="first_name" type="text" value="三"></td>
-                    //         <td><input name="salutation" type="text" value="女士"></td>
-                    //         <td><input name="gender" type="text" value="女"></td>
-                    //         <td><input name="birth_date" type="text" value="19/09/12"></td>
-                    //         <td><input name="nationality" type="text" value="中国"></td>
-                    //         <td><input name="passport_type" type="text" value="普通"></td>
-                    //         <td><input name="passport_number" type="text" value="G890654356"></td>
-                    //         <td><input name="passport_issue" type="text" value="12/09/14"></td>
-                    //         <td><input name="passport_expiry
-                    $("#name").val(data[2] + '.' + data[1]);
-                    $("#last_name").val(data[2]);
-                    $("#first_name").val(data[1]);
-                    $("#salutation").val(data[3]);
-                    $("#gender").val(data[3]);
-                    $("#birth_date").val(data[4]);
-                    $("#nationality").val(data[0]);
-                    $("#passport_number").val(data[5]);
-                    $("#passport_issue").val(data[6]);
-                    $("#passport_expiry").val(data[7]);
-
                 }
-            },
-            error: function (data) {
-                console.log(data);
-            }
-        });
+            });
 
+        }
 
+        function saveUser2() {
+            var id = $("#id").val().trim();
+            var uname = $("#uname").val().trim();
+            var pwd = $("#pwd").val().trim();
+            var file = document.getElementById("file").files[0];
+            var formData = new FormData();
+            formData.append('id', id);
+            formData.append('uname', uname);
+            formData.append('pwd', pwd);
+            formData.append('file', file);
 
-
-
-    }
-    // 上传图片
-    function f(btn) {
-        let that = btn;
-        console.log($(that));
-        let file = $(that).prev()[0].files[0];
-        let formData = new FormData();
-        formData.append('passport', file);
-        console.log(formData);
-        $.ajax({
-            url: "/upload/",
-            type: "post",
-            data: formData,
-            xhrFields: {withCredentials: true},
-            contentType: false,
-            processData: false,
-            mimeType: "multipart/form-data",
-            success: function (data) {
-                data = JSON.parse(data);
-                if (data.length < 8) {
-                    alert("识别失败，请重新拍摄照片，保持画面清晰。")
-                } else {
-                    // data = [ret.get("country"), firstname, lastname, ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
-                    //     ret.get("issue_date"),
-                    //     ret.get("expiry_date")]
+            $.ajax({
+                url: "/home/about",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                mimeType: "multipart/form-data",
+                success: function (data) {
                     console.log(data);
-                    // name="name" type="text" value="张三"></td>
-                    //         <td><input name="last_name" type="text" value="张"></td>
-                    //         <td><input name="first_name" type="text" value="三"></td>
-                    //         <td><input name="salutation" type="text" value="女士"></td>
-                    //         <td><input name="gender" type="text" value="女"></td>
-                    //         <td><input name="birth_date" type="text" value="19/09/12"></td>
-                    //         <td><input name="nationality" type="text" value="中国"></td>
-                    //         <td><input name="passport_type" type="text" value="普通"></td>
-                    //         <td><input name="passport_number" type="text" value="G890654356"></td>
-                    //         <td><input name="passport_issue" type="text" value="12/09/14"></td>
-                    //         <td><input name="passport_expiry
-                    $("#name").val(data[2] + '.' + data[1]);
-                    $("#last_name").val(data[2]);
-                    $("#first_name").val(data[1]);
-                    $("#salutation").val(data[3]);
-                    $("#gender").val(data[3]);
-                    $("#birth_date").val(data[4]);
-                    $("#nationality").val(data[0]);
-                    $("#passport_number").val(data[5]);
-                    $("#passport_issue").val(data[6]);
-                    $("#passport_expiry").val(data[7]);
-
+                },
+                error: function (data) {
+                    console.log(data);
                 }
-            },
-            error: function (data) {
-                console.log(data);
-            }
-        });
+            });
+        }
 
-    }
-
-    function saveUser2() {
-        var id = $("#id").val().trim();
-        var uname = $("#uname").val().trim();
-        var pwd = $("#pwd").val().trim();
-        var file = document.getElementById("file").files[0];
-        var formData = new FormData();
-        formData.append('id', id);
-        formData.append('uname', uname);
-        formData.append('pwd', pwd);
-        formData.append('file', file);
-
-        $.ajax({
-            url: "/home/about",
-            type: "post",
-            data: formData,
-            contentType: false,
-            processData: false,
-            mimeType: "multipart/form-data",
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (data) {
-                console.log(data);
-            }
-        });
-    }
-
-</script>
+    </script>
 {% endblock %}

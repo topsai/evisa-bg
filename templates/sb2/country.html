@@ -1,0 +1,282 @@
+{% extends "sb2/base.html" %}
+{% block css %}
+{% endblock %}
+{% block content %}
+
+<style>
+    .indexbox {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .index_input {
+        width: 200px;
+    }
+
+    .maxbutton {
+        border-radius: 90px;
+    }
+
+    .sum-index {
+        text-align: center;
+    }
+    ul{
+        padding:0;
+        margin:0;
+        list-style: none;
+    }
+    .infobox{
+        width:100%;
+    }
+    .infobox li{
+        border:1px solid #f90;
+        font-size:12px;
+        width:33%;
+        float:left;
+    }
+    .row-img{
+         width:49%;
+        height:7rem;
+        border:1px dotted #ccc;background:url(../../static/img/img.jpg) no-repeat top center;
+        margin-bottom:1rem !important;
+    }
+    .row-p{margin-top:3rem;left:20px;text-align: center; padding:1rem 0 2rem;}
+    .text-primary {
+        color: #999!important;
+    }
+    .card-header{color:#4e73df !important;}
+</style>
+
+{#    粘贴进来的文件sta  #}
+<div id="content-wrapper">
+
+    <div class="container-fluid indexbox">
+
+        <!-- Breadcrumbs-->
+{#        <div class="card-header">#}
+{#            <i class="fas fa-table"></i>#}
+{#            签注进度查询#}
+{#        </div>#}
+
+
+
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i>
+                申请签注
+            </div>
+            <div class="card-body">
+
+                <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th colspan="4" class="th">申请签注</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>选择国家</td>
+                            <td>
+                                <select>
+                                  <option value="volvo">泰国</option>
+                                  <option value="saab">缅甸</option>
+                                  <option value="opel">印度尼西亚</option>
+                                  <option value="audi">马来西亚</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>邮箱地址</td>
+                            <td><input type="text"/></td>
+                        </tr>
+                        <tr>
+                            <td>手机号码</td>
+                            <td><input type="number"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+    <!-- Sticky Footer -->
+    <footer class="sticky-footer">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright © Your Website 2019</span>
+            </div>
+        </div>
+    </footer>
+
+</div>
+{#    粘贴进来的文件end #}
+
+<input name="fi" type="file" value="aaa">
+<button name="bb" class="btn btn-danger up" onclick="f(this)">submit</button>
+
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+    function f11(t) {
+        let that = t;
+        let f = $(that).parent().prev().children()[0];
+        console.log($(that).parent().prev().children().first().val());
+        console.log($(that).parent().prev().children()[0]);
+
+        let file = f.files[0];
+        if(!file){
+            alert("请先选择文件");
+        }
+        let formData = new FormData();
+        formData.append('passport', file);
+        console.log(formData);
+        $.ajax({
+            url: "/upload/",
+            type: "post",
+            data: formData,
+            xhrFields: {withCredentials: true},
+            contentType: false,
+            processData: false,
+            mimeType: "multipart/form-data",
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data.length != 8) {
+                    console.log("识别失败，请重新拍摄照片，保持画面清晰。");
+                    alert("识别失败，请重新拍摄照片，保持画面清晰。");
+                } else {
+                    console.log("else");
+                    // data = [ret.get("country"), firstname, lastname, ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
+                    //     ret.get("issue_date"),
+                    //     ret.get("expiry_date")]
+                    console.log(data);
+                    // name="name" type="text" value="张三"></td>
+                    //         <td><input name="last_name" type="text" value="张"></td>
+                    //         <td><input name="first_name" type="text" value="三"></td>
+                    //         <td><input name="salutation" type="text" value="女士"></td>
+                    //         <td><input name="gender" type="text" value="女"></td>
+                    //         <td><input name="birth_date" type="text" value="19/09/12"></td>
+                    //         <td><input name="nationality" type="text" value="中国"></td>
+                    //         <td><input name="passport_type" type="text" value="普通"></td>
+                    //         <td><input name="passport_number" type="text" value="G890654356"></td>
+                    //         <td><input name="passport_issue" type="text" value="12/09/14"></td>
+                    //         <td><input name="passport_expiry
+                    $("#name").val(data[2] + '.' + data[1]);
+                    $("#last_name").val(data[2]);
+                    $("#first_name").val(data[1]);
+                    $("#salutation").val(data[3]);
+                    $("#gender").val(data[3]);
+                    $("#birth_date").val(data[4]);
+                    $("#nationality").val(data[0]);
+                    $("#passport_number").val(data[5]);
+                    $("#passport_issue").val(data[6]);
+                    $("#passport_expiry").val(data[7]);
+
+                }
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+
+
+
+
+
+    }
+    // 上传图片
+    function f(btn) {
+        let that = btn;
+        console.log($(that));
+        let file = $(that).prev()[0].files[0];
+        let formData = new FormData();
+        formData.append('passport', file);
+        console.log(formData);
+        $.ajax({
+            url: "/upload/",
+            type: "post",
+            data: formData,
+            xhrFields: {withCredentials: true},
+            contentType: false,
+            processData: false,
+            mimeType: "multipart/form-data",
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data.length < 8) {
+                    alert("识别失败，请重新拍摄照片，保持画面清晰。")
+                } else {
+                    // data = [ret.get("country"), firstname, lastname, ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
+                    //     ret.get("issue_date"),
+                    //     ret.get("expiry_date")]
+                    console.log(data);
+                    // name="name" type="text" value="张三"></td>
+                    //         <td><input name="last_name" type="text" value="张"></td>
+                    //         <td><input name="first_name" type="text" value="三"></td>
+                    //         <td><input name="salutation" type="text" value="女士"></td>
+                    //         <td><input name="gender" type="text" value="女"></td>
+                    //         <td><input name="birth_date" type="text" value="19/09/12"></td>
+                    //         <td><input name="nationality" type="text" value="中国"></td>
+                    //         <td><input name="passport_type" type="text" value="普通"></td>
+                    //         <td><input name="passport_number" type="text" value="G890654356"></td>
+                    //         <td><input name="passport_issue" type="text" value="12/09/14"></td>
+                    //         <td><input name="passport_expiry
+                    $("#name").val(data[2] + '.' + data[1]);
+                    $("#last_name").val(data[2]);
+                    $("#first_name").val(data[1]);
+                    $("#salutation").val(data[3]);
+                    $("#gender").val(data[3]);
+                    $("#birth_date").val(data[4]);
+                    $("#nationality").val(data[0]);
+                    $("#passport_number").val(data[5]);
+                    $("#passport_issue").val(data[6]);
+                    $("#passport_expiry").val(data[7]);
+
+                }
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+
+    }
+
+    function saveUser2() {
+        var id = $("#id").val().trim();
+        var uname = $("#uname").val().trim();
+        var pwd = $("#pwd").val().trim();
+        var file = document.getElementById("file").files[0];
+        var formData = new FormData();
+        formData.append('id', id);
+        formData.append('uname', uname);
+        formData.append('pwd', pwd);
+        formData.append('file', file);
+
+        $.ajax({
+            url: "/home/about",
+            type: "post",
+            data: formData,
+            contentType: false,
+            processData: false,
+            mimeType: "multipart/form-data",
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    }
+
+</script>
+{% endblock %}
