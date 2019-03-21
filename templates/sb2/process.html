@@ -3,7 +3,7 @@
 {% endblock %}
 {% block content %}
 
-    <style>
+   <style>
         .indexbox {
             width: 100%;
             margin: 0 auto;
@@ -47,10 +47,7 @@
         }
 
         .row-p {
-            margin-top: 3rem;
-            left: 20px;
             text-align: center;
-            padding: 1rem 0 2rem;
         }
 
         .text-primary {
@@ -60,7 +57,44 @@
         .card-header {
             color: #4e73df !important;
         }
+        .img-size{
+          font-size:2rem;
+        }
+        #prompt3 {
+         width: 100%;
+          height: 180px;
+          text-align: center;
+          position: relative;
+        }
+        #imgSpan {
+         position: absolute;
+        top: 20px;
+        left: 45%;
+        text-align: center;
+        }
+        .filepath {
+         width: 100%;
+         height: 40%;
+         opacity: 0;
+        }
+        #img3 {
+         height: 100%;
+         width: 100%;
+         display: none;
+        }
+        .info-btn{
+          position: absolute; top:0; right: 0;
+        }
+        .over{position: relative;}
+        #finish{
+          display: none;
+        }
+        /*.card-header{
+          background:#d9edf7;
+        }*/
     </style>
+
+
 
     {#    粘贴进来的文件sta  #}
     <div id="content-wrapper">
@@ -74,263 +108,309 @@
             {#        </div>#}
 
 
-            <!-- DataTables Example -->
             <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fas fa-table"></i>
-                    基本资料
-                </div>
-                <div class="card-body">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            基本资料
+        </div>
+        <!-- 标题栏 end-->
 
-                    <div class="row">
+        <div class="card-body">
 
-                        <!-- Grow In Utility -->
-                        <div class="col-lg-4">
+            <div class="row">
+                <!-- Grow In Utility -->
+                <div class="col-lg-4">
 
-                            <div class="card position-relative">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">上传护照副本</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="small mb-5 row-img">
-
-                                            <div class="row-p"><input name="passportphoto[]" type="file" value="1111"
-                                                                      style="width:100%;height:100%;">上传护照复印件<br/> (封面)
-                                            </div>
-                                        </div>
-                                        <div class="small md-2">&nbsp;&nbsp;</div>
-                                        <div class="small mb-5 row-img">
-                                            {#                          <input name="passportphoto[]" type="file" value="22222">#}
-                                            <div class="row-p">上传护照复印件<br/> (个人信息页)</div>
-                                        </div>
-                                        <p class="mb-0 small">*接受文件类型:pdf,jpg,jpeg,png,bmp，请确保文件大小大于100KB，小于2MB</p>
+                    <div class="card position-relative">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">上传护照副本</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="small mb-6 row-img over">
+                                      <!-- <i class="fa fa-camera-retro img-size"></i><br/> -->
+                                   <div id="imgPreview">
+                                     <div id="prompt3">
+                                     <span id="imgSpan">
+                                     <i class="fa fa-camera-retro img-size"></i>
+                                       <br />
+                                     </span>
+                                     <input name="passportphoto[]" value="1111" type="file" id="file" class="filepath" onchange="changepic(this)" accept="image/jpg,image/jpeg,image/png,image/PNG">
+                                     <p>上传护照复印件<br/> (封面)</p>
+                                     </div>
+                                     <img src="#" id="img3" />
                                     </div>
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="col-lg-4">
-
-                            <div class="card position-relative">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">上传机票行程单</h6>
+                                    <button id="finish" type="button" class="btn  btn-circle btn-success info-btn"><i class="fa fa-check"></i>
+                            </button>
                                 </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="small mb-5 row-img">
-                                            {#                          <input name="passportphoto[]" type="file" value="aaa">#}
-                                            <div class="row-p">上传到达机票</div>
-                                        </div>
-                                        <div class="small md-2">&nbsp;&nbsp;</div>
-                                        <div class="small mb-5 row-img">
-                                            {#                          <input name="passportphoto[]" type="file" value="aaa">#}
-                                            <div class="row-p">上传返回机票</div>
-                                        </div>
-                                        <p class="mb-0 small">*接受文件类型:pdf,jpg,jpeg,png,bmp，请确保文件大小大于100KB，小于2MB</p>
+
+                                <div class="small mb-6 row-img over">
+                                  <div id="imgPreview">
+                                     <div id="prompt3">
+                                     <span id="imgSpan">
+                                     <i class="fa fa-camera-retro img-size"></i>
+                                       <br />
+                                       <!--AUI框架中的图标-->
+                                     </span>
+                                     <input name="passportphoto[]" value="1111" type="file" id="file" class="filepath" onchange="changepic(this)" accept="image/jpg,image/jpeg,image/png,image/PNG">
+                                     <p>上传护照复印件<br/> (个人信息页)</p>
+                                     </div>
                                     </div>
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="col-lg-4">
-
-                            <div class="card position-relative">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">上传酒店信息</h6>
+                                     <button id="finish" type="button" class="btn  btn-circle btn-success info-btn"><i class="fa fa-check"></i>
                                 </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="small mb-5 row-img">
-                                            {#                          <input name="passportphoto[]" type="file" value="aaa">#}
-                                            <div class="row-p">上传酒店信息</div>
-                                        </div>
-                                        <p class="mb-0 small">*接受文件类型:pdf,jpg,jpeg,png,bmp，请确保文件大小大于100KB，小于2MB</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <br/>
-                        <div class="row" style="width:100%;margin-top:1rem; ">
-                            <div class="col-lg-10"></div>
-                            <div class="col-lg-2" style="text-align: right">
-                                <a href="#" class="btn btn-success btn-icon-split">
-                        <span class="icon text-white-50">
-                          <i class="fas fa-check"></i>
-                        </span>
-                                    <span class="text">全部上传</span>
-                                </a>
+                                <p class="mb-0 small">*接受文件类型:pdf,jpg,jpeg,png,bmp，请确保文件大小大于100KB，小于2MB</p>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
+                <div class="col-lg-4">
+                  <div class="card position-relative">
+                      <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">上传机票行程单</h6>
+                      </div>
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="small mb-6 row-img over">
+                                    <!-- <i class="fa fa-camera-retro img-size"></i><br/> -->
+                                 <div id="imgPreview">
+                                   <div id="prompt3">
+                                   <span id="imgSpan">
+                                   <i class="fa fa-camera-retro img-size"></i>
+                                     <br />
+                                     <!--AUI框架中的图标-->
+                                   </span>
+                                   <input name="passportphoto[]" value="1111" type="file" id="file" class="filepath" onchange="changepic(this)" accept="image/jpg,image/jpeg,image/png,image/PNG">
+                                   <p>上传到达机票</p>
+                                   </div>
+                                  </div>
+                                   <button id="finish" type="button" class="btn  btn-circle btn-success info-btn"><i class="fa fa-check"></i>
+                              </div>
 
-                <div class="card-body">
+                              <div class="small mb-6 row-img over">
+                                <div id="imgPreview">
+                                   <div id="prompt3">
+                                   <span id="imgSpan">
+                                   <i class="fa fa-camera-retro img-size"></i>
+                                     <br />
+                                     <!--AUI框架中的图标-->
+                                   </span>
+                                   <input name="passportphoto[]" value="1111" type="file" id="file" class="filepath" onchange="changepic(this)" accept="image/jpg,image/jpeg,image/png,image/PNG">
+                                   <p>上传返回机票</p>
+                                   </div>
+                                  </div>
+                                   <button id="finish" type="button" class="btn  btn-circle btn-success info-btn"><i class="fa fa-check"></i>
+                              </div>
+                              <p class="mb-0 small">*接受文件类型:pdf,jpg,jpeg,png,bmp，请确保文件大小大于100KB，小于2MB</p>
+                          </div>
+                      </div>
+                  </div>
+                </div>
 
-                    <div class="col-lg-12">
+                <div class="col-lg-4">
+                  <div class="card position-relative">
+                      <div class="card-header py-3">
+                          <h6 class="m-0 font-weight-bold text-primary">上传酒店信息</h6>
+                      </div>
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="small mb-6 row-img over">
+                                    <!-- <i class="fa fa-camera-retro img-size"></i><br/> -->
+                                 <div id="imgPreview">
+                                   <div id="prompt3">
+                                   <span id="imgSpan">
+                                   <i class="fa fa-camera-retro img-size"></i>
+                                     <br />
+                                     <!--AUI框架中的图标-->
+                                   </span>
+                                   <input name="passportphoto[]" value="aaa" type="file" id="file" class="filepath" onchange="changepic(this)" accept="image/jpg,image/jpeg,image/png,image/PNG">
+                                   <p>上传酒店信息</p>
+                                   </div>
+                                  </div>
+                                   <button id="finish" type="button" class="btn  btn-circle btn-success info-btn"><i class="fa fa-check"></i>
+                              </div>
+                              <p class="mb-0 small">*接受文件类型:pdf,jpg,jpeg,png,bmp，请确保文件大小大于100KB，小于2MB</p>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+
+            </div>
+            <div style=" float: right; margin-top:1rem;">
+              <a href="#" class="btn btn-success btn-icon-split"><span class="icon text-white-50"> <i class="fas fa-check"></i> </span>
+                  <span class="text">全部上传</span>
+              </a>
+             </div>
+        </div>
+        <!-- 上传信息 end-->
+
+        <div class="card-body">
+
+            <div class="row">
+                <!-- Grow In Utility -->
+                <div class="col-lg-12">
+                    <div class="card position-relative">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">请输入个人联系信息</h6>
+                        </div>
+                        <div class="card-body row">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <label  >Mobile number<br/><input id="name" name="Mobile number" type="text" placeholder="86+ 18636987415"></label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <label  >Email address<br/>
+                                    <input id="last_name" name="Email address" type="text" value="" placeholder="Email address">
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <label>address<br/>
+                                    <textarea rows="2" cols="50"  placeholder="address">
+                                    </textarea>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div style=" float: right; margin-top:1rem;">
+              <a href="#" class="btn btn-success btn-icon-split"><span class="icon text-white-50"> <i class="fas fa-check"></i> </span>
+                  <span class="text">提交</span>
+              </a>
+             </div>
+        </div>
+        <!-- 输入联系信息 end -->
+
+        <div class="card-body">
+
+            <div class="row">
+                <!-- Grow In Utility -->
+                <div class="col-lg-12">
 
                         <div class="card position-relative">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">确认个人信息</h6>
                             </div>
                             <div class="card-body row">
-                                <div class="col-lg-3">
-                                    <label  >name<br/><input id="name" name="name"
-                                                                                        type="text" value=""></label>
-                                </div>
-                                <div class="col-lg-3">
-                                    <label  >last_name<br/>
-                                        <input id="last_name" name="last_name" type="text" value="">
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label  >Family Name<br/> <!-- 姓 -->
+                                      <input id="family Name" name="family Name" type="text" value="">
                                     </label>
                                 </div>
-                                <div class="col-lg-3">
-                                    <label >first_name<br/>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label >first_name<br/>  <!-- 名 -->
                                         <input id="first_name" name="first_name" type="text" value=""></label>
                                 </div>
-                                <div class="col-lg-3">
-                                    <label >salutation<br/>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label >salutation<br/>  <!-- 称谓 -->
                                         <input id="salutation" name="salutation" type="text" value=""></label>
                                 </div>
-                                <div class="col-lg-3">
-                                    <label >gender<br/>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label >Gender<br/>  <!-- 性别 -->
                                         <input id="gender" name="gender" type="text" value=""></label>
                                 </div>
-                                <div class="col-lg-3">
-                                    <label>birth_date<br/>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label>Date of birth<br/>  <!-- 出生日期 -->
                                     <input id="birth_date" name="birth_date" type="text" value=""></label>
                                 </div>
-                                <div class="col-lg-3">
-                                    <label>nationality<br/>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label>Nationality<br/>  <!-- 国籍 -->
                                    <input id="nationality" name="nationality" type="text" value=""></label>
                                 </div>
-                                <div class="col-lg-3">
-                                    <label>nationality<br/>
-                                   <input id="nationality" name="nationality" type="text" value=""></label>
-                                </div>
-                                <div class="col-lg-3">
-                                    <label>passport_number<br/>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label>passport_number<br/>  <!-- 护照号 -->
                                   <input id="passport_number" name="passport_number" type="text" value="">
                                 </div>
-                                <div class="col-lg-3">
-                                    <label>passport_issue<br/>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label>Passport Type<br/>  <!-- 护照类型 -->
+                                  <input id="passport type" name="passport type" type="text" value="">
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label>Passport date of issue<br/>  <!-- 签发日期 -->
                                   <input id="passport_issue" name="passport_issue" type="text" value="">
                                 </div>
-                                <div class="col-lg-3">
-                                    <label>passport_expiry<br/>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label>Date of expiry<br/>  <!-- 有效期至 -->
                                   <input id="passport_expiry" name="passport_expiry" type="text" value="">
                                 </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label>Mobile number<br/>  <!-- 电话 -->
+                                  <input id="mobile number" name="mobile number" type="text" value="">
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label>Email address<br/>  <!-- 邮箱 -->
+                                  <input id="email address" name="email address" type="text" value="">
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label>Arrival Airport<br/>  <!-- 到达机场 -->
+                                  <input id="arrival airport" name="arrival airport" type="text" value="">
+                                </div>
 
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label >Date Portion<br/>  <!-- 到达日期 -->
+                                        <input id="date-ortion" name="date-portion" type="text" value="">
+                                    </label>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label >Time Portion<br/>  <!-- 到达时间 -->
+                                        <input id="time-portion" name="time-portion" type="text" value="">
+                                    </label>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label >Arrival Flight No<br/>  <!-- 到达航班号 -->
+                                        <input id="arrival-no" name="arrival-no" type="text" value="">
+                                    </label>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label >Date Portion<br/>  <!-- 离开日期 -->
+                                        <input id="leave-Portion" name="date Portion" type="text" value="">
+                                    </label>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label >Time Portion<br/>  <!-- 离开时间 -->
+                                        <input id="leave-portion" name="leave-portion" type="text" value="">
+                                    </label>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <label >Departure Flight No<br/>  <!-- 离开航班号 -->
+                                        <input id="departure-no" name="departure-no" type="text" value="">
+                                    </label>
+                                </div>
+
+
+
+                                <div class="col-sm-12 col-md-6 col-lg-3"> <!-- 住宿类型 -->
+                                    <label>Place of stay in Thailand<br/>
+                                   <input id="thailand" name="thailand" type="text" value=""></label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-7"> <!-- 住址 -->
+                                    <label>PResidential address (Details of address in your country)<br/>
+                                   <textarea rows="1" cols="60" id="address" name="address"></textarea>
+                                </div>
 
 
 
                             </div>
                         </div>
 
-                    </div>
-{#                    <div class="table-responsive">#}
-{#                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">#}
-{#                            <thead>#}
-{#                            <tr>#}
-{#                                <th colspan="13" class="th">核实确认个人信息</th>#}
-{#                            </tr>#}
-{#                            </thead>#}
-{##}
-{#                            <tbody>#}
-{#                            <tr class="th">#}
-{#                                <td>姓名</td>#}
-{#                                <td>姓</td>#}
-{#                                <td>名</td>#}
-{#                                <td>称谓</td>#}
-{#                                <td>性别</td>#}
-{#                                <td>出生日期</td>#}
-{#                                <td>国籍</td>#}
-{#                                <td>护照类型</td>#}
-{#                                <td>护照号</td>#}
-{#                                <td>护照发行日期</td>#}
-{#                                <td>护照到期日期</td>#}
-{##}
-{#                            </tr>#}
-{#                            <tr>#}
-{#                                <td><input id="name" name="name" type="text" value=""></td>#}
-{#                                <td><input id="last_name" name="last_name" type="text" value=""></td>#}
-{#                                <td><input id="first_name" name="first_name" type="text" value=""></td>#}
-{#                                <td><input id="salutation" name="salutation" type="text" value=""></td>#}
-{#                                <td><input id="gender" name="gender" type="text" value=""></td>#}
-{#                                <td><input id="birth_date" name="birth_date" type="text" value=""></td>#}
-{#                                <td><input id="nationality" name="nationality" type="text" value=""></td>#}
-{#                                <td><input id="passport_type" name="passport_type" type="text" value="P"></td>#}
-{#                                <td><input id="passport_number" name="passport_number" type="text" value=""></td>#}
-{#                                <td><input id="passport_issue" name="passport_issue" type="text" value=""></td>#}
-{#                                <td><input id="passport_expiry" name="passport_expiry" type="text" value=""></td>#}
-{##}
-{#                            </tr>#}
-{#                            </tbody>#}
-{#                        </table>#}
-{##}
-{#                    </div>#}
                 </div>
-{#                <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">#}
-{#                    <thead>#}
-{#                    <tr class="th">#}
-{#                        <th>抵达机场</th>#}
-{#                        <th>抵达航班号</th>#}
-{#                        <th>抵达日期</th>#}
-{#                        <th>抵达时间</th>#}
-{#                        <th>返程日期</th>#}
-{#                        <th>返程时间</th>#}
-{#                        <th>返程航班号</th>#}
-{#                    </tr>#}
-{#                    </thead>#}
-{#                    <tbody>#}
-{#                    <td>清迈机场</td>#}
-{#                    <td>R123</td>#}
-{#                    <td>19/09/12</td>#}
-{#                    <td>10:20#}
-{#                    </th>#}
-{#                    <td>19/10/09</td>#}
-{#                    <td>20:00</td>#}
-{#                    <td>Y123</td>#}
-{#                    </tbody>#}
-{#                </table>#}
-{##}
-{##}
-{#                <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">#}
-{#                    <thead>#}
-{#                    <tr class="th">#}
-{#                        <th>酒店信息</th>#}
-{#                        <th>酒店名称</th>#}
-{#                        <th>酒店地址</th>#}
-{#                        <th>你的家庭住址</th>#}
-{#                    </tr>#}
-{#                    </thead>#}
-{#                    <tbody>#}
-{#                    <td></td>#}
-{#                    <td>Woodfield Resort Chiang Mai</td>#}
-{#                    <td>清迈</td>#}
-{#                    <td>中国北京市海淀区苏州街18号</td>#}
-{#                    </tbody>#}
-{#                </table>#}
-{#                <div class="card-footer small text-muted sum-index ">#}
-{#                    <button class="btn btn-success btn-icon-split maxbutton">#}
-{#                        <span class="text">提交信息</span>#}
-{#                    </button>#}
-{#                </div>#}
             </div>
+            <div style=" float: right; margin-top:1rem;">
+              <a href="#" class="btn btn-success btn-icon-split"><span class="icon text-white-50"> <i class="fas fa-check"></i> </span>
+                  <span class="text">确认提交</span>
+              </a>
+             </div>
+        </div>
+        <!-- 确认信息 end -->
+
+      </div>
+      <!-- End of Main Content -->
 
         </div>
-        <!-- /.container-fluid -->
 
-        <!-- Sticky Footer -->
-{#        <footer class="sticky-footer">#}
-{#            <div class="container my-auto">#}
-{#                <div class="copyright text-center my-auto">#}
-{#                    <span>Copyright © Your Website 2019</span>#}
-{#                </div>#}
-{#            </div>#}
-{#        </footer>#}
 
     </div>
     {#    粘贴进来的文件end #}
