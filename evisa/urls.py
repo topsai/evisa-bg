@@ -22,6 +22,7 @@ urlpatterns = [
     path('login/', views.login),
     path('index/', views.index),
     path('process/', views.process),
+    path('process/Thailand/', views.Thailand),
     path('upload/', views.upload),
     path('country/', views.country),
 ]

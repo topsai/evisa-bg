@@ -106,6 +106,11 @@ def country(request):
 
 @cookie_auth
 def process(request):
+    return render(request, 'sb2/country.html')
+
+
+@cookie_auth
+def Thailand(request):
     return render(request, 'sb2/process.html')
 
 
