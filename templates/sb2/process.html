@@ -30,6 +30,18 @@
         .infobox {
             width: 100%;
         }
+        input::-webkit-input-placeholder{
+            font-size:0.8rem;
+        }
+        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+            font-size:0.8rem;
+        }
+        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+           font-size:0.8rem;
+        }
+        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+            font-size:0.8rem;
+        }
 
         .infobox li {
             border: 1px solid #f90;
@@ -138,7 +150,7 @@
                                        <br />
                                      </span>
                                      <input name="passportphoto[]" value="1111" type="file" id="file" class="filepath" onchange="changepic(this)" accept="image/jpg,image/jpeg,image/png,image/PNG">
-                                     <p>上传护照复印件<br/> (封面)</p>
+                                     <p>上传护照(封面)</p>
                                      </div>
                                      <img src="#" id="img3" />
                                     </div>
@@ -156,7 +168,7 @@
                                        <!--AUI框架中的图标-->
                                      </span>
                                      <input name="passportphoto[]" value="1111" type="file" id="file" class="filepath" onchange="changepic(this)" accept="image/jpg,image/jpeg,image/png,image/PNG">
-                                     <p>上传护照复印件<br/> (个人信息页)</p>
+                                     <p>上传护照(个人信息页)</p>
                                      </div>
                                     </div>
 
@@ -248,41 +260,35 @@
         </div>
         <!-- 上传信息 end-->
 
-{#        <div class="card-body">#}
-{##}
-{#            <div class="row">#}
-{#                <!-- Grow In Utility -->#}
-{#                <div class="col-lg-12">#}
-{#                    <div class="card position-relative">#}
-{#                        <div class="card-header py-3">#}
-{#                            <h6 class="m-0 font-weight-bold text-primary">请输入个人联系信息</h6>#}
-{#                        </div>#}
-{#                        <div class="card-body row">#}
-{#                            <div class="col-sm-12 col-md-6 col-lg-3">#}
-{#                                <label  >Mobile number<br/><input id="name" name="Mobile number" type="text" placeholder="86+ 18636987415"></label>#}
-{#                            </div>#}
-{#                            <div class="col-sm-12 col-md-6 col-lg-3">#}
-{#                                <label  >Email address<br/>#}
-{#                                    <input id="last_name" name="Email address" type="text" value="" placeholder="Email address">#}
-{#                                </label>#}
-{#                            </div>#}
-{#                            <div class="col-sm-12 col-md-6 col-lg-3">#}
-{#                                <label>address<br/>#}
-{#                                    <textarea rows="2" cols="50"  placeholder="address">#}
-{#                                    </textarea>#}
-{#                                </label>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{##}
-{#                </div>#}
-{#            </div>#}
-{#            <div style=" float: right; margin-top:1rem;">#}
-{#              <a href="#" class="btn btn-success btn-icon-split"><span class="icon text-white-50"> <i class="fas fa-check"></i> </span>#}
-{#                  <span class="text">提交</span>#}
-{#              </a>#}
-{#             </div>#}
-{#        </div>#}
+        <div class="card-body">
+
+            <div class="row">
+                <!-- Grow In Utility -->
+                <div class="col-lg-12">
+                    <div class="card position-relative">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">请输入个人联系信息</h6>
+                        </div>
+                        <div class="card-body row">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <label  >Mobile number<br/><input id="name" name="Mobile number" type="text" placeholder="86+ 18636987415"></label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <label  >Email address<br/>
+                                    <input id="last_name" name="Email address" type="text" value="" placeholder="Email address">
+                                </label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <label>address<br/>
+                                    <textarea rows="1" cols="50"  placeholder="住址"></textarea>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <!-- 输入联系信息 end -->
 
         <div class="card-body">
@@ -298,99 +304,84 @@
                             <div class="card-body row">
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label  >Family Name<br/> <!-- 姓 -->
-                                      <input id="family Name" name="family Name" type="text" value="">
+                                      <input id="family Name" name="family Name" type="text" value="" placeholder="姓">
                                     </label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label >first_name<br/>  <!-- 名 -->
-                                        <input id="first_name" name="first_name" type="text" value=""></label>
+                                        <input id="first_name" name="first_name" type="text" value="" placeholder="名"></label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label >salutation<br/>  <!-- 称谓 -->
-                                        <input id="salutation" name="salutation" type="text" value=""></label>
+                                        <input id="salutation" name="salutation" type="text" value="" placeholder="称谓"></label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label >Gender<br/>  <!-- 性别 -->
-                                        <input id="gender" name="gender" type="text" value=""></label>
+                                        <input id="gender" name="gender" type="text" value="" placeholder="性别"></label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label>Date of birth<br/>  <!-- 出生日期 -->
-                                    <input id="birth_date" name="birth_date" type="text" value=""></label>
+                                    <input id="birth_date" name="birth_date" type="text" value="" placeholder="出生日期"></label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label>Nationality<br/>  <!-- 国籍 -->
-                                   <input id="nationality" name="nationality" type="text" value=""></label>
+                                   <input id="nationality" name="nationality" type="text" value="" placeholder="国籍"></label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label>passport_number<br/>  <!-- 护照号 -->
-                                  <input id="passport_number" name="passport_number" type="text" value="">
+                                  <input id="passport_number" name="passport_number" type="text" value="" placeholder="护照号">
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label>Passport Type<br/>  <!-- 护照类型 -->
-                                  <input id="passport type" name="passport type" type="text" value="">
+                                  <input id="passport type" name="passport type" type="text" value="" placeholder="护照类型">
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label>Passport date of issue<br/>  <!-- 签发日期 -->
-                                  <input id="passport_issue" name="passport_issue" type="text" value="">
+                                  <input id="passport_issue" name="passport_issue" type="text" value="" placeholder="签发日期">
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label>Date of expiry<br/>  <!-- 有效期至 -->
-                                  <input id="passport_expiry" name="passport_expiry" type="text" value="">
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-lg-3">
-                                    <label>Mobile number<br/>  <!-- 电话 -->
-                                  <input id="mobile number" name="mobile number" type="text" value="">
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-lg-3">
-                                    <label>Email address<br/>  <!-- 邮箱 -->
-                                  <input id="email address" name="email address" type="text" value="">
+                                  <input id="passport_expiry" name="passport_expiry" type="text" value="" placeholder="有效期至">
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label>Arrival Airport<br/>  <!-- 到达机场 -->
-                                  <input id="arrival airport" name="arrival airport" type="text" value="">
+                                  <input id="arrival airport" name="arrival airport" type="text" value="" placeholder="到达机场">
                                 </div>
 
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label >Date Portion<br/>  <!-- 到达日期 -->
-                                        <input id="date-ortion" name="date-portion" type="text" value="">
+                                        <input id="date-ortion" name="date-portion" type="text" value="" placeholder="到达日期">
                                     </label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label >Time Portion<br/>  <!-- 到达时间 -->
-                                        <input id="time-portion" name="time-portion" type="text" value="">
+                                        <input id="time-portion" name="time-portion" type="text" value="" placeholder="到达时间">
                                     </label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label >Arrival Flight No<br/>  <!-- 到达航班号 -->
-                                        <input id="arrival-no" name="arrival-no" type="text" value="">
+                                        <input id="arrival-no" name="arrival-no" type="text" value="" placeholder="到达航班号">
                                     </label>
                                 </div>
 
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label >Date Portion<br/>  <!-- 离开日期 -->
-                                        <input id="leave-Portion" name="date Portion" type="text" value="">
+                                        <input id="leave-Portion" name="date Portion" type="text" value="" placeholder="离开日期">
                                     </label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label >Time Portion<br/>  <!-- 离开时间 -->
-                                        <input id="leave-portion" name="leave-portion" type="text" value="">
+                                        <input id="leave-portion" name="leave-portion" type="text" value="" placeholder="离开时间">
                                     </label>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                     <label >Departure Flight No<br/>  <!-- 离开航班号 -->
-                                        <input id="departure-no" name="departure-no" type="text" value="">
+                                        <input id="departure-no" name="departure-no" type="text" value="" placeholder="离开航班号">
                                     </label>
                                 </div>
-
-
-
                                 <div class="col-sm-12 col-md-6 col-lg-3"> <!-- 住宿类型 -->
                                     <label>Place of stay in Thailand<br/>
-                                   <input id="thailand" name="thailand" type="text" value=""></label>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-7"> <!-- 住址 -->
-                                    <label>PResidential address (Details of address in your country)<br/>
-                                   <textarea rows="1" cols="60" id="address" name="address"></textarea>
+                                   <input id="thailand" name="thailand" type="text" value="" placeholder="住宿类型"></label>
                                 </div>
 
 
