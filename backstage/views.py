@@ -100,6 +100,11 @@ def index(request):
 
 
 @cookie_auth
+def country(request):
+    return render(request, 'sb2/country.html', {})
+
+
+@cookie_auth
 def process(request):
     return render(request, 'sb2/process.html')
 

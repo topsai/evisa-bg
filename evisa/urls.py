@@ -23,4 +23,5 @@ urlpatterns = [
     path('index/', views.index),
     path('process/', views.process),
     path('upload/', views.upload),
+    path('country/', views.country),
 ]
