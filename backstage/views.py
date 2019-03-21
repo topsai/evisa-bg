@@ -134,6 +134,32 @@ def upload(request):
                 ret.get("issue_date"),
                 ret.get("expiry_date")]
         print(json.dumps(data))
+
+        # 上传泰国evisa官网
+        import requests
+        # 导入requests_toolbelt库使用MultipartEncoder
+        from requests_toolbelt import MultipartEncoder
+
+        url = 'https://www.evisathailand.com/images/upload'
+        headers = {
+            'accept': 'application/json, text/javascript, */*; q=0.01',
+            'Host': 'www.evisathailand.com',
+            'Origin': 'https://www.evisathailand.com',
+            'Referer': 'https://www.evisathailand.com/ft',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.16 Safari/537.36'
+        }
+
+        file_payload = {'passportphoto[]': (passport.name, open(passport.name, 'rb'), "image/jpeg")}
+
+        # file_payload = {'name':'': open('timg.jpg', 'rb')}
+        # 生成可用于multipart/form-data上传的数据
+        m = MultipartEncoder(file_payload)
+        # 自动生成Content-Type类型和随机码
+        headers['Content-Type'] = m.content_type
+        # 使用data上传文件
+        html = requests.post(url, headers=headers, data=m)
+        data.append(html.json().get("passportphoto")[0])
+        print(html.json().get("passportphoto")[0])
         return HttpResponse(json.dumps(data))
 # "country":"CHN" 国籍
 # "name":"MIERAILI.YUSUFU", 姓名
