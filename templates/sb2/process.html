@@ -172,8 +172,7 @@
                                      <i class="fa fa-camera-retro img-size"></i>
                                        <br/>
                                      </span>
-                                                    <input name="passportphoto[]" value="" type="file" id="file"
-                                                           class="filepath" onchange="changepic(this)"
+                                                    <input name="passportphoto[]" type="file" class="filepath" onchange="changepic(this)"
                                                            accept="image/jpg,image/jpeg,image/png,image/PNG">
                                                     <input name="passportphoto[]" class="up" style="display: none">
                                                     <p>护照封面</p>
@@ -195,7 +194,7 @@
                                                        <br/>
                                                          <!--AUI框架中的图标-->
                                                      </span>
-                                                    <input name="passportphoto[]" value="" type="file" id="file"
+                                                    <input name="passportphoto[]" passport="true" value="" type="file" id="file"
                                                            class="filepath" onchange="changepic(this)"
                                                            accept="image/jpg,image/jpeg,image/png,image/PNG">
                                                     <input name="passportphoto[]" class="up" style="display: none">
@@ -322,7 +321,7 @@
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>到达机场<br/>  <!-- 到达机场 -->
                                             <select name="airport" id="pd-airport" required=""
-                                                    class="custom-select custom-select-sm form-control form-control-sm">
+                                                    class="custom-select custom-select-sm form-control form-control-sm up">
                                                 <option value="">Select</option>
                                                 <option value="bkk" selected="selected">BKK - Suvarnabhumi</option>
                                                 <option value="dmk">DMK - Don Mueang</option>
@@ -334,19 +333,19 @@
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>到达日期<br/>  <!-- 到达日期 -->
                                             <input id="date-ortion" name="date-portion" type="text"
-                                                   class="form-control datepicker" placeholder="请选择日期" value="">
+                                                   class="form-control datepicker up" placeholder="请选择日期" value="">
                                         </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>到达时间<br/>  <!-- 到达时间 -->
                                             <input id="time-portion" name="time-portion" type="text"
-                                                   class="form-control" value=""
+                                                   class="form-control up" value=""
                                                    placeholder="到达时间">
                                         </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>到达航班号<br/>  <!-- 到达航班号 -->
-                                            <input id="arrival-no" name="arrival-no" type="text" class="form-control"
+                                            <input id="arrival-no" name="arrival-no" type="text" class="form-control up"
                                                    value=""
                                                    placeholder="到达航班号">
                                         </label>
@@ -362,20 +361,20 @@
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>离开时间<br/>  <!-- 离开时间 -->
                                             <input id="leave-portion" name="leave-portion" type="text"
-                                                   class="form-control" value=""
+                                                   class="form-control up" value=""
                                                    placeholder="离开时间">
                                         </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>离开航班号<br/>  <!-- 离开航班号 -->
                                             <input id="departure-no" name="departure-no" type="text"
-                                                   class="form-control" value=""
+                                                   class="form-control up" value=""
                                                    placeholder="离开航班号">
                                         </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3"> <!-- 住宿类型 -->
                                         <label>住宿类型<br/>
-                                            <select class="form-control" name="pos_select" id="js-place-of-stay"
+                                            <select class="form-control up" name="pos_select" id="js-place-of-stay"
                                                     required="">
                                                 <option value="">选择</option>
                                                 <option value="hotel">Hotel</option>
@@ -386,19 +385,21 @@
                                             </select></label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>手机号码<br/><input id="" name="Mobile number" type="text"
-                                                               class="form-control"
-                                                               placeholder="86+ 18636987415"></label>
+                                        <label>手机号码<br/>
+                                            <input id="" name="Mobile number" type="text"
+                                                               class="form-control up"
+                                                               placeholder="86+ 18636987415">
+                                        </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>邮箱地址<br/>
-                                            <input id="" name="Email address" type="text" class="form-control" value=""
+                                            <input id="" name="Email address" type="text" class="form-control up" value=""
                                                    placeholder="邮箱">
                                         </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>住址信息<br/>
-                                            <textarea rows="1" cols="50" class="form-control" placeholder=""></textarea>
+                                            <textarea rows="1" cols="50" class="form-control up" placeholder=""></textarea>
                                         </label>
                                     </div>
                                 </div>
@@ -422,63 +423,72 @@
                                 <div class="card-body row">
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>姓<br/> <!-- 姓 -->
-                                            <input id="last_name" name="last_name" type="text" class="form-control"
+                                            <input id="last_name" name="last_name" type="text" class="form-control up"
                                                    value=""
                                                    placeholder="姓">
                                         </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>名<br/>  <!-- 名 -->
-                                            <input id="first_name" name="first_name" type="text" class="form-control"
+                                            <input id="first_name" name="first_name" type="text" class="form-control up"
                                                    value=""
-                                                   placeholder="名"></label>
+                                                   placeholder="名">
+                                        </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>称谓<br/>  <!-- 称谓 -->
-                                            <input id="salutation" name="salutation" type="text" class="form-control"
+                                            <input id="salutation" name="salutation" type="text" class="form-control up"
                                                    value=""
-                                                   placeholder="称谓"></label>
+                                                   placeholder="称谓">
+                                        </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>性别<br/>  <!-- 性别 -->
-                                            <input id="gender" name="gender" type="text" class="form-control" value=""
-                                                   placeholder="性别"></label>
+                                            <input id="gender" name="gender" type="text" class="form-control up" value=""
+                                                   placeholder="性别">
+                                        </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>出生日期<br/>  <!-- 出生日期 -->
-                                            <input id="birth_date" name="birth_date" type="text" class="form-control"
+                                            <input id="birth_date" name="birth_date" type="text" class="form-control datepicker up"
                                                    value=""
-                                                   placeholder="出生日期"></label>
+                                                   placeholder="出生日期">
+                                        </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>国籍<br/>  <!-- 国籍 -->
-                                            <input id="nationality" name="nationality" type="text" class="form-control"
+                                            <input id="nationality" name="nationality" type="text" class="form-control up"
                                                    value=""
-                                                   placeholder="国籍"></label>
+                                                   placeholder="国籍">
+                                        </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>护照号<br/>  <!-- 护照号 -->
                                             <input id="passport_number" name="passport_number" type="text"
-                                                   class="form-control" value=""
-                                                   placeholder="护照号"></label>
+                                                   class="form-control up" value=""
+                                                   placeholder="护照号">
+                                        </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>护照类型<br/>  <!-- 护照类型 -->
-                                            <input id="passport type" name="passport type" type="text"
-                                                   class="form-control" value=""
-                                                   placeholder="护照类型"></label>
+                                            <input id="passport_type" name="passport_type" type="text"
+                                                   class="form-control up" value="ordinary"
+                                                   placeholder="护照类型">
+                                        </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>签发日期<br/>  <!-- 签发日期 -->
                                             <input id="passport_issue" name="passport_issue" type="text"
-                                                   class="form-control" value=""
-                                                   placeholder="签发日期"></label>
+                                                   class="form-control up datepicker" value=""
+                                                   placeholder="签发日期">
+                                        </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>有效期至<br/>  <!-- 有效期至 -->
                                             <input id="passport_expiry" name="passport_expiry" type="text"
-                                                   class="form-control" value=""
-                                                   placeholder="有效期至"></label>
+                                                   class="form-control up datepicker" value=""
+                                                   placeholder="有效期至">
+                                        </label>
                                     </div>
 
 
@@ -488,10 +498,10 @@
                         </div>
                     </div>
                     <div style=" float: right; margin-top:1rem;">
-                        <a href="#" class="btn btn-success btn-icon-split"><span class="icon text-white-50"> <i
+                        <button onclick="sub()" class="btn btn-success btn-icon-split"><span class="icon text-white-50"> <i
                                 class="fas fa-check"></i> </span>
                             <span class="text">确认提交</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <!-- 确认信息 end -->
@@ -524,17 +534,28 @@
                 format: "yyyy-mm-dd"//日期格式，详见 http://bootstrap-datepicker.readthedocs.org/en/release/options.html#format
             });
         });
-
-
+        function sub() {
+            $(".up").each(function () {
+                {#console.log(this);#}
+                console.log($(this).attr('name'),':',$(this).val());
+            })
+        }
         function changepic(t) {
+            let passport = $(t).attr("passport");
+            console.log("changepic", passport);
             let that = t;
             let f = $(that)[0];
             let file = f.files[0];
+            let name = f.name;
             if (!file) {
                 alert("请先选择文件");
             }
             let formData = new FormData();
-            formData.append('passport', file);
+            formData.append("file", file);
+            formData.append("name", name);
+            if(passport){
+                formData.append("passport", true);
+            }
             console.log(formData);
             $.ajax({
                 url: "/upload/",
@@ -546,34 +567,42 @@
                 mimeType: "multipart/form-data",
                 success: function (data) {
                     data = JSON.parse(data);
-                    if (data.length != 9) {
-                        console.log("识别失败，请重新拍摄照片，保持画面清晰。");
-                        alert("识别失败，请重新拍摄照片，保持画面清晰。");
-                    } else {
+                    console.log(data, Object.keys(data).length);
+                    if(passport){
+                        console.log("this is passport");
+                        if (Object.keys(data).length < 10) {
+                            {#console.log("识别失败，请重新拍摄照片，保持画面清晰。");#}
+                            alert("识别失败，请重新拍摄照片，保持画面清晰。");
+                        } else {
+                            $(that).parent().parent().next().show();
+                            {#console.log("else");#}
+                            {#console.log(data);#}
+                            $("#name").val(data.name);
+                            $("#last_name").val(data.last_name);
+                            $("#first_name").val(data.first_name);
+                            $("#salutation").val(data.sex);
+                            $("#gender").val(data.sex);
+                            $("#birth_date").val(data.birth_date);
+                            $("#nationality").val(data.country);
+                            $("#passport_number").val(data.passport_no);
+                            $("#passport_issue").val(data.issue_date);
+                            $("#passport_expiry").val(data.expiry_date);
+                            {#console.log("ret data", $(that).attr('name').slice(0,-2));#}
+                            $(that).next().val(data[$(that).attr('name').slice(0,-2)][0]);
+                            {#console.log($(that).next().val());#}
+                        }
+                    }else{
+                        {#console.log("this is pic", data);#}
+                        {#console.log(data[$(that).attr('name').slice(0,-2)][0]);#}
                         $(that).parent().parent().next().show();
-                        console.log("else");
-                        console.log(data);
-                        console.log(data[8]);
-                        $("#name").val(data[2] + '.' + data[1]);
-                        $("#last_name").val(data[2]);
-                        $("#first_name").val(data[1]);
-                        $("#salutation").val(data[3]);
-                        $("#gender").val(data[3]);
-                        $("#birth_date").val(data[4]);
-                        $("#nationality").val(data[0]);
-                        $("#passport_number").val(data[5]);
-                        $("#passport_issue").val(data[6]);
-                        $("#passport_expiry").val(data[7]);
-                        $(that).next().val(data[8]);
-                        console.log($(that).next().val());
+                        $(that).next().val(data[$(that).attr('name').slice(0,-2)][0]);
                     }
+
                 },
                 error: function (data) {
                     console.log(data);
                 }
             });
-
-
         }
 
         // 上传图片

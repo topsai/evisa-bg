@@ -2,9 +2,21 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
 from backstage import models
 from django.contrib.auth import authenticate
+import requests
+# 导入requests_toolbelt库使用MultipartEncoder
+from requests_toolbelt import MultipartEncoder
 import json
 import base64
 import requests
+
+url = 'https://www.evisathailand.com/images/upload'
+headers = {
+    'accept': 'application/json, text/javascript, */*; q=0.01',
+    'Host': 'www.evisathailand.com',
+    'Origin': 'https://www.evisathailand.com',
+    'Referer': 'https://www.evisathailand.com/ft',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.16 Safari/537.36'
+}
 
 
 # Create your views here.
@@ -116,51 +128,55 @@ def Thailand(request):
 
 @cookie_auth
 def upload(request):
-    passport = request.FILES.get("passport")
+    passport = request.POST.get("passport")
+    file = request.FILES.get("file")
+    name = request.POST.get("name")
+    data = {}
+    # save images
+    with open(file.name, "wb+") as f:
+        for chunk in file.chunks():  # 分块写入文件
+            f.write(chunk)
     if passport:
-        # save images
-        with open(passport.name, "wb+") as f:
-            for chunk in passport.chunks():  # 分块写入文件
-                f.write(chunk)
+        print("这是护照")
         try:
-            ret = json.loads(demo(passport.name))
+            # 阿里云ocr解析
+            ret = json.loads(demo(file.name))
         except:
             return HttpResponse("1")
-        print(ret.get("country"), ret.get("name"), ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
-              ret.get("issue_date"),
-              ret.get("expiry_date"))
+        # print(ret.get("country"), ret.get("name"), ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
+        #       ret.get("issue_date"),
+        #       ret.get("expiry_date"))
         firstname, lastname = ret.get("name").split(".")
-        data = [ret.get("country"), firstname, lastname, ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
-                ret.get("issue_date"),
-                ret.get("expiry_date")]
-        print(json.dumps(data))
-
-        # 上传泰国evisa官网
-        import requests
-        # 导入requests_toolbelt库使用MultipartEncoder
-        from requests_toolbelt import MultipartEncoder
-
-        url = 'https://www.evisathailand.com/images/upload'
-        headers = {
-            'accept': 'application/json, text/javascript, */*; q=0.01',
-            'Host': 'www.evisathailand.com',
-            'Origin': 'https://www.evisathailand.com',
-            'Referer': 'https://www.evisathailand.com/ft',
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.16 Safari/537.36'
+        # data = [ret.get("country"), firstname, lastname, ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
+        #         ret.get("issue_date"),
+        #         ret.get("expiry_date")]
+        data = {
+            "country": ret.get("country"),
+            "sex": ret.get("sex"),
+            "birth_date": ret.get("birth_date"),
+            "passport_no": ret.get("passport_no"),
+            "issue_date": ret.get("issue_date"),
+            "expiry_date": ret.get("expiry_date"),
+            "type": ret.get("type"),
+            "firs_tname": firstname,
+            "last_name": lastname,
+            "name": ret.get("name"),
         }
+        print(json.dumps(data))
+    # 上传泰国evisa官网
+    file_payload = {name: (file.name, open(file.name, 'rb'), "image/jpeg")}
+    # file_payload = {'name':'': open('timg.jpg', 'rb')}
+    # 生成可用于multipart/form-data上传的数据
+    m = MultipartEncoder(file_payload)
+    # 自动生成Content-Type类型和随机码
+    headers['Content-Type'] = m.content_type
+    # 使用data上传文件
+    html = requests.post(url, headers=headers, data=m)
+    data.update(html.json())
+    print("----->:", data)
+    return HttpResponse(json.dumps(data))
 
-        file_payload = {'passportphoto[]': (passport.name, open(passport.name, 'rb'), "image/jpeg")}
 
-        # file_payload = {'name':'': open('timg.jpg', 'rb')}
-        # 生成可用于multipart/form-data上传的数据
-        m = MultipartEncoder(file_payload)
-        # 自动生成Content-Type类型和随机码
-        headers['Content-Type'] = m.content_type
-        # 使用data上传文件
-        html = requests.post(url, headers=headers, data=m)
-        data.append(html.json().get("passportphoto")[0])
-        print(html.json().get("passportphoto")[0])
-        return HttpResponse(json.dumps(data))
 # "country":"CHN" 国籍
 # "name":"MIERAILI.YUSUFU", 姓名
 # "sex":"M" 性别、称谓
@@ -168,3 +184,12 @@ def upload(request):
 # "passport_no": "E21160222", 护照号
 # "issue_date": "20130520", 签发日期
 # "expiry_date": "20230519",  有效期
+
+
+a = {"authority": "公安部出入境管理局", "birth_date": "19891001", "birth_day": "891001", "birth_place": "新疆",
+     "birth_place_raw": "新疆/XINJIANG", "country": "CHN", "expiry_date": "20230519", "expiry_day": "230519",
+     "issue_date": "20130520", "issue_place": "新疆", "issue_place_raw": "新疆/XINJIANG",
+     "line0": "POCHNMIERAILI<<YUSUFU<<<<<<<<<<<<<<<<<<<<<<<", "line1": "E211602222CHN8910015M2305190MDNHLGPAXF2",
+     "name": "MIERAILI.YUSUFU", "name_cn": "米尔力杰薇国", "name_cn_raw": "米尔力杰薇T国ALUSUEU", "passport_no": "E21160222",
+     "person_id": "", "request_id": "20190322151243_011b84df9f9247023236a1e12dd02bc9", "sex": "M", "src_country": "CHN",
+     "success": 1, "type": "PO"}
