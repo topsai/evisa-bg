@@ -1,0 +1,54 @@
+<!--商品轮播图-->
+<swiper class="screen-swiper square-dot bg-white" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+    <swiper-item wx:for="{{swiperlist}}" wx:key="index">
+        <image src="{{item}}" mode='aspectFill'></image>
+    </swiper-item>
+</swiper>
+
+<!--左上角按钮-->
+<view class="canui-head-box" style="top:{{StatusBar}}px;">
+    <navigator class='icon-back' open-type="navigateBack" hover-class="none"></navigator>
+    <navigator class='icon-home' open-type="navigateBack" hover-class="none"></navigator>
+</view>
+
+<!--商品价格-->
+<view class="bg-white canui-goods-box" style="padding-top:30rpx;">
+    <text class="text-price text-red text-xl">130.00</text>
+</view>
+
+<!--商品名称-->
+<view class="bg-white canui-goods-box canui-xzwz text-black">日本E-visa电子签证</view>
+
+<!--商品属性-->
+<view class="bg-white grid col-3 canui-goods-box text-gray text-sm">
+    <view class='padding-sm'>剩余：9999</view>
+    <view class='padding-sm text-center'>销量：98笔</view>
+    <view class='padding-sm text-right'>快递包邮</view>
+</view>
+
+<!--商品详情-->
+<view class="cu-bar bg-white margin-top solid-bottom">
+    <view class='action'>
+        <text class='icon-title text-red'></text>
+        <text>商品详情</text>
+    </view>
+</view>
+<view class="bg-white padding cauni-details-box">
+    日本国位于太平洋西岸，是一个由东北向西南延伸的弧形岛国。西隔东海、黄海、朝鲜海峡、日本海与中国、朝鲜、韩国、俄罗斯相望。属温带海洋性季风气候，终年温和湿润。6月多梅雨，夏秋季多台风。 [1] 
+3世纪中叶，其境内出现较大的国家大和国。645年，日本向中国唐朝学习，进行大化改新。12世纪后期，天皇皇权旁落，进入幕府统治时代。19世纪50年代中期，黑船事件迫使日本放弃“锁国政策”，签订一系列不平等条约。1868年，明治天皇重新掌权，进行明治维新，建立日本帝国，并迅速跻身资本主义列强行列，对外逐步走上侵略扩张的军国主义道路，曾多次侵略中国、朝鲜等亚洲国家。二战战败后，颁布新宪法，由天皇制国家变为以天皇为国家象征的议会内阁制国家。
+</view>
+
+<!--TabbarBot为适配全面屏的，如果是全面屏，则底部多出一截空白-->
+<view class="cu-bar bg-white tabbar border shop canui-foor-fixed {{TabbarBot=='y'?'canui-tabbar-bottom':''}}">
+    
+    <button class="action text-grey" open-type='contact'>
+        <view class='icon-service'></view> 客服
+    </button>
+    <view class="action text-grey">
+        <view class='icon-cart'></view> 购物车
+    </view>
+    <view class='btn-group'>
+        <button class='cu-btn bg-orange round shadow-blur'>加入购物车</button>
+        <button class='cu-btn bg-red round shadow-blur'>立即兑换</button>
+    </view>
+</view>

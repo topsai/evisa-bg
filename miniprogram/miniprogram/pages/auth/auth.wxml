@@ -1,0 +1,12 @@
+<view class='UCenter-bg'>
+  <image src='/img/user.jpg' class='png' mode='widthFix'></image>
+  <view class='text-xl'>仔仔
+    <text class='text-df'>v0.0.1</text>
+  </view>
+  <view class='margin-top-sm'>
+    <text>普通会员</text>
+  </view>
+</view>
+<view class='padding-xl'>
+  <button class='cu-btn  bg-red shadow lg block' open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信登录</button>
+</view>
