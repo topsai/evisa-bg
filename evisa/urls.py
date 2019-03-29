@@ -25,4 +25,6 @@ urlpatterns = [
     path('process/Thailand/', views.Thailand),
     path('upload/', views.upload),
     path('country/', views.country),
+    path('test/', views.test),
+    path('progress/', views.progress),
 ]

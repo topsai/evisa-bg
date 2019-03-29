@@ -172,7 +172,8 @@
                                      <i class="fa fa-camera-retro img-size"></i>
                                        <br/>
                                      </span>
-                                                    <input name="passportphoto[]" type="file" class="filepath" onchange="changepic(this)"
+                                                    <input name="passportphoto[]" type="file" class="filepath"
+                                                           onchange="changepic(this)"
                                                            accept="image/jpg,image/jpeg,image/png,image/PNG">
                                                     <input name="passportphoto[]" class="up" style="display: none">
                                                     <p>护照封面</p>
@@ -194,7 +195,8 @@
                                                        <br/>
                                                          <!--AUI框架中的图标-->
                                                      </span>
-                                                    <input name="passportphoto[]" passport="true" value="" type="file" id="file"
+                                                    <input name="passportphoto[]" passport="true" value="" type="file"
+                                                           id="file"
                                                            class="filepath" onchange="changepic(this)"
                                                            accept="image/jpg,image/jpeg,image/png,image/PNG">
                                                     <input name="passportphoto[]" class="up" style="display: none">
@@ -332,13 +334,13 @@
 
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>到达日期<br/>  <!-- 到达日期 -->
-                                            <input id="date-ortion" name="date-portion" type="text"
+                                            <input name="arrival_date" type="text"
                                                    class="form-control datepicker up" placeholder="请选择日期" value="">
                                         </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>到达时间<br/>  <!-- 到达时间 -->
-                                            <input id="time-portion" name="time-portion" type="text"
+                                            <input name="arrival_time" type="text"
                                                    class="form-control up" value=""
                                                    placeholder="到达时间">
                                         </label>
@@ -386,20 +388,21 @@
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>手机号码<br/>
-                                            <input id="" name="Mobile number" type="text"
-                                                               class="form-control up"
-                                                               placeholder="86+ 18636987415">
+                                            <input id="" name="mobile_number" type="text"
+                                                   class="form-control up"
+                                                   placeholder="86+ 18636987415">
                                         </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>邮箱地址<br/>
-                                            <input id="" name="Email address" type="text" class="form-control up" value=""
+                                            <input name="email" type="text" class="form-control up" value=""
                                                    placeholder="邮箱">
                                         </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>住址信息<br/>
-                                            <textarea rows="1" cols="50" class="form-control up" placeholder=""></textarea>
+                                            <textarea name="residential_address" rows="3" cols="50"
+                                                      class="form-control up" placeholder=""></textarea>
                                         </label>
                                     </div>
                                 </div>
@@ -444,20 +447,22 @@
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>性别<br/>  <!-- 性别 -->
-                                            <input id="gender" name="gender" type="text" class="form-control up" value=""
+                                            <input name="gender" type="text" class="form-control up" value=""
                                                    placeholder="性别">
                                         </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>出生日期<br/>  <!-- 出生日期 -->
-                                            <input id="birth_date" name="birth_date" type="text" class="form-control datepicker up"
+                                            <input id="birth_date" name="birth_date" type="text"
+                                                   class="form-control datepicker up"
                                                    value=""
                                                    placeholder="出生日期">
                                         </label>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
                                         <label>国籍<br/>  <!-- 国籍 -->
-                                            <input id="nationality" name="nationality" type="text" class="form-control up"
+                                            <input id="nationality" name="nationality" type="text"
+                                                   class="form-control up"
                                                    value=""
                                                    placeholder="国籍">
                                         </label>
@@ -534,12 +539,29 @@
                 format: "yyyy-mm-dd"//日期格式，详见 http://bootstrap-datepicker.readthedocs.org/en/release/options.html#format
             });
         });
+
         function sub() {
+            let formData = new FormData();
             $(".up").each(function () {
                 {#console.log(this);#}
-                console.log($(this).attr('name'),':',$(this).val());
-            })
+                console.log($(this).attr('name'), ':', $(this).val());
+                formData.append($(this).attr('name'), $(this).val())
+
+            });
+            console.log(formData);
+            $.ajax({
+                url:"/test/",
+                type:"post",
+                data: formData,
+                mimeType: "multipart/form-data",
+                success:function (d) {
+                    console.log(d)
+
+                }
+            });
+
         }
+
         function changepic(t) {
             let passport = $(t).attr("passport");
             console.log("changepic", passport);
@@ -553,7 +575,7 @@
             let formData = new FormData();
             formData.append("file", file);
             formData.append("name", name);
-            if(passport){
+            if (passport) {
                 formData.append("passport", true);
             }
             console.log(formData);
@@ -568,7 +590,7 @@
                 success: function (data) {
                     data = JSON.parse(data);
                     console.log(data, Object.keys(data).length);
-                    if(passport){
+                    if (passport) {
                         console.log("this is passport");
                         if (Object.keys(data).length < 10) {
                             {#console.log("识别失败，请重新拍摄照片，保持画面清晰。");#}
@@ -588,14 +610,14 @@
                             $("#passport_issue").val(data.issue_date);
                             $("#passport_expiry").val(data.expiry_date);
                             {#console.log("ret data", $(that).attr('name').slice(0,-2));#}
-                            $(that).next().val(data[$(that).attr('name').slice(0,-2)][0]);
+                            $(that).next().val(data[$(that).attr('name').slice(0, -2)][0]);
                             {#console.log($(that).next().val());#}
                         }
-                    }else{
+                    } else {
                         {#console.log("this is pic", data);#}
                         {#console.log(data[$(that).attr('name').slice(0,-2)][0]);#}
                         $(that).parent().parent().next().show();
-                        $(that).next().val(data[$(that).attr('name').slice(0,-2)][0]);
+                        $(that).next().val(data[$(that).attr('name').slice(0, -2)][0]);
                     }
 
                 },
