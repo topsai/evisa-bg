@@ -193,8 +193,11 @@ a = {"authority": "公安部出入境管理局", "birth_date": "19891001", "birt
      "name": "MIERAILI.YUSUFU", "name_cn": "米尔力杰薇国", "name_cn_raw": "米尔力杰薇T国ALUSUEU", "passport_no": "E21160222",
      "person_id": "", "request_id": "20190322151243_011b84df9f9247023236a1e12dd02bc9", "sex": "M", "src_country": "CHN",
      "success": 1, "type": "PO"}
+
+
 def test(request):
     print(request.POST)
+
 
 def progress(request):
     return render(request, 'sb2/progress.html', {})
