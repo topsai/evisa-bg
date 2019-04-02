@@ -196,7 +196,8 @@ a = {"authority": "公安部出入境管理局", "birth_date": "19891001", "birt
 
 
 def test(request):
-    print(request.POST)
+    print(request.body)
+    return HttpResponse("ok")
 
 
 def progress(request):

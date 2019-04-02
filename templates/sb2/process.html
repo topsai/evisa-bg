@@ -597,62 +597,12 @@
                                             </select>
                                         </label>
                                     </div>
-
-
-                                    <ul class="l-form-grid__brick l-form-grid__singlelayer -no-space-around"
-                                        id="js-place-dynamic-fields" style="">
-
-
-                                        <li class="js-stay-type-both l-form-grid__brick--regular -customwidth">
-                                            <label class="js-to-translate" data-translateid="29">区</label>
-                                            <select name="pos_district">
-                                                <option class="js-pos-default" value="">Select</option>
-
-
-                                                <option value="Chanuman">Chanuman</option>
-
-                                                <option value="Hua Taphan">Hua Taphan</option>
-
-                                                <option value="Lue Amnat ">Lue Amnat</option>
-
-                                                <option value="Mueang Amnat Charoen">Mueang Amnat Charoen</option>
-
-                                                <option value="Pathum Ratchawongsa">Pathum Ratchawongsa</option>
-
-                                                <option value="Phana ">Phana</option>
-
-                                                <option value="Senangkhanikhom">Senangkhanikhom</option>
-                                            </select>
-                                        </li>
-                                        <li class="js-stay-type-ppd l-form-grid__brick--regular -customwidth"
-                                            style="display: none;">
-                                            <label class="js-to-translate" data-translateid="30">分地区</label>
-                                            <select name="pos_sub_district">
-                                                <option class="js-pos-default" value="">Select</option>
-
-
-                                                <option value="Chanuman">Chanuman</option>
-
-                                                <option value="Kham Khuean Kaeo">Kham Khuean Kaeo</option>
-
-                                                <option value="Khok Kong">Khok Kong</option>
-
-                                                <option value="Khok San">Khok San</option>
-
-                                                <option value="Pa Ko ">Pa Ko</option>
-                                            </select>
-                                        </li>
-                                        <li class="js-stay-type-ppd l-form-grid__brick--wide -no-margin -customwidth"
-                                            style="display: none;">
-                                            <label class="js-to-translate" data-translateid="31">街道地址</label>
-                                            <input type="text" placeholder="Street Address" name="pos_street_address">
-                                        </li>
-                                        <li class="js-stay-type-both l-form-grid__brick--regular -customwidth">
-                                            <label class="js-to-translate" data-translateid="32">邮政编码/邮政编码</label>
-                                            <input type="text" placeholder="Postcode/Zip Code" name="pos_postcode">
-                                        </li>
-                                    </ul>
-
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                        <label>邮政编码<br/>
+                                            <input name="pos_postcode" type="text" class="form-control up" value=""
+                                                   placeholder="邮政编码">
+                                        </label>
+                                    </div>
 
                                 </div>
                             </div>
@@ -799,57 +749,53 @@
         });
 
         function sub() {
-            let formData = new FormData();
-            let data = {
-                "p[0][_id]": "1",
-                "p[0][nationality]": $("#nationality").val(),
-                "p[0][passport_type]": $("#passport_type").val(),
-                "p[0][airport]": $("#airport").val(),
-                "p[0][salutation]": $("#salutation").val(),
-                "p[0][lastName]": $("#lastName").val(),
-                "p[0][middleName]": "",
-                "p[0][firstName]": $("#firstName").val(),
-                "p[0][gender]": $("#gender").val(),
-                "p[0][birthDate]": $("#birthDate").val(),
-                "p[0][email]": $("#email").val(),
-                "p[0][mobileNumCountry]": $("#mobileNumCountry").val(),
-                "p[0][mobileNum]": $("#mobileNum").val(),
-                "p[0][passportNum]": $("#passportNum").val(),
-                "p[0][passportDateIssue]": $("#passportDateIssue").val(),
-                "p[0][passportDateExpiry]": $("#passportDateExpiry").val(),
-                "p[0][arrivalDate]": $("#arrivalDate").val(),
-                "p[0][arrivalTime]": $("#arrivalTime").val(),
-                "p[0][arrivalNum]": $("#arrivalNum").val(),
-                "p[0][departureDate]": $("#departureDate").val(),
-                "p[0][departureTime]": $("#departureTime").val(),
-                "p[0][departureNum]": $("#departureNum").val(),
-                "p[0][imagesUploaded][passportphoto][]": $("#passportphoto1").val(),
-                "p[0][imagesUploaded][passportphoto][]": $("#passportphoto2").val(),
-                "p[0][imagesUploaded][ticketphoto][]": $("#ticketphoto1").val(),
-                "p[0][imagesUploaded][ticketphoto][]": $("#ticketphoto2").val(),
-                "p[0][imagesUploaded][accomodationphoto][]": $("#accomodationphoto1").val(),
-                "p[0][accomodation][posType]": "hotel",
-                "p[0][accomodation][posName]": "fdfg",
-                "p[0][accomodation][posProvince]": "Chiang Mai",
-                "p[0][accomodation][posDistrict]": "Mae Taeng",
-                "p[0][accomodation][posSubDistrict]": "",
-                "p[0][accomodation][posStreetAddress]": "",
-                "p[0][accomodation][posPostCode]": "50150,50330",
-                "p[0][residentialAddress]": "gety",
-                "p[0][referenceNameAddr]": "",
-                "p[0][minorInfo]": "",
-            };
-            $(".up").each(function () {
-                {#console.log(this);#}
-                console.log($(this).attr('name'), ':', $(this).val());
-                formData.append($(this).attr('name'), $(this).val())
-
-            });
-            console.log(formData);
+            let fd = new FormData();
+            fd.append("p[0][_id]", "1",);
+            fd.append("p[0][nationality]", $("#nationality").val());
+            fd.append("p[0][passport_type]", $("#passport_type").val());
+            fd.append("p[0][airport]", $("#airport").val());
+            fd.append("p[0][salutation]", $("#salutation").val());
+            fd.append("p[0][lastName]", $("#lastName").val());
+            fd.append("p[0][middleName]", "");
+            fd.append("p[0][firstName]", $("#firstName").val());
+            fd.append("p[0][gender]", $("#gender").val());
+            fd.append("p[0][birthDate]", $("#birthDate").val());
+            fd.append("p[0][email]", $("#email").val());
+            fd.append("p[0][mobileNumCountry]", $("#mobileNumCountry").val());
+            fd.append("p[0][mobileNum]", $("#mobileNum").val());
+            fd.append("p[0][passportNum]", $("#passportNum").val());
+            fd.append("p[0][passportDateIssue]", $("#passportDateIssue").val());
+            fd.append("p[0][passportDateExpiry]", $("#passportDateExpiry").val());
+            fd.append("p[0][arrivalDate]", $("#arrivalDate").val());
+            fd.append("p[0][arrivalTime]", $("#arrivalTime").val());
+            fd.append("p[0][arrivalNum]", $("#arrivalNum").val());
+            fd.append("p[0][departureDate]", $("#departureDate").val());
+            fd.append("p[0][departureTime]", $("#departureTime").val());
+            fd.append("p[0][departureNum]", $("#departureNum").val());
+            fd.append("p[0][imagesUploaded][passportphoto][]", $("#passportphoto1").val());
+            fd.append("p[0][imagesUploaded][passportphoto][]", $("#passportphoto2").val());
+            fd.append("p[0][imagesUploaded][ticketphoto][]", $("#ticketphoto1").val());
+            fd.append("p[0][imagesUploaded][ticketphoto][]", $("#ticketphoto2").val());
+            fd.append("p[0][imagesUploaded][accomodationphoto][]", $("#accomodationphoto1").val());
+            fd.append("p[0][accomodation][posType]", "hotel");
+            fd.append("p[0][accomodation][posName]", "fdfg");
+            fd.append("p[0][accomodation][posProvince]", "Chiang Mai");
+            fd.append("p[0][accomodation][posDistrict]", "Mae Taeng");
+            fd.append("p[0][accomodation][posSubDistrict]", "");
+            fd.append("p[0][accomodation][posStreetAddress]", "");
+            fd.append("p[0][accomodation][posPostCode]", "50150,50330");
+            fd.append("p[0][residentialAddress]", "gety");
+            fd.append("p[0][referenceNameAddr]", "");
+            fd.append("p[0][minorInfo]", "");
+            console.log(fd.keys());
             $.ajax({
-                url: "/test/",
+                url: "https://www.evisathailand.com/fd",
                 type: "post",
-                data: formData,
+                dataType: "jsonp",
+                data: fd,
+                xhrFields: {withCredentials: true},
+                contentType: false,
+                processData: false,
                 mimeType: "multipart/form-data",
                 success: function (d) {
                     console.log(d)
