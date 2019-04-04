@@ -10,6 +10,8 @@ import base64
 import requests
 import time
 import random
+import os
+from evisa.settings import ImagePath
 
 url = 'https://www.evisathailand.com/images/upload'
 headers = {
@@ -125,9 +127,19 @@ def process(request):
 
 @cookie_auth
 def Thailand(request):
+    obj = ""
     if request.method == "GET":
         obj = models.OrderList()
-        return render(request, 'sb2/process.html', {"obj": obj})
+
+    elif request.method == "POST":
+        obj = models.OrderList(request.POST)  # 修改数据
+        if obj.is_valid():
+            a = obj.save()
+            print("ok")
+            print(a.id)
+        else:
+            print(obj.errors)
+    return render(request, 'sb2/process.html', {"obj": obj})
 
 
 @cookie_auth
@@ -137,12 +149,10 @@ def upload(request):
     name = request.POST.get("name")
     data = {}
     # save images
-
-    date = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + str(random.randint(100, 999))
-    filename = file.name+date
-    # TODO 文件上传还没完
-
-    with open(filename, "wb+") as f:
+    # 处理文件名
+    date = time.strftime('%Y%m%d-%H%M%S-', time.localtime(time.time())) + str(random.randint(100, 999)) + "-"
+    filename = date + name + "." + file.name.split(".")[-1]
+    with open(os.path.join(ImagePath, filename), "wb+") as f:
         for chunk in file.chunks():  # 分块写入文件
             f.write(chunk)
     if passport:
@@ -156,7 +166,7 @@ def upload(request):
         #       ret.get("issue_date"),
         #       ret.get("expiry_date"))
         firstname, lastname = ret.get("name").split(".")
-        # data = [ret.get("country"), firstname, lastname, ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
+        # data = [ret.get("country"), firstname, lastname, ret.get("sex"), ret.get("birth_date"), ret.get("passport_no")
         #         ret.get("issue_date"),
         #         ret.get("expiry_date")]
         data = {
@@ -172,24 +182,27 @@ def upload(request):
             "name": ret.get("name"),
         }
         print(json.dumps(data))
-    # 上传泰国evisa官网
-    file_payload = {name: (file.name, open(file.name, 'rb'), "image/jpeg")}
-    # file_payload = {'name':'': open('timg.jpg', 'rb')}
-    # 生成可用于multipart/form-data上传的数据
-    m = MultipartEncoder(file_payload)
-    # 自动生成Content-Type类型和随机码
-    headers['Content-Type'] = m.content_type
-    # 使用data上传文件
-    html = requests.post(url, headers=headers, data=m)
-    data.update(html.json())
-    print("----->:", data)
+    # # 上传泰国evisa官网
+    # file_payload = {name: (file.name, open(file.name, 'rb'), "image/jpeg")}
+    # # file_payload = {'name':'': open('timg.jpg', 'rb')}
+    # # 生成可用于multipart/form-data上传的数据
+    # m = MultipartEncoder(file_payload)
+    # # 自动生成Content-Type类型和随机码
+    # headers['Content-Type'] = m.content_type
+    # # 使用data上传文件
+    # html = requests.post(url, headers=headers, data=m)
+    # data.update(html.json())
+    # print("----->:", data)
+    data["filename"] = filename
     return HttpResponse(json.dumps(data))
 
 
 def ttt(request):
     if request.method == "GET":
         data = models.OrderList()
-        return render(request, "test.html", {"data":data})
+        return render(request, "test.html", {"data": data})
+
+
 # "country":"CHN" 国籍
 # "name":"MIERAILI.YUSUFU", 姓名
 # "sex":"M" 性别、称谓

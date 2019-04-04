@@ -127,6 +127,11 @@
         label {
             margin-top: 0.5rem;
         }
+        .errorlist{
+            font-size: 0.5rem;
+            color: red;
+            float: right;
+        }
 
         /*label {
             margin-bottom: 1.5rem;
@@ -143,369 +148,389 @@
     <div id="content-wrapper">
 
         <div class="container-fluid indexbox">
+            <form method="post">
+                <!-- Breadcrumbs-->
+                {#        <div class="card-header">#}
+                {#            <i class="fas fa-table"></i>#}
+                {#            签注进度查询#}
+                {#        </div>#}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-table"></i>
+                        基本资料
+                    </div>
+                    <!-- 标题栏 end-->
 
-            <!-- Breadcrumbs-->
-            {#        <div class="card-header">#}
-            {#            <i class="fas fa-table"></i>#}
-            {#            签注进度查询#}
-            {#        </div>#}
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fas fa-table"></i>
-                    基本资料
-                </div>
-                <!-- 标题栏 end-->
+                    <div class="card-body">
+                        <p class="mb-0 small info-hot">*接受文件类型:pdf,jpg,jpeg,png,bmp，请确保文件大小大于100KB，小于2MB</p>
+                        <div class="row">
+                            <!-- Grow In Utility -->
+                            <div class="col-lg-4">
 
-                <div class="card-body">
-                    <p class="mb-0 small info-hot">*接受文件类型:pdf,jpg,jpeg,png,bmp，请确保文件大小大于100KB，小于2MB</p>
-                    <div class="row">
-                        <!-- Grow In Utility -->
-                        <div class="col-lg-4">
-
-                            <div class="card position-relative">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">上传护照信息</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="small mb-6 row-img over">
-                                            <!-- <i class="fa fa-camera-retro img-size"></i><br/> -->
-                                            <div id="imgPreview">
-                                                <div id="prompt3">
+                                <div class="card position-relative">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">上传护照信息</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="small mb-6 row-img over">
+                                                <!-- <i class="fa fa-camera-retro img-size"></i><br/> -->
+                                                <div id="imgPreview">
+                                                    <div id="prompt3">
                                      <span id="imgSpan">
                                      <i class="fa fa-camera-retro img-size"></i>
                                        <br/>
                                      </span>
-                                                    {{ obj.passport_img1 }}
-                                                    <!--
-                                                    <input name="passportphoto[]" type="file" class="filepath"
-                                                           onchange="changepic(this)"
-                                                           accept="image/jpg,image/jpeg,image/png,image/PNG">
-                                                    <input name="passportphoto1" class="up" style="display: none">
-                                                    -->
-                                                    <p>护照封面</p>
+
+                                                        <input name="passport_img1" type="file" class="filepath"
+                                                               onchange="changepic(this)"
+                                                               accept="image/jpg,image/jpeg,image/png,image/PNG">
+                                                        <input name="passport_img1" class="up" style="display: none">
+                                                        <p>护照封面</p>
+                                                    </div>
+                                                    <img src="#" id="img3"/>
                                                 </div>
-                                                <img src="#" id="img3"/>
+
+                                                <button id="finish" type="button"
+                                                        class="btn  btn-circle btn-success info-btn"><i
+                                                        class="fa fa-check"></i>
+                                                </button>
                                             </div>
 
-                                            <button id="finish" type="button"
-                                                    class="btn  btn-circle btn-success info-btn"><i
-                                                    class="fa fa-check"></i>
-                                            </button>
-                                        </div>
-
-                                        <div class="small mb-6 row-img over">
-                                            <div id="imgPreview">
-                                                <div id="prompt3">
+                                            <div class="small mb-6 row-img over">
+                                                <div id="imgPreview">
+                                                    <div id="prompt3">
                                                      <span id="imgSpan">
                                                      <i class="fa fa-camera-retro img-size"></i>
                                                        <br/>
                                                          <!--AUI框架中的图标-->
                                                      </span>
-                                                    {{ obj.passport_img2 }}
-                                                    <!--
-                                                    <input name="passportphoto[]" passport="true" value="" type="file"
-                                                           id="file"
-                                                           class="filepath" onchange="changepic(this)"
-                                                           accept="image/jpg,image/jpeg,image/png,image/PNG">
-                                                    <input name="passportphoto2" class="up" style="display: none">
-                                                    -->
-                                                    <p>护照个人信息页</p>
+
+                                                        <input name="passport_img2" passport="true" value="" type="file"
+                                                               id="file"
+                                                               class="filepath" onchange="changepic(this)"
+                                                               accept="image/jpg,image/jpeg,image/png,image/PNG">
+                                                        <input name="passport_img2" class="up" style="display: none">
+
+                                                        <p>护照个人信息页</p>
+                                                    </div>
                                                 </div>
+
+                                                <button id="finish" type="button"
+                                                        class="btn  btn-circle btn-success info-btn"><i
+                                                        class="fa fa-check"></i></button>
                                             </div>
 
-                                            <button id="finish" type="button"
-                                                    class="btn  btn-circle btn-success info-btn"><i
-                                                    class="fa fa-check"></i></button>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-lg-4">
-                            <div class="card position-relative">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">上传机票行程单</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="small mb-6 row-img over">
-                                            <!-- <i class="fa fa-camera-retro img-size"></i><br/> -->
-                                            <div id="imgPreview">
-                                                <div id="prompt3">
+                            <div class="col-lg-4">
+                                <div class="card position-relative">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">上传机票行程单</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="small mb-6 row-img over">
+                                                <!-- <i class="fa fa-camera-retro img-size"></i><br/> -->
+                                                <div id="imgPreview">
+                                                    <div id="prompt3">
                                    <span id="imgSpan">
                                    <i class="fa fa-camera-retro img-size"></i>
                                      <br/>
                                        <!--AUI框架中的图标-->
                                    </span>
-                                                    {{ obj.airimg1 }}
-                                                    <!--
-                                                    <input name="ticketphoto[]" value="1111" type="file" id="file"
-                                                           class="filepath" onchange="changepic(this)"
-                                                           accept="image/jpg,image/jpeg,image/png,image/PNG">
-                                                    <input name="ticketphoto1" class="up" style="display: none">
-                                                    -->
-                                                    <p>上传到达机票</p>
-                                                </div>
-                                            </div>
-                                            <button id="finish" type="button"
-                                                    class="btn  btn-circle btn-success info-btn"><i
-                                                    class="fa fa-check"></i></button>
-                                        </div>
+                                                        <input name="airimg1" value="1111" type="file" id="file"
+                                                               class="filepath" onchange="changepic(this)"
+                                                               accept="image/jpg,image/jpeg,image/png,image/PNG">
+                                                        <input name="airimg1" class="up" style="display: none">
 
-                                        <div class="small mb-6 row-img over">
-                                            <div id="imgPreview">
-                                                <div id="prompt3">
+                                                        <p>上传到达机票</p>
+                                                    </div>
+                                                </div>
+                                                <button id="finish" type="button"
+                                                        class="btn  btn-circle btn-success info-btn"><i
+                                                        class="fa fa-check"></i></button>
+                                            </div>
+
+                                            <div class="small mb-6 row-img over">
+                                                <div id="imgPreview">
+                                                    <div id="prompt3">
                                    <span id="imgSpan">
                                    <i class="fa fa-camera-retro img-size"></i>
                                      <br/>
                                        <!--AUI框架中的图标-->
                                    </span>
 
-                                                    <input name="airimg2" type="file"
-                                                           class="filepath" onchange="changepic(this)"
-                                                           accept="image/jpg,image/jpeg,image/png,image/PNG" />
-                                                    <input name="airimg2" class="up" style="display: none" />
+                                                        <input name="airimg2" type="file"
+                                                               class="filepath" onchange="changepic(this)"
+                                                               accept="image/jpg,image/jpeg,image/png,image/PNG"/>
+                                                        <input name="airimg2" class="up" style="display: none"/>
 
-                                                    <p>上传返回机票</p>
+                                                        <p>上传返回机票</p>
+                                                    </div>
                                                 </div>
+                                                <button id="finish" type="button"
+                                                        class="btn  btn-circle btn-success info-btn"><i
+                                                        class="fa fa-check"></i></button>
                                             </div>
-                                            <button id="finish" type="button"
-                                                    class="btn  btn-circle btn-success info-btn"><i
-                                                    class="fa fa-check"></i></button>
-                                        </div>
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-lg-4">
-                            <div class="card position-relative">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">上传酒店信息</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="small mb-6 row-img over">
-                                            <!-- <i class="fa fa-camera-retro img-size"></i><br/> -->
-                                            <div id="imgPreview">
-                                                <div id="prompt3">
+                            <div class="col-lg-4">
+                                <div class="card position-relative">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">上传酒店信息</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="small mb-6 row-img over">
+                                                <!-- <i class="fa fa-camera-retro img-size"></i><br/> -->
+                                                <div id="imgPreview">
+                                                    <div id="prompt3">
                                    <span id="imgSpan">
                                    <i class="fa fa-camera-retro img-size"></i>
                                      <br/>
                                        <!--AUI框架中的图标-->
                                    </span>
-                                                    {{ obj.hotelimg }}
-                                                    <!--
-                                                    <input name="accomodationphoto[]" value="aaa" type="file" id="file"
-                                                           class="filepath" onchange="changepic(this)"
-                                                           accept="image/jpg,image/jpeg,image/png,image/PNG">
-                                                    <input name="accomodationphoto1" class="up" style="display: none">
-                                                    -->
-                                                    <p>上传酒店信息</p>
+
+                                                        <input name="hotelimg" value="aaa" type="file" id="file"
+                                                               class="filepath" onchange="changepic(this)"
+                                                               accept="image/jpg,image/jpeg,image/png,image/PNG">
+                                                        <input name="hotelimg" class="up" style="display: none">
+                                                        <p>上传酒店信息</p>
+                                                    </div>
                                                 </div>
+                                                <button id="finish" type="button"
+                                                        class="btn  btn-circle btn-success info-btn"><i
+                                                        class="fa fa-check"></i></button>
                                             </div>
-                                            <button id="finish" type="button"
-                                                    class="btn  btn-circle btn-success info-btn"><i
-                                                    class="fa fa-check"></i></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-
+                        {#            <div style=" float: right; margin-top:1rem;">#}
+                        {#              <a href="#" class="btn btn-success btn-icon-split"><span class="icon text-white-50"> <i class="fas fa-check"></i> </span>#}
+                        {#                  <span class="text">全部上传</span>#}
+                        {#              </a>#}
+                        {#             </div>#}
                     </div>
-                    {#            <div style=" float: right; margin-top:1rem;">#}
-                    {#              <a href="#" class="btn btn-success btn-icon-split"><span class="icon text-white-50"> <i class="fas fa-check"></i> </span>#}
-                    {#                  <span class="text">全部上传</span>#}
-                    {#              </a>#}
-                    {#             </div>#}
-                </div>
-                <!-- 上传信息 end-->
+                    <!-- 上传信息 end-->
 
-                <div class="card-body">
+                    <div class="card-body">
 
-                    <div class="row">
-                        <!-- Grow In Utility -->
-                        <div class="col-lg-12">
-                            <div class="card position-relative">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">签证信息</h6>
+                        <div class="row">
+                            <!-- Grow In Utility -->
+                            <div class="col-lg-12">
+                                <div class="card position-relative">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">签证信息</h6>
+                                    </div>
+                                    <div class="card-body row">
+
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.airport.label_tag }} <!-- 到达机场 -->
+                                            {{ obj.airport }}
+                                            {{ obj.airport.errors }}
+
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.arrival_date.label_tag }}  <!-- 到达日期 -->
+                                            {{ obj.arrival_date }}
+                                            {{ obj.arrival_date.errors }}
+
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.arrival_time.label_tag }}  <!-- 到达时间 -->
+                                            {{ obj.arrival_time }}
+                                            {{ obj.arrival_time.errors }}
+
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.arrival_flightnum.label_tag }} <!-- 到达航班号 -->
+                                            {{ obj.arrival_flightnum }}
+                                            {{ obj.arrival_flightnum.errors }}
+
+                                        </div>
+
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.departure_date.label_tag }}<br/>  <!-- 离开日期 -->
+                                            {{ obj.departure_date }}
+                                            {{ obj.departure_date.errors }}
+
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.departure_time.label_tag }} <!-- 离开时间 -->
+                                            {{ obj.departure_time }}
+                                            {{ obj.departure_time.errors }}
+
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.departure_flightnum.label_tag }} <!-- 离开航班号 -->
+                                            {{ obj.departure_flightnum }}
+                                            {{ obj.departure_flightnum.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3"> <!-- 住宿类型 -->
+                                            {{ obj.pos_select.label_tag }}
+                                            {{ obj.pos_select }}
+                                            {{ obj.pos_select.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.mobile_number.label_tag }}
+                                            {{ obj.mobile_number }}
+                                            {{ obj.mobile_number.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.email.label_tag }}
+                                            {{ obj.email }}
+                                            {{ obj.email.errors }}
+                                        </div>
+
+
+                                    </div>
                                 </div>
-                                <div class="card-body row">
 
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.airport.label_tag }}  <!-- 到达机场 -->
-                                        {{ obj.airport }}
-
-                                    </div>
-
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.arrival_date.label_tag }}  <!-- 到达日期 -->
-                                        {{ obj.arrival_date }}
-
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.arrival_time.label_tag }}  <!-- 到达时间 -->
-                                        {{ obj.arrival_time }}
-
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.arrival_flightnum.label_tag }} <!-- 到达航班号 -->
-                                        {{ obj.arrival_flightnum }}
-
-                                    </div>
-
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.departure_date.label_tag }}<br/>  <!-- 离开日期 -->
-                                        {{ obj.departure_date }}
-
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.departure_time.label_tag }} <!-- 离开时间 -->
-                                        {{ obj.departure_time }}
-
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.departure_flightnum.label_tag }} <!-- 离开航班号 -->
-                                        {{ obj.departure_flightnum }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3"> <!-- 住宿类型 -->
-                                        {{ obj.pos_select.label_tag }}
-                                        {{ obj.pos_select }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.mobile_number.label_tag }}
-                                        {{ obj.mobile_number }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.email.label_tag }}
-                                        {{ obj.email }}
-                                    </div>
-
-
-                                </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
-                <!-- 输入联系信息 end -->
-                <!-- 输入住宿信息 -->
+                    <!-- 输入联系信息 end -->
+                    <!-- 输入住宿信息 -->
 
-                <div class="card-body">
+                    <div class="card-body">
 
-                    <div class="row">
-                        <!-- Grow In Utility -->
-                        <div class="col-lg-12">
+                        <div class="row">
+                            <!-- Grow In Utility -->
+                            <div class="col-lg-12">
 
-                            <div class="card position-relative">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">住宿信息</h6>
+                                <div class="card position-relative">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">住宿信息</h6>
+                                    </div>
+                                    <div class="card-body row">
+
+
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.pos_name.label_tag }}
+                                            {{ obj.pos_name }}
+                                            {{ obj.pos_name.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.pos_city_province.label_tag }}
+                                            {{ obj.pos_city_province }}
+                                            {{ obj.pos_city_province.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.pos_district.label_tag }}
+                                            {{ obj.pos_district }}
+                                            {{ obj.pos_district.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.pos_postcode.label_tag }}
+                                            {{ obj.pos_postcode }}
+                                            {{ obj.pos_postcode.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            {{ obj.residential_address.label_tag }}
+                                            {{ obj.residential_address }}
+                                            {{ obj.residential_address.errors }}
+                                        </div>
+
+
+                                    </div>
                                 </div>
-                                <div class="card-body row">
 
-
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.pos_name.label_tag }}
-                                        {{ obj.pos_name }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.pos_city_province.label_tag }}
-                                        {{ obj.pos_city_province }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.pos_district.label_tag }}
-                                        {{ obj.pos_district }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.pos_postcode.label_tag }}
-                                        {{ obj.pos_postcode }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        {{ obj.residential_address.label_tag }}
-                                        {{ obj.residential_address }}
-                                    </div>
-
-
-                                </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
-                <!-- 住宿信息 end -->
+                    <!-- 住宿信息 end -->
 
-                <div class="card-body">
+                    <div class="card-body">
 
-                    <div class="row">
-                        <!-- Grow In Utility -->
-                        <div class="col-lg-12">
+                        <div class="row">
+                            <!-- Grow In Utility -->
+                            <div class="col-lg-12">
 
-                            <div class="card position-relative">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">确认个人信息</h6>
+                                <div class="card position-relative">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">确认个人信息</h6>
+                                    </div>
+                                    <div class="card-body row">
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.last_name.label_tag }}
+                                            {{ obj.last_name }}
+                                            {{ obj.last_name.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.first_name.label_tag }}
+                                            {{ obj.first_name }}
+                                            {{ obj.first_name.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.salutation.label_tag }}
+                                            {{ obj.salutation }}
+                                            {{ obj.salutation.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.gender.label_tag }}
+                                            {{ obj.gender }}
+                                            {{ obj.gender.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.birth_date.label_tag }}
+                                            {{ obj.birth_date }}
+                                            {{ obj.birth_date.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.nationality.label_tag }}
+                                            {{ obj.nationality }}
+                                            {{ obj.nationality.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.passport_number.label_tag }}
+                                            {{ obj.passport_number }}
+                                            {{ obj.passport_number.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.passport_type.label_tag }}
+                                            {{ obj.passport_type }}
+                                            {{ obj.passport_type.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.passport_issue.label_tag }}
+                                            {{ obj.passport_issue }}
+                                            {{ obj.passport_issue.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.passport_expiry.label_tag }}
+                                            {{ obj.passport_expiry }}
+                                            {{ obj.passport_expiry.errors }}
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div class="card-body row">
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.last_name.label_tag }}
-                                        {{ obj.last_name }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.first_name.label_tag }}
-                                        {{ obj.first_name }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.salutation.label_tag }}
-                                        {{ obj.salutation }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.gender.label_tag }}
-                                        {{ obj.gender }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.birth_date.label_tag }}
-                                        {{ obj.birth_date }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.nationality.label_tag }}
-                                        {{ obj.nationality }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.passport_number.label_tag }}
-                                        {{ obj.passport_number }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.passport_type.label_tag }}
-                                        {{ obj.passport_type }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.passport_issue.label_tag }}
-                                        {{ obj.passport_issue }}
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        {{ obj.passport_expiry.label_tag }}
-                                        {{ obj.passport_expiry }}
-                                    </div>
 
-                                </div>
                             </div>
-
+                        </div>
+                        <div style=" float: right; margin-top:1rem;">
+                            <button onclick="submit()" class="btn btn-success btn-icon-split"><span
+                                    class="icon text-white-50"> <i
+                                    class="fas fa-check"></i> </span>
+                                <span class="text">确认提交</span>
+                            </button>
                         </div>
                     </div>
-                    <div style=" float: right; margin-top:1rem;">
-                        <button onclick="sub()" class="btn btn-success btn-icon-split"><span class="icon text-white-50"> <i
-                                class="fas fa-check"></i> </span>
-                            <span class="text">确认提交</span>
-                        </button>
-                    </div>
+                    <!-- 确认信息 end -->
                 </div>
-                <!-- 确认信息 end -->
-            </div>
-            <!-- End of Main Content -->
+                <!-- End of Main Content -->
+            </form>
         </div>
     </div>
     {#    粘贴进来的文件end #}
@@ -525,7 +550,7 @@
     <script type="text/javascript">
 
         //$("input[type='file']").each(function () {
-         //   let that = this;
+        //   let that = this;
         //    $(that).attr("onchange", "changepic(this)")
         //});
 
@@ -637,25 +662,26 @@
                             $(that).parent().parent().next().show();
                             {#console.log("else");#}
                             {#console.log(data);#}
-                            $("#lastName").val(data.last_name);
-                            $("#firstName").val(data.first_name);
-                            $("#salutation").val(data.sex);
-                            $("#gender").val(data.sex);
-                            $("#birthDate").val(data.birth_date.slice(6, 8) + "/" + data.birth_date.slice(4, 6) + "/" + data.birth_date.slice(0, 4));
-                            $("#nationality").val(data.country.toLowerCase());
-                            $("#passportNum").val(data.passport_no);
-                            $("#passportDateIssue").val(data.issue_date.slice(6, 8) + "/" + data.issue_date.slice(4, 6) + "/" + data.issue_date.slice(0, 4));
-                            $("#passportDateExpiry").val(data.expiry_date.slice(6, 8) + "/" + data.expiry_date.slice(4, 6) + "/" + data.expiry_date.slice(0, 4));
-                            {#console.log("ret data", $(that).attr('name').slice(0,-2));#}
-                            $(that).next().val(data[$(that).attr('name').slice(0, -2)][0]);
-                            {#console.log($(that).next().val());#}
+                            $("#id_last_name").val(data.last_name);
+                            $("#id_first_name").val(data.first_name);
+                            $("#id_salutation").val(data.sex);
+                            $("#id_gender").val(data.sex);
+                            $("#id_birth_date").val(data.birth_date.slice(6, 8) + "/" + data.birth_date.slice(4, 6) + "/" + data.birth_date.slice(0, 4));
+                            $("#id_nationality").val(data.country.toLowerCase());
+                            $("#id_passport_number").val(data.passport_no);
+                            $("#id_passport_issue").val(data.issue_date.slice(6, 8) + "/" + data.issue_date.slice(4, 6) + "/" + data.issue_date.slice(0, 4));
+                            $("#id_passport_expiry").val(data.expiry_date.slice(6, 8) + "/" + data.expiry_date.slice(4, 6) + "/" + data.expiry_date.slice(0, 4));
+                            $("#id_passport_type").val("ordinary");
+                            $(that).attr("disabled", true);
+                            $(that).next().val(data.filename);
+                            console.log($(that).next().val());
                         }
                     } else {
                         {#console.log("this is pic", data);#}
                         {#console.log(data[$(that).attr('name').slice(0,-2)][0]);#}
                         $(that).parent().parent().next().show();
                         $(that).attr("disabled", true);
-                        $(that).next().val(data[$(that).attr('name').slice(0, -2)][0]);
+                        $(that).next().val(data.filename);
                         console.log($(that).next().val());
                     }
 

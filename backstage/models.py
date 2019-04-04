@@ -14,7 +14,7 @@ class Order(models.Model):
     airimg2 = models.CharField(max_length=256)
     hotelimg = models.CharField(max_length=256)
     # 订单时间
-    order_info = models.ForeignKey("OrderInfo", on_delete=True)
+    # order_info = models.ForeignKey("OrderInfo", on_delete=True)
     passport_type = models.CharField(max_length=256)
     nationality = models.CharField(max_length=256)
     airport = models.CharField(max_length=256)
@@ -80,19 +80,44 @@ class OrderList(ModelForm):
         error_messages = {
             'name': {'required': "用户名不能为空", },
             'age': {'required': "年龄不能为空", },
+            "passport_type": {'required': "不能为空"},
+            "nationality": {'required': "不能为空"},
+            "airport": {'required': "不能为空"},
+            "salutation": {'required': "不能为空"},
+            "last_name": {'required': "不能为空"},
+            "first_name":{'required': "不能为空"},
+            "gender": {'required': "不能为空"},
+            "birth_date":{'required': "不能为空"},
+            "email": {'required': "不能为空"},
+            "mobile_number": {'required': "不能为空"},
+            "passport_number":{'required': "不能为空"},
+            "passport_issue": {'required': "不能为空"},
+            "passport_expiry": {'required': "不能为空"},
+            "arrival_date": {'required': "不能为空"},
+            "arrival_time": {'required': "不能为空"},
+            "arrival_flightnum": {'required': "不能为空"},
+            "departure_date": {'required': "不能为空"},
+            "departure_time": {'required': "不能为空"},
+            "departure_flightnum": {'required': "不能为空"},
+            "pos_select": {'required': "不能为空"},
+            "pos_name": {'required': "不能为空"},
+            "pos_city_province": {'required': "不能为空"},
+            "pos_district": {'required': "不能为空"},
+            "pos_postcode": {'required': "不能为空"},
+            "residential_address": {'required': "不能为空"},
         }
         # widgets用法,比如把输入用户名的input框给为Textarea
         # 首先得导入模块
         widgets = {
             "id": wid.TextInput(),
             # 还可以自定义属性class="filepath"
-            "passport_img1": wid.FileInput(attrs={"class": "filepath"}),
-            "passport_img2": wid.FileInput(attrs={"class": "filepath", "passport":"true"}),
-            "airimg1": wid.FileInput(attrs={"class": "filepath"}),
-            "airimg2": wid.FileInput(attrs={"class": "filepath"}),
-            "hotelimg": wid.FileInput(attrs={"class": "filepath"}),
-            "passport_type": wid.TextInput(attrs={"class": "form-control up"}),
-            "nationality": wid.TextInput(attrs={"class": "form-control up"}),
+            "passport_img1": wid.TextInput(attrs={"class": "filepath", "required": "true"}),
+            "passport_img2": wid.TextInput(attrs={"class": "filepath", "passport": "true", "required": "true"}),
+            "airimg1": wid.TextInput(attrs={"class": "filepath", "required": "true"}),
+            "airimg2": wid.TextInput(attrs={"class": "filepath", "required": "true"}),
+            "hotelimg": wid.TextInput(attrs={"class": "filepath", "required": "true"}),
+            "passport_type": wid.TextInput(attrs={"class": "form-control up", "required": "true"}),
+            "nationality": wid.TextInput(attrs={"class": "form-control up", "required": "true"}),
             # "airport": wid.TextInput(attrs={"class": "form-control up"}),
             # "airport": wid.ChoiceWidget(choices=(("a",1), ("b", 2))),
             "airport": wid.Select(choices=airport_choises, attrs={"class": "form-control up"}),
