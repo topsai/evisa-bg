@@ -8,6 +8,8 @@ from requests_toolbelt import MultipartEncoder
 import json
 import base64
 import requests
+import time
+import random
 
 url = 'https://www.evisathailand.com/images/upload'
 headers = {
@@ -123,7 +125,9 @@ def process(request):
 
 @cookie_auth
 def Thailand(request):
-    return render(request, 'sb2/process.html')
+    if request.method == "GET":
+        obj = models.OrderList()
+        return render(request, 'sb2/process.html', {"obj": obj})
 
 
 @cookie_auth
@@ -133,7 +137,12 @@ def upload(request):
     name = request.POST.get("name")
     data = {}
     # save images
-    with open(file.name, "wb+") as f:
+
+    date = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time())) + str(random.randint(100, 999))
+    filename = file.name+date
+    # TODO 文件上传还没完
+
+    with open(filename, "wb+") as f:
         for chunk in file.chunks():  # 分块写入文件
             f.write(chunk)
     if passport:
@@ -177,6 +186,10 @@ def upload(request):
     return HttpResponse(json.dumps(data))
 
 
+def ttt(request):
+    if request.method == "GET":
+        data = models.OrderList()
+        return render(request, "test.html", {"data":data})
 # "country":"CHN" 国籍
 # "name":"MIERAILI.YUSUFU", 姓名
 # "sex":"M" 性别、称谓

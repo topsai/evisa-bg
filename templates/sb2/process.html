@@ -125,8 +125,12 @@
         }
 
         label {
-            margin-bottom: 1.5rem;
+            margin-top: 0.5rem;
         }
+
+        /*label {
+            margin-bottom: 1.5rem;
+        }*/
 
         /*.card-header{
           background:#d9edf7;
@@ -172,10 +176,13 @@
                                      <i class="fa fa-camera-retro img-size"></i>
                                        <br/>
                                      </span>
+                                                    {{ obj.passport_img1 }}
+                                                    <!--
                                                     <input name="passportphoto[]" type="file" class="filepath"
                                                            onchange="changepic(this)"
                                                            accept="image/jpg,image/jpeg,image/png,image/PNG">
                                                     <input name="passportphoto1" class="up" style="display: none">
+                                                    -->
                                                     <p>护照封面</p>
                                                 </div>
                                                 <img src="#" id="img3"/>
@@ -195,11 +202,14 @@
                                                        <br/>
                                                          <!--AUI框架中的图标-->
                                                      </span>
+                                                    {{ obj.passport_img2 }}
+                                                    <!--
                                                     <input name="passportphoto[]" passport="true" value="" type="file"
                                                            id="file"
                                                            class="filepath" onchange="changepic(this)"
                                                            accept="image/jpg,image/jpeg,image/png,image/PNG">
                                                     <input name="passportphoto2" class="up" style="display: none">
+                                                    -->
                                                     <p>护照个人信息页</p>
                                                 </div>
                                             </div>
@@ -230,10 +240,13 @@
                                      <br/>
                                        <!--AUI框架中的图标-->
                                    </span>
+                                                    {{ obj.airimg1 }}
+                                                    <!--
                                                     <input name="ticketphoto[]" value="1111" type="file" id="file"
                                                            class="filepath" onchange="changepic(this)"
                                                            accept="image/jpg,image/jpeg,image/png,image/PNG">
                                                     <input name="ticketphoto1" class="up" style="display: none">
+                                                    -->
                                                     <p>上传到达机票</p>
                                                 </div>
                                             </div>
@@ -250,10 +263,12 @@
                                      <br/>
                                        <!--AUI框架中的图标-->
                                    </span>
-                                                    <input name="ticketphoto[]" value="1111" type="file" id="file"
+
+                                                    <input name="airimg2" type="file"
                                                            class="filepath" onchange="changepic(this)"
-                                                           accept="image/jpg,image/jpeg,image/png,image/PNG">
-                                                    <input name="ticketphoto2" class="up" style="display: none">
+                                                           accept="image/jpg,image/jpeg,image/png,image/PNG" />
+                                                    <input name="airimg2" class="up" style="display: none" />
+
                                                     <p>上传返回机票</p>
                                                 </div>
                                             </div>
@@ -283,10 +298,13 @@
                                      <br/>
                                        <!--AUI框架中的图标-->
                                    </span>
+                                                    {{ obj.hotelimg }}
+                                                    <!--
                                                     <input name="accomodationphoto[]" value="aaa" type="file" id="file"
                                                            class="filepath" onchange="changepic(this)"
                                                            accept="image/jpg,image/jpeg,image/png,image/PNG">
                                                     <input name="accomodationphoto1" class="up" style="display: none">
+                                                    -->
                                                     <p>上传酒店信息</p>
                                                 </div>
                                             </div>
@@ -294,7 +312,6 @@
                                                     class="btn  btn-circle btn-success info-btn"><i
                                                     class="fa fa-check"></i></button>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -321,288 +338,54 @@
                                 <div class="card-body row">
 
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>到达机场<br/>  <!-- 到达机场 -->
-                                            <select name="airport" id="airport" required=""
-                                                    class="custom-select custom-select-sm form-control form-control-sm up">
-                                                <option value="">Select</option>
-                                                <option value="bkk" selected="selected">BKK - Suvarnabhumi</option>
-                                                <option value="dmk">DMK - Don Mueang</option>
-                                                <option value="hkt">HKT - Phuket</option>
-                                                <option value="cnx">CNX - Chiang Mai</option>
-                                            </select></label>
+                                        {{ obj.airport.label_tag }}  <!-- 到达机场 -->
+                                        {{ obj.airport }}
+
                                     </div>
 
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>到达日期<br/>  <!-- 到达日期 -->
-                                            <input name="arrivalDate" type="text"
-                                                   class="form-control datepicker up" placeholder="请选择日期" value="">
-                                        </label>
+                                        {{ obj.arrival_date.label_tag }}  <!-- 到达日期 -->
+                                        {{ obj.arrival_date }}
+
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>到达时间<br/>  <!-- 到达时间 -->
-                                            <input name="arrivalTime" type="text"
-                                                   class="form-control up" value=""
-                                                   placeholder="到达时间">
-                                        </label>
+                                        {{ obj.arrival_time.label_tag }}  <!-- 到达时间 -->
+                                        {{ obj.arrival_time }}
+
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>到达航班号<br/>  <!-- 到达航班号 -->
-                                            <input id="arrivalNum" name="arrivalNum" type="text" class="form-control up"
-                                                   value=""
-                                                   placeholder="到达航班号">
-                                        </label>
+                                        {{ obj.arrival_flightnum.label_tag }} <!-- 到达航班号 -->
+                                        {{ obj.arrival_flightnum }}
+
                                     </div>
 
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>离开日期<br/>  <!-- 离开日期 -->
-                                            <input id="departureDate" name="departureDate" type="text"
-                                                   class="form-control datepicker" value=""
-                                                   placeholder="离开日期">
-                                        </label>
+                                        {{ obj.departure_date.label_tag }}<br/>  <!-- 离开日期 -->
+                                        {{ obj.departure_date }}
+
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>离开时间<br/>  <!-- 离开时间 -->
-                                            <input id="departureTime" name="departureTime" type="text"
-                                                   class="form-control up" value=""
-                                                   placeholder="离开时间">
-                                        </label>
+                                        {{ obj.departure_time.label_tag }} <!-- 离开时间 -->
+                                        {{ obj.departure_time }}
+
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>离开航班号<br/>  <!-- 离开航班号 -->
-                                            <input id="departureNum" name="departureNum" type="text"
-                                                   class="form-control up" value=""
-                                                   placeholder="离开航班号">
-                                        </label>
+                                        {{ obj.departure_flightnum.label_tag }} <!-- 离开航班号 -->
+                                        {{ obj.departure_flightnum }}
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3"> <!-- 住宿类型 -->
-                                        <label>住宿类型<br/>
-                                            <select class="form-control up" name="accomodation" id="js-place-of-stay"
-                                                    required="">
-                                                <option value="">选择</option>
-                                                <option value="hotel">Hotel</option>
-                                                <option value="hostel">Hostel</option>
-                                                <option value="guesthouse">Guesthouse</option>
-                                                <option value="private_property">Private Property</option>
-                                                <option value="dormitory">Dormitory</option>
-                                            </select>
-                                        </label>
+                                        {{ obj.pos_select.label_tag }}
+                                        {{ obj.pos_select }}
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>手机号码<br/>
-                                            <input id="mobileNum" name="mobileNum" type="text"
-                                                   class="form-control up"
-                                                   placeholder="+86 18636987415">
-                                        </label>
+                                        {{ obj.mobile_number.label_tag }}
+                                        {{ obj.mobile_number }}
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>邮箱地址<br/>
-                                            <input name="email" type="text" class="form-control up" value=""
-                                                   placeholder="邮箱">
-                                        </label>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>住址信息<br/>
-                                            <textarea name="residential_address" rows="3" cols="50"
-                                                      class="form-control up" placeholder=""></textarea>
-                                        </label>
+                                        {{ obj.email.label_tag }}
+                                        {{ obj.email }}
                                     </div>
 
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>住宿名称（要求）<br/>
-                                            <input name="pos_name" type="text" class="form-control up" value=""
-                                                   placeholder="住宿名称">
-                                        </label>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>城市/省份<br/>
-
-                                            <select name="pos_city_province" class="form-control up">
-                                                <option value="" selected="selected">Select</option>
-                                                <option value="Amnat Charoen">Amnat Charoen</option>
-
-                                                <option value="Ang Thong">Ang Thong</option>
-
-                                                <option value="Bangkok">Bangkok</option>
-
-                                                <option value="Bueng Kan">Bueng Kan</option>
-
-                                                <option value="Buriram">Buriram</option>
-
-                                                <option value="Chachoengsao">Chachoengsao</option>
-
-                                                <option value="Chai Nat">Chai Nat</option>
-
-                                                <option value="Chaiyaphum">Chaiyaphum</option>
-
-                                                <option value="Chanthaburi ">Chanthaburi</option>
-
-                                                <option value="Chiang Mai">Chiang Mai</option>
-
-                                                <option value="Chiang Rai">Chiang Rai</option>
-
-                                                <option value="Chonburi">Chonburi</option>
-
-                                                <option value="Chumphon ">Chumphon</option>
-
-                                                <option value="Kalasin">Kalasin</option>
-
-                                                <option value="Kamphaeng Phet">Kamphaeng Phet</option>
-
-                                                <option value="Kanchanaburi">Kanchanaburi</option>
-
-                                                <option value="Khon Kaen">Khon Kaen</option>
-
-                                                <option value="Krabi">Krabi</option>
-
-                                                <option value="Lampang">Lampang</option>
-
-                                                <option value="Lamphun ">Lamphun</option>
-
-                                                <option value="Loei">Loei</option>
-
-                                                <option value="Lopburi">Lopburi</option>
-
-                                                <option value="Mae Hong Son">Mae Hong Son</option>
-
-                                                <option value="Maha Sarakham">Maha Sarakham</option>
-
-                                                <option value="Mukdahan">Mukdahan</option>
-
-                                                <option value="Nakhon Nayok ">Nakhon Nayok</option>
-
-                                                <option value="Nakhon Pathom">Nakhon Pathom</option>
-
-                                                <option value="Nakhon Phanom">Nakhon Phanom</option>
-
-                                                <option value="Nakhon Ratchasima">Nakhon Ratchasima</option>
-
-                                                <option value="Nakhon Sawan ">Nakhon Sawan</option>
-
-                                                <option value="Nakhon Si Thammarat">Nakhon Si Thammarat</option>
-
-                                                <option value="Nan">Nan</option>
-
-                                                <option value="Narathiwat">Narathiwat</option>
-
-                                                <option value="Nong Bua Lamphu ">Nong Bua Lamphu</option>
-
-                                                <option value="Nong Khai">Nong Khai</option>
-
-                                                <option value="Nonthaburi">Nonthaburi</option>
-
-                                                <option value="Pathum Thani">Pathum Thani</option>
-
-                                                <option value="Pattani">Pattani</option>
-
-                                                <option value="Phang Nga">Phang Nga</option>
-
-                                                <option value="Phatthalung">Phatthalung</option>
-
-                                                <option value="Phayao">Phayao</option>
-
-                                                <option value="Phetchabun">Phetchabun</option>
-
-                                                <option value="Phetchaburi">Phetchaburi</option>
-
-                                                <option value="Phichit">Phichit</option>
-
-                                                <option value="Phitsanulok">Phitsanulok</option>
-
-                                                <option value="Phra Nakhon Si Ayutthaya ">Phra Nakhon Si Ayutthaya
-                                                </option>
-
-                                                <option value="Phrae">Phrae</option>
-
-                                                <option value="Phuket">Phuket</option>
-
-                                                <option value="Prachinburi">Prachinburi</option>
-
-                                                <option value="Prachuap Khiri Khan">Prachuap Khiri Khan</option>
-
-                                                <option value="Ranong">Ranong</option>
-
-                                                <option value="Ratchaburi">Ratchaburi</option>
-
-                                                <option value="Rayong ">Rayong</option>
-
-                                                <option value="Roi Et">Roi Et</option>
-
-                                                <option value="Sa Kaeo">Sa Kaeo</option>
-
-                                                <option value="Sakon Nakhon">Sakon Nakhon</option>
-
-                                                <option value="Samut Prakan">Samut Prakan</option>
-
-                                                <option value="Samut Sakhon">Samut Sakhon</option>
-
-                                                <option value="Samut Songkhram">Samut Songkhram</option>
-
-                                                <option value="Saraburi">Saraburi</option>
-
-                                                <option value="Satun">Satun</option>
-
-                                                <option value="Sing Buri">Sing Buri</option>
-
-                                                <option value="Sisaket">Sisaket</option>
-
-                                                <option value="Songkhla">Songkhla</option>
-
-                                                <option value="Sukhothai">Sukhothai</option>
-
-                                                <option value="Suphan Buri">Suphan Buri</option>
-
-                                                <option value="Surat Thani">Surat Thani</option>
-
-                                                <option value="Surin">Surin</option>
-
-                                                <option value="Tak">Tak</option>
-
-                                                <option value="Trang">Trang</option>
-
-                                                <option value="Trat">Trat</option>
-
-                                                <option value="Ubon Ratchathani ">Ubon Ratchathani</option>
-
-                                                <option value="Udon Thani">Udon Thani</option>
-
-                                                <option value="Uthai Thani">Uthai Thani</option>
-
-                                                <option value="Uttaradit">Uttaradit</option>
-
-                                                <option value="Yala">Yala</option>
-
-                                                <option value="Yasothon">Yasothon</option>
-                                            </select>
-                                        </label>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>区<br/>
-                                            <select name="pos_district" class="form-control up">
-                                                <option class="js-pos-default" value="">Select</option>
-
-
-                                                <option value="Chanuman">Chanuman</option>
-
-                                                <option value="Hua Taphan">Hua Taphan</option>
-
-                                                <option value="Lue Amnat ">Lue Amnat</option>
-
-                                                <option value="Mueang Amnat Charoen">Mueang Amnat Charoen</option>
-
-                                                <option value="Pathum Ratchawongsa">Pathum Ratchawongsa</option>
-
-                                                <option value="Phana ">Phana</option>
-
-                                                <option value="Senangkhanikhom">Senangkhanikhom</option>
-                                            </select>
-                                        </label>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>邮政编码<br/>
-                                            <input name="pos_postcode" type="text" class="form-control up" value=""
-                                                   placeholder="邮政编码">
-                                        </label>
-                                    </div>
 
                                 </div>
                             </div>
@@ -611,6 +394,50 @@
                     </div>
                 </div>
                 <!-- 输入联系信息 end -->
+                <!-- 输入住宿信息 -->
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <!-- Grow In Utility -->
+                        <div class="col-lg-12">
+
+                            <div class="card position-relative">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">住宿信息</h6>
+                                </div>
+                                <div class="card-body row">
+
+
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                        {{ obj.pos_name.label_tag }}
+                                        {{ obj.pos_name }}
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                        {{ obj.pos_city_province.label_tag }}
+                                        {{ obj.pos_city_province }}
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                        {{ obj.pos_district.label_tag }}
+                                        {{ obj.pos_district }}
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                        {{ obj.pos_postcode.label_tag }}
+                                        {{ obj.pos_postcode }}
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        {{ obj.residential_address.label_tag }}
+                                        {{ obj.residential_address }}
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- 住宿信息 end -->
 
                 <div class="card-body">
 
@@ -624,77 +451,45 @@
                                 </div>
                                 <div class="card-body row">
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>姓<br/> <!-- 姓 -->
-                                            <input id="lastName" name="lastName" type="text" class="form-control up"
-                                                   value=""
-                                                   placeholder="姓">
-                                        </label>
+                                        {{ obj.last_name.label_tag }}
+                                        {{ obj.last_name }}
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>名<br/>  <!-- 名 -->
-                                            <input id="firstName" name="firstName" type="text" class="form-control up"
-                                                   value=""
-                                                   placeholder="名">
-                                        </label>
+                                        {{ obj.first_name.label_tag }}
+                                        {{ obj.first_name }}
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>称谓<br/>  <!-- 称谓 -->
-                                            <input id="salutation" name="salutation" type="text" class="form-control up"
-                                                   value="mr"
-                                                   placeholder="称谓">
-                                        </label>
+                                        {{ obj.salutation.label_tag }}
+                                        {{ obj.salutation }}
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>性别<br/>  <!-- 性别 -->
-                                            <input name="gender" type="text" class="form-control up" value=""
-                                                   placeholder="性别">
-                                        </label>
+                                        {{ obj.gender.label_tag }}
+                                        {{ obj.gender }}
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>出生日期<br/>  <!-- 出生日期 -->
-                                            <input id="birthDate" name="birthDate" type="text"
-                                                   class="form-control datepicker up"
-                                                   value=""
-                                                   placeholder="出生日期">
-                                        </label>
+                                        {{ obj.birth_date.label_tag }}
+                                        {{ obj.birth_date }}
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>国籍<br/>  <!-- 国籍 -->
-                                            <input id="nationality" name="nationality" type="text"
-                                                   class="form-control up"
-                                                   value=""
-                                                   placeholder="国籍">
-                                        </label>
+                                        {{ obj.nationality.label_tag }}
+                                        {{ obj.nationality }}
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>护照号<br/>  <!-- 护照号 -->
-                                            <input id="passportNum" name="passportNum" type="text"
-                                                   class="form-control up" value=""
-                                                   placeholder="护照号">
-                                        </label>
+                                        {{ obj.passport_number.label_tag }}
+                                        {{ obj.passport_number }}
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>护照类型<br/>  <!-- 护照类型 -->
-                                            <input id="passport_type" name="passport_type" type="text"
-                                                   class="form-control up" value="ordinary"
-                                                   placeholder="Ordinary">
-                                        </label>
+                                        {{ obj.passport_type.label_tag }}
+                                        {{ obj.passport_type }}
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>签发日期<br/>  <!-- 签发日期 -->
-                                            <input id="passportDateIssue" name="passportDateIssue" type="text"
-                                                   class="form-control up datepicker" value=""
-                                                   placeholder="签发日期">
-                                        </label>
+                                        {{ obj.passport_issue.label_tag }}
+                                        {{ obj.passport_issue }}
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-3">
-                                        <label>有效期至<br/>  <!-- 有效期至 -->
-                                            <input id="passportDateExpiry" name="passportDateExpiry" type="text"
-                                                   class="form-control up datepicker" value=""
-                                                   placeholder="有效期至">
-                                        </label>
+                                        {{ obj.passport_expiry.label_tag }}
+                                        {{ obj.passport_expiry }}
                                     </div>
-
 
                                 </div>
                             </div>
@@ -709,17 +504,11 @@
                     </div>
                 </div>
                 <!-- 确认信息 end -->
-
             </div>
             <!-- End of Main Content -->
-
         </div>
-
-
     </div>
     {#    粘贴进来的文件end #}
-
-
 
 
 
@@ -734,6 +523,13 @@
     <script type="text/javascript" src="/static/js/bootstrap-datepicker.min.js" charset="UTF-8"></script>
     <script type="text/javascript" src="/static/js/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
     <script type="text/javascript">
+
+        //$("input[type='file']").each(function () {
+         //   let that = this;
+        //    $(that).attr("onchange", "changepic(this)")
+        //});
+
+
         $(function () {
             $(".datepicker").datepicker({
                 language: "zh-CN",
@@ -789,9 +585,8 @@
             fd.append("p[0][minorInfo]", "");
             console.log(fd.keys());
             $.ajax({
-                url: "https://www.evisathailand.com/fd",
+                url: "/test/",
                 type: "post",
-                dataType: "jsonp",
                 data: fd,
                 xhrFields: {withCredentials: true},
                 contentType: false,
@@ -859,7 +654,9 @@
                         {#console.log("this is pic", data);#}
                         {#console.log(data[$(that).attr('name').slice(0,-2)][0]);#}
                         $(that).parent().parent().next().show();
+                        $(that).attr("disabled", true);
                         $(that).next().val(data[$(that).attr('name').slice(0, -2)][0]);
+                        console.log($(that).next().val());
                     }
 
                 },

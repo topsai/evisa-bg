@@ -27,4 +27,5 @@ urlpatterns = [
     path('country/', views.country),
     path('test/', views.test),
     path('progress/', views.progress),
+    path('ttt/', views.ttt),
 ]
