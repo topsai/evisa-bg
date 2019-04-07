@@ -1,0 +1,433 @@
+{% extends "sb2/base.html" %}
+{% block css %}
+    <link href="/static/css/bootstrap-datepicker.min.css" rel="stylesheet" media="screen">
+    <link href="/static/css/bootstrap-datepicker3.min.css" rel="stylesheet" media="screen">
+    <style>
+        .indexbox {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .index_input {
+            width: 200px;
+        }
+
+        .maxbutton {
+            border-radius: 90px;
+        }
+
+        .sum-index {
+            text-align: center;
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .infobox {
+            width: 100%;
+        }
+
+        input::-webkit-input-placeholder {
+            font-size: 0.8rem;
+        }
+
+        input::-moz-placeholder { /* Mozilla Firefox 19+ */
+            font-size: 0.8rem;
+        }
+
+        input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            font-size: 0.8rem;
+        }
+
+        input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            font-size: 0.8rem;
+        }
+
+        textarea {
+            font-size: 0.8rem;
+        }
+
+        .infobox li {
+            border: 1px solid #f90;
+            font-size: 12px;
+            width: 33%;
+            float: left;
+        }
+
+        .row-img {
+            width: 49%;
+            height: 7rem;
+            border: 1px dotted #ccc;
+            margin-bottom: 1rem !important;
+        }
+
+        .row-p {
+            text-align: center;
+        }
+
+        .text-primary {
+            color: #999 !important;
+        }
+
+        .card-header {
+            color: #4e73df !important;
+        }
+
+        .img-size {
+            font-size: 2rem;
+        }
+
+        #prompt3 {
+            width: 100%;
+            height: 180px;
+            text-align: center;
+            position: relative;
+        }
+
+        #imgSpan {
+            position: absolute;
+            top: 20px;
+            left: 45%;
+            text-align: center;
+        }
+
+        .filepath {
+            width: 100%;
+            height: 40%;
+            opacity: 0;
+        }
+
+        #img3 {
+            height: 100%;
+            width: 100%;
+            display: none;
+        }
+
+        .info-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .over {
+            position: relative;
+        }
+
+        #finish {
+            display: none;
+        }
+
+        .info-hot {
+            color: indianred;
+        }
+
+        label {
+            margin-top: 0.5rem;
+        }
+        .errorlist{
+            font-size: 0.5rem;
+            color: red;
+            float: right;
+        }
+
+        /*label {
+            margin-bottom: 1.5rem;
+        }*/
+
+        /*.card-header{
+          background:#d9edf7;
+        }*/
+    </style>
+{% endblock %}
+{% block content %}
+
+    {#    粘贴进来的文件sta  #}
+    <div id="content-wrapper">
+
+        <div class="container-fluid indexbox">
+            <form method="post">
+                <!-- Breadcrumbs-->
+                {#        <div class="card-header">#}
+                {#            <i class="fas fa-table"></i>#}
+                {#            签注进度查询#}
+                {#        </div>#}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fas fa-table"></i>
+                        基本资料
+                    </div>
+                    <!-- 标题栏 end-->
+
+                    {{ obj.as_p }}
+                    <!-- 上传信息 end-->
+
+
+                    <!-- 输入联系信息 end -->
+                    <!-- 输入住宿信息 -->
+
+
+                    <!-- 住宿信息 end -->
+
+                    <div class="card-body">
+
+                        <div style=" float: right; margin-top:1rem;">
+                            <button onclick="submit()" class="btn btn-success btn-icon-split"><span
+                                    class="icon text-white-50"> <i
+                                    class="fas fa-check"></i> </span>
+                                <span class="text">确认提交</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- 确认信息 end -->
+                </div>
+                <!-- End of Main Content -->
+            </form>
+        </div>
+    </div>
+    {#    粘贴进来的文件end #}
+
+
+
+
+
+
+    {#    <input name="fi" type="file" value="aaa">#}
+    {#    <button name="bb" class="btn btn-danger up" onclick="f(this)">submit</button>#}
+{% endblock %}
+{% block js %}
+
+    <script type="text/javascript" src="/static/js/bootstrap-datepicker.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
+    <script type="text/javascript">
+
+        //$("input[type='file']").each(function () {
+        //   let that = this;
+        //    $(that).attr("onchange", "changepic(this)")
+        //});
+
+
+        $(function () {
+            $(".datepicker").datepicker({
+                language: "zh-CN",
+                autoclose: true,//选中之后自动隐藏日期选择框
+                //clearBtn: true,//清除按钮
+                //todayBtn: true,//今日按钮
+                //format: "yyyy-mm-dd"//日期格式，详见 http://bootstrap-datepicker.readthedocs.org/en/release/options.html#format
+                format: "dd/mm/yyyy",
+                timeFormat: 'HH:mm:ss',//时间显示格式
+                minView: 0,
+                minuteStep: 1
+            });
+        });
+
+        function sub() {
+            let fd = new FormData();
+            fd.append("p[0][_id]", "1",);
+            fd.append("p[0][nationality]", $("#nationality").val());
+            fd.append("p[0][passport_type]", $("#passport_type").val());
+            fd.append("p[0][airport]", $("#airport").val());
+            fd.append("p[0][salutation]", $("#salutation").val());
+            fd.append("p[0][lastName]", $("#lastName").val());
+            fd.append("p[0][middleName]", "");
+            fd.append("p[0][firstName]", $("#firstName").val());
+            fd.append("p[0][gender]", $("#gender").val());
+            fd.append("p[0][birthDate]", $("#birthDate").val());
+            fd.append("p[0][email]", $("#email").val());
+            fd.append("p[0][mobileNumCountry]", $("#mobileNumCountry").val());
+            fd.append("p[0][mobileNum]", $("#mobileNum").val());
+            fd.append("p[0][passportNum]", $("#passportNum").val());
+            fd.append("p[0][passportDateIssue]", $("#passportDateIssue").val());
+            fd.append("p[0][passportDateExpiry]", $("#passportDateExpiry").val());
+            fd.append("p[0][arrivalDate]", $("#arrivalDate").val());
+            fd.append("p[0][arrivalTime]", $("#arrivalTime").val());
+            fd.append("p[0][arrivalNum]", $("#arrivalNum").val());
+            fd.append("p[0][departureDate]", $("#departureDate").val());
+            fd.append("p[0][departureTime]", $("#departureTime").val());
+            fd.append("p[0][departureNum]", $("#departureNum").val());
+            fd.append("p[0][imagesUploaded][passportphoto][]", $("#passportphoto1").val());
+            fd.append("p[0][imagesUploaded][passportphoto][]", $("#passportphoto2").val());
+            fd.append("p[0][imagesUploaded][ticketphoto][]", $("#ticketphoto1").val());
+            fd.append("p[0][imagesUploaded][ticketphoto][]", $("#ticketphoto2").val());
+            fd.append("p[0][imagesUploaded][accomodationphoto][]", $("#accomodationphoto1").val());
+            fd.append("p[0][accomodation][posType]", "hotel");
+            fd.append("p[0][accomodation][posName]", "fdfg");
+            fd.append("p[0][accomodation][posProvince]", "Chiang Mai");
+            fd.append("p[0][accomodation][posDistrict]", "Mae Taeng");
+            fd.append("p[0][accomodation][posSubDistrict]", "");
+            fd.append("p[0][accomodation][posStreetAddress]", "");
+            fd.append("p[0][accomodation][posPostCode]", "50150,50330");
+            fd.append("p[0][residentialAddress]", "gety");
+            fd.append("p[0][referenceNameAddr]", "");
+            fd.append("p[0][minorInfo]", "");
+            console.log(fd.keys());
+            $.ajax({
+                url: "/test/",
+                type: "post",
+                data: fd,
+                xhrFields: {withCredentials: true},
+                contentType: false,
+                processData: false,
+                mimeType: "multipart/form-data",
+                success: function (d) {
+                    console.log(d)
+
+                }
+            });
+
+        }
+
+        function changepic(t) {
+            let passport = $(t).attr("passport");
+            console.log("changepic", passport);
+            let that = t;
+            let f = $(that)[0];
+            let file = f.files[0];
+            let name = f.name;
+            if (!file) {
+                alert("请先选择文件");
+            }
+            let formData = new FormData();
+            formData.append("file", file);
+            formData.append("name", name);
+            if (passport) {
+                formData.append("passport", true);
+            }
+            console.log(formData);
+            $.ajax({
+                url: "/upload/",
+                type: "post",
+                data: formData,
+                xhrFields: {withCredentials: true},
+                contentType: false,
+                processData: false,
+                mimeType: "multipart/form-data",
+                success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data, Object.keys(data).length);
+                    if (passport) {
+                        console.log("this is passport");
+                        if (Object.keys(data).length < 10) {
+                            {#console.log("识别失败，请重新拍摄照片，保持画面清晰。");#}
+                            alert("识别失败，请重新拍摄照片，保持画面清晰。");
+                        } else {
+                            $(that).parent().parent().next().show();
+                            {#console.log("else");#}
+                            {#console.log(data);#}
+                            $("#id_last_name").val(data.last_name);
+                            $("#id_first_name").val(data.first_name);
+                            $("#id_salutation").val(data.sex);
+                            $("#id_gender").val(data.sex);
+                            $("#id_birth_date").val(data.birth_date.slice(6, 8) + "/" + data.birth_date.slice(4, 6) + "/" + data.birth_date.slice(0, 4));
+                            $("#id_nationality").val(data.country.toLowerCase());
+                            $("#id_passport_number").val(data.passport_no);
+                            $("#id_passport_issue").val(data.issue_date.slice(6, 8) + "/" + data.issue_date.slice(4, 6) + "/" + data.issue_date.slice(0, 4));
+                            $("#id_passport_expiry").val(data.expiry_date.slice(6, 8) + "/" + data.expiry_date.slice(4, 6) + "/" + data.expiry_date.slice(0, 4));
+                            $("#id_passport_type").val("ordinary");
+                            $(that).attr("disabled", true);
+                            $(that).next().val(data.filename);
+                            console.log($(that).next().val());
+                        }
+                    } else {
+                        {#console.log("this is pic", data);#}
+                        {#console.log(data[$(that).attr('name').slice(0,-2)][0]);#}
+                        $(that).parent().parent().next().show();
+                        $(that).attr("disabled", true);
+                        $(that).next().val(data.filename);
+                        console.log($(that).next().val());
+                    }
+
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+        // 上传图片
+        function f(btn) {
+            let that = btn;
+            console.log($(that));
+            let file = $(that).prev()[0].files[0];
+            let formData = new FormData();
+            formData.append('passport', file);
+            console.log(formData);
+            $.ajax({
+                url: "/upload/",
+                type: "post",
+                data: formData,
+                xhrFields: {withCredentials: true},
+                contentType: false,
+                processData: false,
+                mimeType: "multipart/form-data",
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data.length < 9) {
+                        alert("识别失败，请重新拍摄照片，保持画面清晰。")
+                    } else {
+                        // data = [ret.get("country"), firstname, lastname, ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
+                        //     ret.get("issue_date"),
+                        //     ret.get("expiry_date")]
+                        console.log(data);
+                        // name="name" type="text" class="form-control" value="张三"></td>
+                        //         <td><input name="last_name" type="text" class="form-control" value="张"></td>
+                        //         <td><input name="first_name" type="text" class="form-control" value="三"></td>
+                        //         <td><input name="salutation" type="text" class="form-control" value="女士"></td>
+                        //         <td><input name="gender" type="text" class="form-control" value="女"></td>
+                        //         <td><input name="birth_date" type="text" class="form-control" value="19/09/12"></td>
+                        //         <td><input name="nationality" type="text" class="form-control" value="中国"></td>
+                        //         <td><input name="passport_type" type="text" class="form-control" value="普通"></td>
+                        //         <td><input name="passport_number" type="text" class="form-control" value="G890654356"></td>
+                        //         <td><input name="passport_issue" type="text" class="form-control" value="12/09/14"></td>
+                        //         <td><input name="passport_expiry
+                        $("#name").val(data[2] + '.' + data[1]);
+                        $("#last_name").val(data[2]);
+                        $("#first_name").val(data[1]);
+                        $("#salutation").val(data[3]);
+                        $("#gender").val(data[3]);
+                        $("#birth_date").val(data[4]);
+                        $("#nationality").val(data[0]);
+                        $("#passport_number").val(data[5]);
+                        $("#passport_issue").val(data[6]);
+                        $("#passport_expiry").val(data[7]);
+
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+
+        }
+
+        function saveUser2() {
+            var id = $("#id").val().trim();
+            var uname = $("#uname").val().trim();
+            var pwd = $("#pwd").val().trim();
+            var file = document.getElementById("file").files[0];
+            var formData = new FormData();
+            formData.append('id', id);
+            formData.append('uname', uname);
+            formData.append('pwd', pwd);
+            formData.append('file', file);
+
+            $.ajax({
+                url: "/home/about",
+                type: "post",
+                data: formData,
+                contentType: false,
+                processData: false,
+                mimeType: "multipart/form-data",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+    </script>
+{% endblock %}

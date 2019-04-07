@@ -12,6 +12,7 @@ import time
 import random
 import os
 from evisa.settings import ImagePath
+from backstage import mypool
 
 url = 'https://www.evisathailand.com/images/upload'
 headers = {
@@ -133,13 +134,18 @@ def Thailand(request):
 
     elif request.method == "POST":
         obj = models.OrderList(request.POST)  # 修改数据
+        # obj.state = 0
+        # obj.order_method = 1
+        # obj.destination = "泰国"
         if obj.is_valid():
             a = obj.save()
             print("ok")
             print(a.id)
+            return redirect("/progress/")
         else:
             print(obj.errors)
     return render(request, 'sb2/process.html', {"obj": obj})
+    # return render(request, 'sb2/none.html', {"obj": obj})
 
 
 @cookie_auth
@@ -227,4 +233,51 @@ def test(request):
 
 
 def progress(request):
-    return render(request, 'sb2/progress.html', {})
+    obj = models.Order.objects.all()
+    return render(request, 'sb2/progress.html', {"obj": obj})
+
+
+def pay(request):
+    print(request.GET.get("id"))
+    # 这是将数据库数据提交官网
+    # data = models.Order.objects.filter(state=0).first()
+    # ret = mypool.process(data)
+    # if ret.get("url"):
+    #     print(ret.get("url"))
+    #     data.state = 1
+    #     data.pay_addr = ret.get("url")
+    #     data.save()
+    # else:
+    #     print(ret.get("err"))
+    # time.sleep(1000)
+    obj = models.Order.objects.get(id=request.GET.get("id"))
+    return render(request, 'sb2/pay.html', {"obj": obj})
+
+
+import threading
+
+
+def forever():
+    while True:
+        # 这是将数据库数据提交官网
+        data = models.Order.objects.filter(state=0).first()
+        if data:
+            try:
+                print("有任务")
+                ret = mypool.process(data)
+                if ret.get("url"):
+                    print(ret.get("url"))
+                    data.state = 1
+                    data.pay_addr = ret.get("url")
+                    data.save()
+                else:
+                    print(ret.get("err"))
+            except Exception as e:
+                print(e)
+        else:
+            print("全部任务已经完成")
+        time.sleep(1)
+
+
+t = threading.Thread(target=forever)
+t.start()

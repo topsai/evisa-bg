@@ -2,12 +2,27 @@ from django.db import models
 from django.forms import ModelForm
 from django.forms import widgets as wid  # 因为重名，所以起个别名
 
-
 # Create your models here.
+state_choise = (
+    (0, "未处理"),
+    (1, "待支付"),
+    (2, "已支付"),
+    (3, "待上传"),
+    (4, "待审核"),
+    (5, "成功"),
+    (4, "失败"),
+)
+order_method_choise = {
+    (1, "小程序"),
+    (2, "门店办理"),
+}
+
 
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
     time = models.TimeField(auto_now_add=True)
+    # 目的地
+    destination = models.CharField(max_length=256, default="泰国")
     passport_img1 = models.CharField(max_length=256)
     passport_img2 = models.CharField(max_length=256)
     airimg1 = models.CharField(max_length=256)
@@ -40,6 +55,12 @@ class Order(models.Model):
     pos_district = models.CharField(max_length=256)
     pos_postcode = models.CharField(max_length=256)
     residential_address = models.CharField(max_length=256)
+    # 订单状态（是否支付）
+    state = models.IntegerField(choices=state_choise, default=0)
+    # 订单渠道（微信、店面）
+    order_method = models.IntegerField(choices=order_method_choise, default=1)
+    # 支付地址
+    pay_addr = models.CharField(max_length=256, blank=True, null=True)
 
 
 class OrderInfo(models.Model):
@@ -71,12 +92,13 @@ class OrderList(ModelForm):
         )
         model = Order  # 对应的Model中的类
         fields = "__all__"  # 字段，如果是__all__,就是表示列出所有的字段
-        exclude = None  # 排除的字段
+        # exclude = None  # 排除的字段
         # labels = None  # 提示信息
         help_texts = None  # 帮助提示信息
         # widgets = None  # 自定义插件
         # 自定义错误信息
         # error_messages用法：
+        exclude = ["state", "order_method", "destination"]
         error_messages = {
             'name': {'required': "用户名不能为空", },
             'age': {'required': "年龄不能为空", },
@@ -85,12 +107,12 @@ class OrderList(ModelForm):
             "airport": {'required': "不能为空"},
             "salutation": {'required': "不能为空"},
             "last_name": {'required': "不能为空"},
-            "first_name":{'required': "不能为空"},
+            "first_name": {'required': "不能为空"},
             "gender": {'required': "不能为空"},
-            "birth_date":{'required': "不能为空"},
+            "birth_date": {'required': "不能为空"},
             "email": {'required': "不能为空"},
             "mobile_number": {'required': "不能为空"},
-            "passport_number":{'required': "不能为空"},
+            "passport_number": {'required': "不能为空"},
             "passport_issue": {'required': "不能为空"},
             "passport_expiry": {'required': "不能为空"},
             "arrival_date": {'required': "不能为空"},

@@ -39,7 +39,24 @@
                             <th>进度</th>
                         </tr>
                         </tfoot>
-                        <tbody>
+                        {% for i in obj %}
+                            <tr>
+
+                                <td>{{ i.last_name }} - {{ i.first_name }}</td>
+                                <td>上海</td>
+                                <td>{{ i.passport_number }}</td>
+                                <td>86+ 236987125</td>
+                                <td>565454@qq.com</td>
+                                <td>小程序</td>
+                                <td class="march">
+                                    <a href="/pay/?id={{ i.id }}">
+                                        {{ i.get_state_display }}
+                                    </a>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+
                         <tr>
                             <td>孙钦</td>
                             <td>上海</td>

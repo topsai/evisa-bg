@@ -27,5 +27,6 @@ urlpatterns = [
     path('country/', views.country),
     path('test/', views.test),
     path('progress/', views.progress),
+    path('pay/', views.pay),
     path('ttt/', views.ttt),
 ]

@@ -4,28 +4,23 @@
 # Email: master@liwenzhou.com
 # Date: 2019/4/3
 
-from selenium import webdriver
-from selenium.webdriver.support.select import Select
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
 import time
 import os
-
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.chrome.options import Options
 
 url = "https://www.evisathailand.com/terms"
-
 
 desired_capabilities = DesiredCapabilities.CHROME  # 修改页面加载策略
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 driver = webdriver.Chrome()
 driver.get(url)
-
 
 print("next wait")
 
@@ -41,7 +36,6 @@ while flag:
 print("next ok")
 # pd-nationality
 time.sleep(1)
-
 
 # 上传图片
 file = driver.find_element_by_name("passportphoto[]")
@@ -60,10 +54,6 @@ for i in btn:
     # WebDriverWait(driver, 30).until(EC.element_to_be_clickable(i))
     time.sleep(2)
     i.click()
-
-
-
-
 
 # 选择国籍
 select = Select(driver.find_element_by_id('pd-nationality'))
@@ -129,7 +119,23 @@ select.select_by_index(1)
 # 设置住址
 driver.find_element_by_name("residential_address").send_keys("residential_address")
 
-
-
+upload = driver.find_elements_by_class_name("a-upload-btn")
+# 等待图片上传
+flag = 0
+while flag == 3:
+    for i in upload:
+        if i.text == "✓ Uploaded":
+            flag += 1
+        else:
+            print("等待图片上传")
+            time.sleep(1)
 # 提交 js-submitpd
 WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, 'js-submitpd'))).click()
+# 等待数据处理
+time.sleep(0.5)
+alert = driver.find_element_by_class_name("m-alert")
+if alert:
+    print(alert.is_displayed())
+    print(driver.find_element_by_class_name("m-alert__message").text)
+else:
+    print("alert 未弹出！")
