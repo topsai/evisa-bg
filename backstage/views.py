@@ -10,6 +10,7 @@ import base64
 import requests
 import time
 import random
+import threading
 import os
 from evisa.settings import ImagePath
 from backstage import mypool
@@ -148,12 +149,13 @@ def Thailand(request):
     # return render(request, 'sb2/none.html', {"obj": obj})
 
 
-@cookie_auth
+# @cookie_auth
 def upload(request):
     passport = request.POST.get("passport")
     file = request.FILES.get("file")
     name = request.POST.get("name")
     data = {}
+    print(file, name)
     # save images
     # 处理文件名
     date = time.strftime('%Y%m%d-%H%M%S-', time.localtime(time.time())) + str(random.randint(100, 999)) + "-"
@@ -254,9 +256,7 @@ def pay(request):
     return render(request, 'sb2/pay.html', {"obj": obj})
 
 
-import threading
-
-
+# 处理后台数据
 def forever():
     while True:
         # 这是将数据库数据提交官网
@@ -280,4 +280,4 @@ def forever():
 
 
 t = threading.Thread(target=forever)
-t.start()
+# t.start()

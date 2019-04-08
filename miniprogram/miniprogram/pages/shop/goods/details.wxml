@@ -1,62 +1,461 @@
 <!--商品轮播图-->
 <swiper class="screen-swiper square-dot bg-white" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-    <swiper-item wx:for="{{swiperlist}}" wx:key="index">
-        <image src="{{item}}" mode='aspectFill'></image>
-    </swiper-item>
+  <swiper-item wx:for="{{swiperlist}}" wx:key="index">
+    <image src="{{item}}" mode='aspectFill'></image>
+  </swiper-item>
 </swiper>
 
 <!--左上角按钮-->
 <view class="canui-head-box" style="top:{{StatusBar}}px;">
-    <navigator class='icon-back' open-type="navigateBack" hover-class="none"></navigator>
-    <navigator class='icon-home' open-type="navigateBack" hover-class="none"></navigator>
+  <navigator class='icon-back' open-type="navigateBack" hover-class="none"></navigator>
+  <navigator class='icon-home' open-type="navigateBack" hover-class="none"></navigator>
 </view>
 
 <!--商品价格-->
 <view class="bg-white canui-goods-box" style="padding-top:30rpx;">
-    <text class="text-price text-red text-xl">130.00</text>
+  <text class="text-price text-red text-xl">130.00</text>
 </view>
 
 <!--商品名称-->
 <view class="bg-white canui-goods-box canui-xzwz text-black">马来西亚E-visa电子签证</view>
 
-<!--商品属性-->
+<!--
+商品属性
 <view class="bg-white grid col-3 canui-goods-box text-gray text-sm">
-    <view class='padding-sm'>剩余：9999</view>
-    <view class='padding-sm text-center'>销量：98笔</view>
-    <view class='padding-sm text-right'>快递包邮</view>
+  <view class='padding-sm'>剩余：9999</view>
+  <view class='padding-sm text-center'>销量：98笔</view>
+  <view class='padding-sm text-right'>快递包邮</view>
 </view>
+-->
 <!--信息-->
-<view class='bg-white padding cauni-details-box'>
-<form>
-姓名：<input type='text'></input>
-电话：<input type='file'></input>
-邮箱：<input></input>
+
+<!--
+// 布局
+  <view class="flex  p-xs margin-bottom-sm mb-sm">
+    <view class="flex-sub bg-grey padding-sm margin-xs radius">1</view>
+    <view class="flex-twice bg-grey padding-sm margin-xs radius">2</view>
+  </view>
+
+// 日期选择器
+  <view class="section">
+    <view class="section__title">日期选择器</view>
+    <picker mode="date" value="{{date}}" start="01/09/2015" end="01/09/2025" bindchange="bindDateChange">
+      <view class="picker text-center padding solid{{size?'s':''}}">
+        当前选择: {{date}}
+      </view>
+    </picker>
+  </view>
+
+// 时间选择器
+  <view class="section">
+    <view class="section__title">时间选择器</view>
+    <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+      <view class="picker  text-center padding solid{{size?'s':''}}">
+        当前选择: {{time}}
+      </view>
+    </picker>
+  </view>
+
+// 边框
+  <view class="padding bg-white text-center">
+    <view class="padding solid{{size?'s':''}}">四周</view>
+  </view>
+
+ -->
+<form bindsubmit="formSubmit" bindreset="formReset">
+
+  <view class="cu-bar bg-white margin-top solid-bottom">
+    <view class='action'>
+      <text class='icon-title text-red'></text>
+      <text>基本资料</text>
+    </view>
+  </view>
+
+  <view class="section__ctn">
+    <text>护照封面</text>
+    <image style="width: 200px; height: 200px; background-color: #eeeeee;" mode="{{images.mode}}" src="{{images.src}}" data-name='passport_img1' bindtap="chooseImage">
+    </image>
+    <input name="passport_img1" value='{{passinfo.passport_img1}}'></input>
+  </view>
+
+  <view class="section__ctn">
+    <text>护照内容页</text>
+    <image style="width: 200px; height: 200px; background-color: #eeeeee;" data-passport='true' data-name='passport_img2' mode="{{images.mode}}" src="{{images.src}}" bindtap="chooseImage">
+    </image>
+    <input name="passport_img2" value='{{passinfo.passport_img2}}'></input>
+  </view>
+
+  <view class="section__ctn">
+    <text>往返机票</text>
+    <view>
+      <image style="width: 200px; height: 200px; background-color: #eeeeee;" data-name='airimg1' mode="{{images.mode}}" src="{{images.src}}" bindtap="chooseImage">
+      </image>
+      <input name="passport_img2" value='{{passinfo.airimg1}}'></input>
+    </view>
+  </view>
+
+  <view class="section__ctn">
+    <text>住宿信息</text>
+    <image style="width: 100px; height: 200px; background-color: #eeeeee;" data-name='hotelimg' mode="{{images.mode}}" src="{{images.src}}" bindtap="chooseImage">
+    </image>
+    <input name="passport_img2" value='{{passinfo.hotelimg}}'></input>
+  </view>
+
+
+
+
+  <view class="bg-white padding cauni-details-box">
+    <view class="flex p-xs margin-bottom-sm mb-sm">
+      <view class="flex-treble radius">
+        <label for='id_airport'>到达机场：</label>
+        <picker name="airport" id="id_airport" bindchange="bindPickerChange" value="{{index[0]}}" range="{{array}}">
+          <view class="picker text-center padding solid{{size?'s':''}}">
+            {{array[index][1]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+
+
+    <view class="section">
+      <view class="section__title">到达日期：</view>
+      <picker mode="date" value="{{date}}" start="01/09/2015" end="01/09/2025" bindchange="bindDateChange">
+        <view class="picker text-center padding solid{{size?'s':''}}">
+          {{date}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="section">
+      <view class="section__title">到达时间：</view>
+      <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+        <view class="picker text-center padding solid{{size?'s':''}}">
+          {{time}}
+        </view>
+      </picker>
+    </view>
+
+    <view>
+      <label for="id_arrival_flightnum">到达航班:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+
+
+    <view class="section">
+      <view class="section__title">离开日期：</view>
+      <picker mode="date" value="{{date}}" start="01/09/2015" end="01/09/2025" bindchange="bindDateChange">
+        <view class="picker text-center padding solid{{size?'s':''}}">
+          {{date}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="section">
+      <view class="section__title">离开时间：</view>
+      <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange">
+        <view class="picker text-center padding solid{{size?'s':''}}">
+          {{time}}
+        </view>
+      </picker>
+    </view>
+
+    <view>
+      <label for="id_arrival_flightnum">离开航班:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+    <view>
+      <label for="id_arrival_flightnum">手机号:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+    <view>
+      <label for="id_arrival_flightnum">邮箱:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+
+    <view class="flex p-xs margin-bottom-sm mb-sm">
+      <view class="flex-treble radius">
+        <label for='id_airport'>住宿类型：</label>
+        <picker name="airport" id="id_airport" bindchange="bindPickerChange" value="{{index[0]}}" range="{{array}}">
+          <view class="picker text-center padding solid{{size?'s':''}}">
+            {{array[index][1]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+
+
+    // --------------------
+
+    <!-- 
+  <view>
+    <label>到达日期:</label>
+
+    <input type="text" name="arrival_date"></input>
+  </view>
+  <view>
+    <label for="id_arrival_time">到达时间:</label>
+
+    <input type="text" name="arrival_time" class="form-control up" placeholder="到达时间" maxlength="256" required="" id="id_arrival_time"></input>
+  </view>
+  <view>
+    <label for="id_arrival_flightnum">到达航班:</label>
+
+    <input type="text" name="arrival_flightnum" class="form-control up" placeholder="到达航班号" maxlength="256" required="" id="id_arrival_flightnum"></input>
+  </view>
+  <view>
+    <label for="id_departure_date">离开日期:</label>
+
+    <input type="text" name="departure_date" class="form-control datepicker up" placeholder="离开日期" maxlength="256" required="" id="id_departure_date"></input>
+  </view>
+  <view>
+    <label for="id_departure_time">离开时间:</label>
+
+    <input type="text" name="departure_time" class="form-control up" placeholder="离开时间" maxlength="256" required="" id="id_departure_time">
+    </input>
+  </view>
+  <view>
+    <label for="id_departure_flightnum">离开航班:</label>
+ 
+    <input type="text" name="departure_flightnum" class="form-control up" placeholder="离开航班号" maxlength="256" required="" id="id_departure_flightnum"></input>
+  </view>
+  <view>
+
+    <label for="id_pos_select">住宿类型:</label>
+    <select name="pos_select" class="form-control up" maxlength="256" id="id_pos_select">
+      <option value="hotel">Hostel</option>
+      <option value="guesthouse">Guesthouse</option>
+      <option value="private_property">Private Property</option>
+      <option value="dormitory">Dormitory</option>
+    </select>
+  </view>
+  <view>
+    <label for="id_mobile_number">手机号:</label>
+    <input type="text" name="mobile_number" class="form-control up" maxlength="256" required="" id="id_mobile_number"></input>
+  </view>
+  <view>
+    <label for="id_email">邮箱地址:</label>
+    <input type="text" name="email" class="form-control up" maxlength="256" required="" id="id_email"></input>
+  </view>
+  -->
+  </view>
+
+
+
+
+
+
+
+
+
+  <!--表单详情-->
+  <view class="cu-bar bg-white margin-top solid-bottom">
+    <view class='action'>
+      <text class='icon-title text-red'></text>
+      <text>个人信息</text>
+    </view>
+  </view>
+  <view class="bg-white padding cauni-details-box">
+
+    <view>
+      <label for="id_arrival_flightnum">姓:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+    <view>
+      <label for="id_arrival_flightnum">名:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+    <view>
+      <label for="id_arrival_flightnum">称谓:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+    <view>
+      <label for="id_arrival_flightnum">性别:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+    <view>
+      <label for="id_arrival_flightnum">出生日期:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+    <view>
+      <label for="id_arrival_flightnum">国籍:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+    <view>
+      <label for="id_arrival_flightnum">护照号:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+    <view>
+      <label for="id_arrival_flightnum">护照类型:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+    <view>
+      <label for="id_arrival_flightnum">签发日期:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+    <view>
+      <label for="id_arrival_flightnum">有效期:</label>
+      <!-- 到达航班号 -->
+      <view class="solid{{size?'s':''}}">
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+      </view>
+    </view>
+
+
+
+
+    // -----------------------------
+    <!--
+  <form method="post">
+    <view class="card mb-3">
+      <view class="card-body">
+        <view class="row">
+        
+          <view class="col-lg-12">
+
+            <view class="card position-relative">
+              <view class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">确认个人信息</h6>
+              </view>
+              <view class="card-body row">
+                <view>
+                  <label for="id_last_name">姓:</label>
+                  <input type="text" name="last_name" class="form-control up" maxlength="256" required="" id="id_last_name"></input>
+
+                </view>
+                <view>
+                  <label for="id_first_name">名:</label>
+                  <input type="text" name="first_name" class="form-control up" maxlength="256" required="" id="id_first_name"></input>
+
+                </view>
+                <view>
+                  <label for="id_salutation">称谓:</label>
+                  <input type="text" name="salutation" class="form-control up" maxlength="256" required="" id="id_salutation"></input>
+
+                </view>
+                <view>
+                  <label for="id_gender">性别:</label>
+                  <input type="text" name="gender" class="form-control up" maxlength="256" required="" id="id_gender"></input>
+
+                </view>
+                <view>
+                  <label for="id_birth_date">出生日期:</label>
+                  <input type="text" name="birth_date" class="form-control up" maxlength="256" required="" id="id_birth_date"></input>
+
+                </view>
+                <view>
+                  <label for="id_nationality">国籍:</label>
+                  <input type="text" name="nationality" class="form-control up" required="" maxlength="256" id="id_nationality"></input>
+
+                </view>
+                <view>
+                  <label for="id_passport_number">护照号:</label>
+                  <input type="text" name="passport_number" class="form-control up" maxlength="256" required="" id="id_passport_number"></input>
+
+                </view>
+                <view>
+                  <label for="id_passport_type">护照类型:</label>
+                  <input type="text" name="passport_type" class="form-control up" required="" maxlength="256" id="id_passport_type"></input>
+
+                </view>
+                <view>
+                  <label for="id_passport_issue">护照签发日期:</label>
+                  <input type="text" name="passport_issue" class="form-control up" maxlength="256" required="" id="id_passport_issue"></input>
+
+                </view>
+                <view>
+                  <label for="id_passport_expiry">护照有效期:</label>
+                  <input type="text" name="passport_expiry" class="form-control up" maxlength="256" required="" id="id_passport_expiry"></input>
+
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view style=" float: right; margin-top:1rem;">
+          <button onclick="submit()" class="btn btn-success btn-icon-split">
+            <span class="icon text-white-50">
+              <i class="fas fa-check"></i>
+            </span>
+            <span class="text">确认提交</span>
+          </button>
+        </view>
+      </view>
+      
+    </view>
+  
+  </form>
+
+  -->
+    <view class="btn-area">
+      <button formType="submit">Submit</button>
+      <button formType="reset">Reset</button>
+    </view>
+
+  </view>
+  <!--表单详情-->
 </form>
-</view>
 <!--商品详情-->
 <view class="cu-bar bg-white margin-top solid-bottom">
-    <view class='action'>
-        <text class='icon-title text-red'></text>
-        <text>商品详情</text>
-    </view>
+  <view class='action'>
+    <text class='icon-title text-red'></text>
+    <text>商品详情</text>
+  </view>
 </view>
 <view class="bg-white padding cauni-details-box">
-    马来西亚是一个多民族、多元文化的国家，官方宗教虽然为伊斯兰教，但国民于马来西亚宪法下享有宗教自由的权利。政府系统密切仿照了英国的威斯敏斯特的议会制度。国家对内外的最高代表被称为元首， [1]  而政府首脑是首相（总理）。 [2] 
-马来西亚是一个新兴的多元化经济国家。经济在1990年代突飞猛进，为“亚洲四小虎”国家之一，是资本主义国家。马来西亚已成为亚洲地区引人注目的多元化新兴工业国家和世界新兴市场经济体。
+  马来西亚是一个多民族、多元文化的国家，官方宗教虽然为伊斯兰教，但国民于马来西亚宪法下享有宗教自由的权利。政府系统密切仿照了英国的威斯敏斯特的议会制度。国家对内外的最高代表被称为元首， [1] 而政府首脑是首相（总理）。 [2] 马来西亚是一个新兴的多元化经济国家。经济在1990年代突飞猛进，为“亚洲四小虎”国家之一，是资本主义国家。马来西亚已成为亚洲地区引人注目的多元化新兴工业国家和世界新兴市场经济体。
 </view>
 
 
 <!--TabbarBot为适配全面屏的，如果是全面屏，则底部多出一截空白-->
 <view class="cu-bar bg-white tabbar border shop canui-foor-fixed {{TabbarBot=='y'?'canui-tabbar-bottom':''}}">
-    
-    <button class="action text-grey" open-type='contact'>
-        <view class='icon-service'></view> 客服
-    </button>
-    <view class="action text-grey">
-        <view class='icon-cart'></view> 购物车
-    </view>
-    <view class='btn-group'>
-        <button class='cu-btn bg-orange round shadow-blur'>加入购物车</button>
-        <button class='cu-btn bg-red round shadow-blur'>立即兑换</button>
-    </view>
+
+  <button class="action text-grey" open-type='contact'>
+    <view class='icon-service'></view> 客服
+  </button>
+  <view class="action text-grey">
+    <view class='icon-cart'></view> 购物车
+  </view>
+  <view class='btn-group'>
+    <button class='cu-btn bg-orange round shadow-blur'>加入购物车</button>
+    <button class='cu-btn bg-red round shadow-blur'>立即兑换</button>
+  </view>
 </view>
