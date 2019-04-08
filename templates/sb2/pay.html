@@ -6,7 +6,8 @@
 
     <style>
          .see{
-            margin:60px 30px ; text-align: center
+            margin:60px 30px ;
+             text-align: left;
         }
         .btn_login {
             display: inline-block;
@@ -31,8 +32,18 @@
             line-height: 33px;
             *line-height: 31px;
             width: 120px;
-            padding-left: 0;
+            margin-left: 40px;
             padding-right: 0;
+        }
+        .mon{
+            color:#e74a3b;
+            font-size:20px;
+        }
+        .sin{
+            color:#bbb;
+            width:80px;
+            display: inline-block;
+            text-align: right;
         }
     </style>
 
@@ -54,8 +65,9 @@
             </div>
 
             <div class="see">
-                <p>{{ obj.last_name }} - {{ obj.first_name }}</p>
-                <p>金额</p>
+                <p><span class="sin">姓名：</span>{{ obj.last_name }} - {{ obj.first_name }}</p>
+                <p><span class="sin">护照号：</span>{{ obj.passport_number }}</p>
+                <p><span class="sin">金额：</span><span class="mon">￥150元</span></p>
                 <p><button type="submit" value="去付款" class="btn_login">去付款</button></p>
             </div>
 
