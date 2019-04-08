@@ -8,6 +8,24 @@ Page({
       ['hkt', 'HKT - Phuket'],
       ['cnx', 'CNX - Chiang]'],
     ],
+    post_select: [{
+        'v': "hotel",
+        'k': 'Hotel'
+      },
+      {
+        'v': "hostel",
+        'k': 'Hostel'
+      },
+      {
+        'v': "guesthouse",
+        'k': 'Guesthouse'
+      },
+      {
+        'v': "private_property",
+        'k': 'Private Property'
+      }
+    ],
+    Index: 0,
     images: {
       mode: 'scaleToFill',
       text: 'scaleToFill：不保持纵横比缩放图片，使图片完全适应',
@@ -32,7 +50,7 @@ Page({
       'email': '',
       'mobile_number': '',
       'passport_number': '',
-      'passport_type': '',
+      'passport_type': 'ordinary',
       'passport_issue': '',
       'passport_expiry': '',
       'arrival_date': '',
@@ -74,7 +92,7 @@ Page({
     console.log(e.currentTarget.dataset.name);
     let classname = e.currentTarget.dataset.name
     let passport = e.currentTarget.dataset.passport
-    if(!passport){
+    if (!passport) {
       passport = ""
     }
     let that = this;
@@ -115,18 +133,16 @@ Page({
             } else if (classname == 'passport_img2') {
               that.setData({
                 'passinfo.passport_img2': data.filename,
-                'passinfo.nationality': data.country,
+                'passinfo.nationality': data.country.toLowerCase(),
                 'passinfo.last_name': data.last_name,
                 'passinfo.first_name': data.first_name,
-                'passinfo.salutation': data.filename,
-                'passinfo.gender': data.filename,
-                'passinfo.birth_date': data.filename,
-                'passinfo.passport_number': data.filename,
-                'passinfo.passport_type': data.filename,
-                'passinfo.passport_issue': data.filename,
-                'passinfo.passport_expiry': data.filename,
+                'passinfo.salutation': data.sex,
+                'passinfo.gender': data.sex,
+                'passinfo.birth_date': data.birth_date,
+                'passinfo.passport_number': data.passport_no,
+                'passinfo.passport_issue': data.issue_date.slice(6, 8) + "/" + data.issue_date.slice(4, 6) + "/" + data.issue_date.slice(0, 4),
+                'passinfo.passport_expiry': data.expiry_date.slice(6, 8) + "/" + data.expiry_date.slice(4, 6) + "/" + data.expiry_date.slice(0, 4),
               })
-
             } else if (classname == 'airimg1') {
               that.setData({
                 'passinfo.airimg1': data.filename,
