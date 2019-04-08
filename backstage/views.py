@@ -160,20 +160,23 @@ def upload(request):
     # 处理文件名
     date = time.strftime('%Y%m%d-%H%M%S-', time.localtime(time.time())) + str(random.randint(100, 999)) + "-"
     filename = date + name + "." + file.name.split(".")[-1]
-    with open(os.path.join(ImagePath, filename), "wb+") as f:
+    filepath = os.path.join(ImagePath, filename)
+    with open(filepath, "wb+") as f:
         for chunk in file.chunks():  # 分块写入文件
             f.write(chunk)
     if passport:
         print("这是护照")
         try:
             # 阿里云ocr解析
-            ret = json.loads(demo(file.name))
-        except:
+            ret = json.loads(demo(filepath))
+            firstname, lastname = ret.get("name").split(".")
+        except Exception as e:
+            print(e)
             return HttpResponse("1")
         # print(ret.get("country"), ret.get("name"), ret.get("sex"), ret.get("birth_date"), ret.get("passport_no"),
         #       ret.get("issue_date"),
         #       ret.get("expiry_date"))
-        firstname, lastname = ret.get("name").split(".")
+
         # data = [ret.get("country"), firstname, lastname, ret.get("sex"), ret.get("birth_date"), ret.get("passport_no")
         #         ret.get("issue_date"),
         #         ret.get("expiry_date")]

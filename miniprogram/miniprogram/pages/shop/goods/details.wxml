@@ -321,7 +321,7 @@
       <label for="id_arrival_flightnum">护照类型:</label>
       <!-- 到达航班号 -->
       <view class="solid{{size?'s':''}}">
-        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum"></input>
+        <input type="text" name="arrival_flightnum" id="id_arrival_flightnum" value='{{passinfo.passport_type}}'></input>
       </view>
     </view>
     <view>
