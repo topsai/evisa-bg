@@ -108,15 +108,13 @@
     <view class="flex p-xs margin-bottom-sm mb-sm">
       <view class="flex-treble radius">
         <label for='id_airport'>到达机场：</label>
-        <picker name="airport" id="id_airport" bindchange="bindPickerChange" value="{{index[0]}}" range="{{array}}">
+        <picker name="airport" id="id_airport" bindchange="bindPickerChange" range-key="{{'v'}}" data-index="{{value}}" range="{{selectData}}">
           <view class="picker text-center padding solid{{size?'s':''}}">
-            {{array[index][1]}}
+            {{index}}
           </view>
         </picker>
       </view>
     </view>
-
-
     <view class="section">
       <view class="section__title">到达日期：</view>
       <picker name='arrival_date' mode="date" value="{{date}}" start="01/09/2015" end="01/09/2025" bindchange="bindDateChange">

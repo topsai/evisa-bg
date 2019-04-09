@@ -32,3 +32,6 @@
   width: 250rpx;
   height: 250rpx;
 }
+.png{
+  border-radius:150rpx;
+}

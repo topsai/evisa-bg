@@ -2,30 +2,37 @@ const app = getApp();
 
 Page({
   data: {
-    array: [
-      ['bkk', 'BKK - Suvarnabhumi'],
-      ['dmk', 'DMK - Don Mueang'],
-      ['hkt', 'HKT - Phuket'],
-      ['cnx', 'CNX - Chiang]'],
+    selectData: [{
+        'index': 0,
+        'k': 'bkk',
+        'v': 'BKK - Suvarnabhumi'
+      },
+      {
+        'index': 1,
+        'k': 'dmk',
+        'v': 'DMK - Don Mueang'
+      },
+      {
+        'index': 2,
+        'k': 'hkt',
+        'v': 'HKT - Phuket'
+      },
+      {
+        'index': 3,
+        'k': 'cnx',
+        'v': 'CNX - Chiang'
+      },
+      // {
+      //   index: 0,
+      //   name: 'pos_select',
+      //   option: [
+      //     ('hotel', 'Hotel'),
+      //     ('hostel', 'Hostel'),
+      //     ('guesthouse', 'Guesthouse'),
+      //     ('private_property', 'Private Property'),
+      //   ]
+      // },
     ],
-    post_select: [{
-        'v': "hotel",
-        'k': 'Hotel'
-      },
-      {
-        'v': "hostel",
-        'k': 'Hostel'
-      },
-      {
-        'v': "guesthouse",
-        'k': 'Guesthouse'
-      },
-      {
-        'v': "private_property",
-        'k': 'Private Property'
-      }
-    ],
-    Index: 0,
     images: {
       mode: 'scaleToFill',
       text: 'scaleToFill：不保持纵横比缩放图片，使图片完全适应',
@@ -76,10 +83,12 @@ Page({
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
   },
   bindPickerChange(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index: e.detail.value
-    })
+    console.log(e.detail)
+    console.log('picker ', e.detail.value)
+    // console.log('picker发送选择改变，携带值1为', e.currentTarget.dataset.index)
+    // this.setData({
+    //   airportIndex: e.detail.value
+    // })
   },
   bindDateChange(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
