@@ -1,77 +1,95 @@
 .screen-swiper {
-    min-height:555rpx;
+  min-height: 555rpx;
 }
+
 /*-------左上角按钮-------*/
-.canui-head-box{
-    position:fixed;
-    top:26px;
-    margin-left:10px;
-    background:rgba(0,0,0,0.2);
-    color:#fff;
-    border-radius:20px;
-    padding:4px 4px;
-    border:1px solid rgba(255,255,255,0.3);
-}
-.canui-head-box navigator{
-    padding:8px;
-    font-size:20px;
-    display:initial;
-}
-.canui-head-box navigator + navigator{
-    border-left:1px solid rgba(255,255,255,0.3);
-    margin:0 3px;
-    padding:0 5px;
-    padding-left:15px;
+
+.canui-head-box {
+  position: fixed;
+  top: 26px;
+  margin-left: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-radius: 20px;
+  padding: 4px 4px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.canui-goods-box{
-    padding:10rpx 30rpx;
+.canui-head-box navigator {
+  padding: 8px;
+  font-size: 20px;
+  display: initial;
 }
 
-.canui-xzwz{
-    -webkit-line-clamp:2;
+.canui-head-box navigator + navigator {
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 0 3px;
+  padding: 0 5px;
+  padding-left: 15px;
 }
-.cauni-details-box{
-    word-wrap:break-word;
+
+.canui-goods-box {
+  padding: 10rpx 30rpx;
 }
+
+.canui-xzwz {
+  -webkit-line-clamp: 2;
+}
+
+.cauni-details-box {
+  word-wrap: break-word;
+}
+
 .cu-bar.tabbar.shop .action {
-    width:100rpx;
+  width: 100rpx;
 }
+
 .cu-bar.tabbar .action {
-    font-size:20rpx;
+  font-size: 20rpx;
 }
+
 .cu-bar.tabbar .action [class*="icon"] {
-    width:38rpx;
+  width: 38rpx;
 }
-.passport-text{
+
+.passport-text {
   display: block;
-  width:100%;
-  height:60rpx;
-  background:#f6f6f6;
-  padding:10rpx 20rpx;
+  width: 100%;
+  height: 60rpx;
+  background: #f6f6f6;
+  padding: 10rpx 20rpx;
 }
-.passport{
-  width: 400rpx; 
-  height: 300rpx;  
-  background-color: #eeeeee;
+
+.passport {
+  width: 400rpx;
+  height: 300rpx;
+  background-color: #eee;
   text-align: center;
-  margin:20rpx 25%;
+  margin: 20rpx 25%;
+  background: #ccc url(https://huaban.com/img/tasks/task_step1_2_highlight.png) no-repeat center center;
+  opacity: 0.2;
 }
-.action image{
-  width:40rpx;height:34rpx;
+
+.action image {
+  width: 40rpx;
+  height: 34rpx;
 }
-.action-text{
-  padding-left:10rpx;
-  font-size:32rpx;
+
+.action-text {
+  padding-left: 10rpx;
+  font-size: 32rpx;
 }
-.section__ctn{
-  background:#fff;
+
+.section__ctn {
+  background: #fff;
 }
-.title{
-  display:block;
-  background:#f6f6f6;
-  padding:10rpx 20rpx;
+
+.title {
+  display: block;
+  background: #f6f6f6;
+  padding: 10rpx 20rpx;
 }
-.section{
-  margin-bottom:20rpx;
+
+.section {
+  margin-bottom: 20rpx;
 }
