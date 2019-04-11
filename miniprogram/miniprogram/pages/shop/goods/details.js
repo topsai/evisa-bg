@@ -1,3 +1,4 @@
+import WxValidate from '../../../utils/WxValidate.js'
 const app = getApp();
 
 Page({
@@ -173,4 +174,22 @@ Page({
     'pos_postcode': '',
     'residential_address': '',
   },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 });

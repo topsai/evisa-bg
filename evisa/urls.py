@@ -29,4 +29,6 @@ urlpatterns = [
     path('progress/', views.progress),
     path('pay/', views.pay),
     path('ttt/', views.ttt),
+    path('shapcar/', views.shapcar),
+    path('wxlogin/', views.wxlogin),
 ]

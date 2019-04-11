@@ -54,7 +54,7 @@
 <view class="cu-bar bg-white margin-top solid-bottom">
     <view class='action'>
         <text class='icon-title text-green'></text>
-        <text>优选商品</text>
+        <text>当季热门目的地</text>
     </view>
     <!-- <navigator hover-class='none' url="/pages/home/groom/index">
         <view class='action' style="font-size: 27rpx;"> 更多 <view class='icon-right'></view> </view>
@@ -72,9 +72,9 @@
                     <view class="cu-list menu menu-avatar">
                         <view class="cu-item">
                             <view class='content flex-sub'>
-                                <view class='text-grey'>马来西亚</view>
+                                <view class='text-grey'>马来西亚 evisa 签证</view>
                                 <view class='text-gray text-sm flex justify-between'>
-                                    ￥10.00起
+                                    ￥180.00起
                                 </view>
                             </view>
                         </view>
@@ -92,9 +92,9 @@
                     <view class="cu-list menu menu-avatar">
                         <view class="cu-item">
                             <view class='content flex-sub'>
-                                <view class='text-grey'>新加坡</view>
+                                <view class='text-grey'>新加坡 evisa 签证</view>
                                 <view class='text-gray text-sm flex justify-between'>
-                                    ￥90.00起
+                                    ￥90.00
                                 </view>
                             </view>
                         </view>
@@ -112,9 +112,9 @@
                     <view class="cu-list menu menu-avatar">
                         <view class="cu-item">
                             <view class='content flex-sub'>
-                                <view class='text-grey'>印度尼西亚</view>
+                                <view class='text-grey'>印度尼西亚  evisa 签证</view>
                                 <view class='text-gray text-sm flex justify-between'>
-                                    ￥300.30起
+                                    ￥300.30
                                 </view>
                             </view>
                         </view>
@@ -132,7 +132,7 @@
                     <view class="cu-list menu menu-avatar">
                         <view class="cu-item">
                             <view class='content flex-sub'>
-                                <view class='text-grey'>日本</view>
+                                <view class='text-grey'>日本  evisa 签证</view>
                                 <view class='text-gray text-sm flex justify-between'>
                                     ￥230.90
                                 </view>

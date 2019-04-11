@@ -259,6 +259,42 @@ def pay(request):
     return render(request, 'sb2/pay.html', {"obj": obj})
 
 
+from django.core import serializers
+
+
+# data1 = serializers.serialize("json", SomeModel.objects.filter(myfield1=myvalue))
+
+def shapcar(request):
+    obj = models.Order.objects.all()
+    data = serializers.serialize("json", obj)
+    return HttpResponse(data)
+
+
+wxloginapi = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code"
+
+
+def wxlogin(request):
+    print(request.body)
+    code = request.GET.get("code")
+    r = requests.post(
+        wxloginapi,
+        data={
+            'appid': 'wxb11c8642b5007e82',
+            'secret': '41035b5dc2c09eb18123ddd0c90d3be3',
+            'js_code': code,
+            'grant_type': 'authorization_code',
+        }
+    )
+    print(r.json())
+    return HttpResponse(r.text)
+
+
+# appid	string		是	小程序 appId
+# secret	string		是	小程序 appSecret
+# js_code	string		是	登录时获取的 code
+# grant_type	string		是	授权类型，此处只需填写 authorization_code
+
+
 # 处理后台数据
 def forever():
     while True:
