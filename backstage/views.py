@@ -49,6 +49,7 @@ def predict(url, appcode, img_base64, kv_configure):
     try:
         print('try predict')
         r = requests.post(url=url, headers=headers, data=body)
+        print(r.status_code, r.headers, r.text)
         return r.status_code, r.headers, r.text
     except Exception as e:
         print(e)
