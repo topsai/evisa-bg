@@ -1,9 +1,10 @@
 {
   "pages":[
     "pages/home/index/index",
-    "pages/user/index/index",
+    "pages/auth/auth",
+    "pages/shop/goods/details",
     "pages/scar/index/index",
-    "pages/auth/auth"
+    "pages/user/index/index"
   ],
   "window":{
     "navigationBarBackgroundColor": "#39b54a",

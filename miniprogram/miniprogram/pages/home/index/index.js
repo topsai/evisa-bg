@@ -93,7 +93,7 @@ Page({
 		console.log(swip);
 		if (swip.type === 1) {
 			wx.navigateTo({
-				url: '/pages/home/doc/index?id=' + swip.id
+				// url: '/pages/home/doc/index?id=' + swip.id
 			});
 		}
 	},
@@ -108,7 +108,7 @@ Page({
 		console.log(swip);
 		if (swip.type === 1) {
 			wx.navigateTo({
-				url: '/pages/home/doc/index?id=' + swip.id
+				// url: '/pages/home/doc/index?id=' + swip.id
 			});
 		}
 	},
@@ -118,7 +118,7 @@ Page({
 		console.log(item.index,item.itemtype)
 		if (item.itemtype === 1) {
 			wx.navigateTo({
-				url: '/pages/home/doc/index?id=' + item.index
+				// url: '/pages/home/doc/index?id=' + item.index
 			});
 		}
 		if (item.itemtype === 2) {
