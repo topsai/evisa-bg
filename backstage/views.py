@@ -29,7 +29,7 @@ headers = {
 def get_img_base64(img_file):
     with open(img_file, 'rb') as infile:
         s = infile.read()
-        return base64.b64encode(s)
+        return base64.b64encode(s).decode('utf8')
 
 
 def predict(u, appcode, img_base64, kv_configure):
