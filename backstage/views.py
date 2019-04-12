@@ -40,13 +40,14 @@ def predict(url, appcode, img_base64, kv_configure):
     body = json.dumps(param)
     headers = {'Authorization': 'APPCODE %s' % appcode}
     # request = urllib.Request(url=url, headers=headers, data=body)
-    r = requests.post(url=url, headers=headers, data=body)
+    # r = requests.post(url=url, headers=headers, data=body)
     # try:
     #     response = urllib.urlopen(request, timeout=10)
     #     return response.code, response.headers, response.read()
     # except urllib.HTTPError as e:
     #     return e.code, e.headers, e.read()
     try:
+        print('try predict')
         r = requests.post(url=url, headers=headers, data=body)
         return r.status_code, r.headers, r.text
     except Exception as e:
