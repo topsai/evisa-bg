@@ -169,6 +169,7 @@ def upload(request):
         try:
             # 阿里云ocr解析
             ret = json.loads(demo(filepath))
+            print('ali-ok')
             firstname, lastname = ret.get("name").split(".")
         except Exception as e:
             print(e)
