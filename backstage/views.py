@@ -165,7 +165,7 @@ def upload(request):
         for chunk in file.chunks():  # 分块写入文件
             f.write(chunk)
     if passport:
-        print("这是护照")
+        print("passport")
         try:
             # 阿里云ocr解析
             ret = json.loads(demo(filepath))
