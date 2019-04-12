@@ -29,10 +29,10 @@ headers = {
 def get_img_base64(img_file):
     with open(img_file, 'rb') as infile:
         s = infile.read()
-        return base64.b64encode(s).decode()
+        return base64.b64encode(s)
 
 
-def predict(url, appcode, img_base64, kv_configure):
+def predict(u, appcode, img_base64, kv_configure):
     param = {}
     param['image'] = img_base64
     if kv_configure is not None:
@@ -48,7 +48,7 @@ def predict(url, appcode, img_base64, kv_configure):
     #     return e.code, e.headers, e.read()
     try:
         print('try predict')
-        r = requests.post(url=url, headers=headers, data=body)
+        r = requests.post(url=u, headers=headers, data=body)
         print(r.status_code, r.headers, r.text)
         return r.status_code, r.headers, r.text
     except Exception as e:
