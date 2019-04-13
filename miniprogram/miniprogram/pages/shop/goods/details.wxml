@@ -245,7 +245,7 @@
     <view>
       <label for="id_passport_type">护照类型:</label>
       <view class="solid{{size?'s':''}}">
-        <input type="text" name="passport_type" id="id_passport_type" value='{{passinfo.passport_type}}'></input>
+        <input type="text" name="passport_type" id="id_passport_type" value='{{passinfo.passport_type}}'>{{passinfo.passport_type}}</input>
       </view>
     </view>
     <view>

@@ -83,7 +83,7 @@ Page({
         })
         // TODO 上传图片
         wx.uploadFile({
-          url: 'http://127.0.0.1:8000/upload/', // 仅为示例，非真实的接口地址
+          url: 'http://138.128.220.228:8000/upload/', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: 'file',
           formData: {
@@ -103,7 +103,7 @@ Page({
                 'passinfo.first_name': data.first_name,
                 'passinfo.salutation': data.sex,
                 'passinfo.gender': data.sex,
-                'passinfo.type': 'ordinary',
+                'passinfo.passport_type': 'ordinary',
                 'passinfo.birth_date': data.birth_date,
                 'passinfo.passport_number': data.passport_no,
                 'passinfo.passport_issue': data.issue_date.slice(6, 8) + "/" + data.issue_date.slice(4, 6) + "/" + data.issue_date.slice(0, 4),
