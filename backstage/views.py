@@ -273,6 +273,18 @@ def shapcar(request):
     return HttpResponse(data)
 
 
+def trainticket(request):
+    return render(request, 'sb2/trainticket.html')
+
+
+def trainticket_team(request):
+    return render(request, 'sb2/trainticket_team.html')
+
+
+def trainticket_refund(request):
+    return render(request, 'sb2/trainticket_refund.html')
+
+
 wxloginapi = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code"
 
 

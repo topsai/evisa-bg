@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
 
@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
+
     {% block css %} {% endblock %}
 
 </head>
@@ -44,12 +45,27 @@
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
             <a class="nav-link" href="/process/">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa fa-id-card"></i>
                 <span>护照办理</span></a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="/trainticket/">
+                <i class="fas fa fa-subway"></i>
+                <span>火车票办理</span>
+            </a>
+            <div id="collapseUtilities" class="collapse show" aria-labelledby="headingUtilities"
+                 data-parent="#accordionSidebar" style="">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    {#                    <h6 class="collapse-header">Custom Utilities:</h6>#}
+                    <a class="collapse-item" href="/trainticket/">火车票查询</a>
+                    <a class="collapse-item" href="/trainticket_team/">批量购票</a>
+                    <a class="collapse-item" href="/trainticket_refund/">退改签</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="/index/">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa fa-file-excel"></i>
                 <span>报表信息</span></a>
         </li>
         <li class="nav-item">
@@ -57,7 +73,6 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>进度查询</span></a>
         </li>
-
 
 
         <!-- Divider -->
@@ -330,7 +345,11 @@
 <!-- Bootstrap core JavaScript-->
 
 <script src="/static/vendor/jquery/jquery.min.js"></script>
-<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+{#<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"#}
+{#        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"#}
+{#        crossorigin="anonymous"></script>#}
+{#<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>#}
 <!-- Core plugin JavaScript-->
 <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
 <!-- Custom scripts for all pages-->

@@ -31,4 +31,7 @@ urlpatterns = [
     path('ttt/', views.ttt),
     path('shapcar/', views.shapcar),
     path('wxlogin/', views.wxlogin),
+    path('trainticket/', views.trainticket),
+    path('trainticket_team/', views.trainticket_team),
+    path('trainticket_refund/', views.trainticket_refund),
 ]

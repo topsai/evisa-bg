@@ -1,0 +1,53 @@
+{% extends "sb2/base.html" %}
+{% block css %}
+        <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+{% endblock %}
+{% block content %}
+
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">火车票查询</h1>
+        <p class="mb-4"></p>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4">
+                    <br>
+                    <br>
+                    <div>
+                        <label>出发地:</label>
+                        <input type="text" class="form-control" placeholder="北京"
+                               aria-controls="dataTable">
+                    </div>
+
+                    <div>
+                        <label>到达地:</label>
+                        <input type="text" class="form-control form-control-sm" placeholder="上海"
+                               aria-controls="dataTable">
+                    </div>
+                    <div>
+                        <label>出发日期:</label>
+                        <input type="text" class="form-control form-control-sm" placeholder="2019-04-14"
+                               aria-controls="dataTable">
+                    </div>
+                    <br>
+
+                    <button type="button" class="btn btn-warning btn-block">查询</button>
+
+
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+{% endblock %}
+{% block js %}
+{% endblock %}
