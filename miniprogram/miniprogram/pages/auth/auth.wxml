@@ -1,6 +1,6 @@
 <view class='UCenter-bg'>
   <image src='/img/user.jpg' class='png' mode='widthFix'></image>
-  <view class='text-xl'>仔仔
+  <view class='text-xl'>仔仔 {{app.globalData.userInfo.nickName}}
     <text class='text-df'>v0.0.1</text>
   </view>
   <view class='margin-top-sm'>
