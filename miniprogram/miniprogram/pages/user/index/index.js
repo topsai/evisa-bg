@@ -1,9 +1,12 @@
 // pages/user/index.js
+const app = getApp();
 Page({
   data: {
     starCount: 0,
     forksCount: 0,
     visitTotal: 0,
+    nickName: null,
+    avatarUrl: null
   },
   onLoad: function (options) {
     let that = this;

@@ -71,9 +71,12 @@ Page({
 
   },
   onLoad: function() {
+    
     /*console.log(app.globalData.StatusBar);
     console.log(app.globalData.CustomBar);*/
     // 检查登陆状态
+    console.log('#--->', app.globalData)
+    // console.log('--->', app.globalData.openid)
     if(!app.globalData.openid){
       console.log('没有openid')
       wx.redirectTo({
