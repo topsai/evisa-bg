@@ -3,13 +3,14 @@
 {% endblock %}
 {% block content %}
     <style>
-    .table-responsive{
-        overflow-x:hidden;
-        width:80%;
-    }
-    .table-responsive{
-        margin: 0 auto;
-    }
+        .table-responsive {
+            overflow-x: hidden;
+            width: 80%;
+        }
+
+        .table-responsive {
+            margin: 0 auto;
+        }
     </style>
 
     <div class="container-fluid">
@@ -20,33 +21,30 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-{#                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>#}
+                {#                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>#}
             </div>
 
-            <div style="background: #f6f6f6; width: 100%; height:60px auto; padding:30px; border-bottom: 1px solid #ccc;">
-                <div style="width:40%; height:80px; margin:0 auto;  padding-top:20px;">
-                    <div style="width:35%; float: left; text-align: center">
-                        <a href="#" class="btn btn-info  btn-lg">
-                        <span class="icon text-white-50">
-                          <i class="fas fa-info-circle"></i>
-                        </span>
-                        <span class="text">上传文件</span>
-                      </a>
+            <div style="background: #f6f6f6; width: 100%; padding:30px; border-bottom: 1px solid #ccc;">
+                <div class="row col-center">
+                    <div class="col-1"></div>
+                    <div class="col-4">
+                        <input type="file" class="btn btn-success btn-lg btn-block">
+                        <button class="btn btn-success btn-lg btn-block">上传</button>
                     </div>
-                    <div style="width:65%; float: left; text-align: center">
-                        <a href="#" class="btn btn-success btn-lg">
-                        <span class="icon text-white-50">
-                          <i class="fas fa-arrow-right"></i>
-                        </span>
-                        <span class="text">开始购票</span>
-                      </a>
+                    <div class="col-2"></div>
+                    <div class="col-4">
+                        <button class="btn btn-success btn-lg btn-block">开始购票</button>
                     </div>
                 </div>
-                <div class="card-body" style="width:40%; height:80px; margin:0 auto;  padding-top:20px;">
-                  支持文件类型：xls、xlsx  ，文件内容请按照格式填写，文件格式请见<a href="#">示例</a>。
+                <br>
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        支持文件类型：xls、xlsx ，文件内容请按照格式填写，文件格式请见<a href="#">示例</a>。
+                    </div>
                 </div>
-             </div>
 
+            </div>
 
 
             <div class="card-body">
@@ -61,16 +59,16 @@
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-sort="ascending"
-                                            aria-label="Name: activate to sort column descending" style="width: 171px;">
+                                            aria-label="Name: activate to sort column descending" style="width: 120px;">
                                             姓名
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-label="Position: activate to sort column ascending"
-                                            style="width: 260px;">出发地
+                                            style="width: 120px;">出发地
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-label="Office: activate to sort column ascending"
-                                            style="width: 123px;">到达地
+                                            style="width: 120px;">到达地
                                         </th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-label="Age: activate to sort column ascending"
@@ -109,7 +107,7 @@
                                     <tbody>
 
 
-                                    <tr role="row" class="odd">
+                                    <tr role="row">
                                         <td class="sorting_1">于学忠</td>
                                         <td>北京</td>
                                         <td>合肥</td>
@@ -167,7 +165,7 @@
                                         <td>G673</td>
                                         <td>待处理</td>
                                         <td>二等座</td>
-                                        <td>¥515.5	</td>
+                                        <td>¥515.5</td>
                                     </tr>
                                     <tr role="row" class="odd">
                                         <td class="sorting_1">王海</td>
@@ -223,4 +221,67 @@
     <!-- /.container-fluid -->
 {% endblock %}
 {% block js %}
+    <script>
+        /*
+        FileReader共有4种读取方法：
+        1.readAsArrayBuffer(file)：将文件读取为ArrayBuffer。
+        2.readAsBinaryString(file)：将文件读取为二进制字符串
+        3.readAsDataURL(file)：将文件读取为Data URL
+        4.readAsText(file, [encoding])：将文件读取为文本，encoding缺省值为'UTF-8'
+                     */
+        var wb;//读取完成的数据
+        var rABS = false; //是否将文件读取为二进制字符串
+
+        function importf(obj) {//导入
+            if (!obj.files) {
+                return;
+            }
+            var f = obj.files[0];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var data = e.target.result;
+                if (rABS) {
+                    wb = XLSX.read(btoa(fixdata(data)), {//手动转化
+                        type: 'base64'
+                    });
+                } else {
+                    wb = XLSX.read(data, {
+                        type: 'binary'
+                    });
+                }
+                //wb.SheetNames[0]是获取Sheets中第一个Sheet的名字
+                //wb.Sheets[Sheet名]获取第一个Sheet的数据
+                //console.log("SheetNames",wb.SheetNames);
+                //console.log("Sheets",wb.Sheets);
+                var data_json = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+                var data_json1 = JSON.stringify(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]));
+                var data_json3 = JSON.stringify(XLSX.utils.sheet_to_html(wb.Sheets[wb.SheetNames[0]]));
+                //console.log(data_json);
+                //console.log(data_json1);
+                //console.log(data_json3);
+                document.getElementById("demo").innerHTML = JSON.stringify(data_json);
+
+                for (var i in data_json) {
+                    console.log(data_json[i]["姓名"])
+                }
+
+
+            };
+            if (rABS) {
+                reader.readAsArrayBuffer(f);
+            } else {
+                reader.readAsBinaryString(f);
+            }
+        }
+
+        function fixdata(data) { //文件流转BinaryString
+            var o = "",
+                l = 0,
+                w = 10240;
+            for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
+            o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+            return o;
+        }
+
+    </script>
 {% endblock %}
