@@ -34,4 +34,6 @@ urlpatterns = [
     path('trainticket/', views.trainticket),
     path('trainticket_team/', views.trainticket_team),
     path('trainticket_refund/', views.trainticket_refund),
+    path('trainticket_search/', views.trainticket_search),
+    path('trainticket_report/', views.trainticket_report),
 ]

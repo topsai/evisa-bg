@@ -1,0 +1,145 @@
+{% extends "sb2/base.html" %}
+{% block css %}
+{% endblock %}
+{% block content %}
+    <style>
+        .table-responsive {
+            overflow-x: hidden;
+            width: 80%;
+        }
+
+        .table-responsive {
+            margin: 0 auto;
+        }
+    </style>
+
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">订单查询</h1>
+        <p class="mb-4"></p>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                {#                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>#}
+            </div>
+
+            <div style="background: #f6f6f6; width: 100%; padding:30px; border-bottom: 1px solid #ccc;">
+                <div style="width:40%; margin:0 auto;  padding-top:20px; padding-bottom: 20px">
+                    姓名 <input type="text" class="form-control" >
+                    身份证号 <input type="text" class="form-control" >
+                    开始时间 <input type="text" class="form-control" >
+                    结束时间 <input type="text" class="form-control" >
+                    <br>
+                    <button class="btn btn-primary btn-block">查询</button>
+                    <!-- Topbar Search -->
+{#                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">#}
+{#                        <div class="input-group">#}
+{#                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."#}
+{#                                   aria-label="Search" aria-describedby="basic-addon2">#}
+{#                            <div class="input-group-append">#}
+{#                                <button class="btn btn-primary" type="button">#}
+{#                                    <i class="fas fa-search fa-sm"></i>#}
+{#                                </button>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </form>#}
+
+{#                    <div style="width:35%; float: left; text-align: center">#}
+{#                        <a href="#" class="btn btn-info  btn-lg">#}
+{#                        <span class="icon text-white-50">#}
+{#                          <i class="fas fa-info-circle"></i>#}
+{#                        </span>#}
+{#                            <span class="text">上传文件</span>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    <div style="width:65%; float: left; text-align: center">#}
+{#                        <a href="#" class="btn btn-success btn-lg">#}
+{#                        <span class="icon text-white-50">#}
+{#                          <i class="fas fa-arrow-right"></i>#}
+{#                        </span>#}
+{#                            <span class="text">退票/改签</span>#}
+{#                        </a>#}
+{#                    </div>#}
+                </div>
+            </div>
+
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4" style="margin: 0 auto;">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                       cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                       style="width: 100%;">
+                                    <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-sort="ascending"
+                                            aria-label="Name: activate to sort column descending" style="width: 171px;">
+                                            姓名
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-label="Position: activate to sort column ascending"
+                                            style="width: 260px;">出发地
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-label="Office: activate to sort column ascending"
+                                            style="width: 123px;">到达地
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-label="Age: activate to sort column ascending"
+                                            style="width: 55px;">日期
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-label="Start date: activate to sort column ascending"
+                                            style="width: 114px;">出票状态
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-label="Salary: activate to sort column ascending"
+                                            style="width: 104px;">票价（元）
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <!--
+                                    <tr>
+                                        <th rowspan="1" colspan="1">姓名</th>
+                                        <th rowspan="1" colspan="1">出发地</th>
+                                        <th rowspan="1" colspan="1">到达地</th>
+                                        <th rowspan="1" colspan="1">日期</th>
+                                        <th rowspan="1" colspan="1">出票状态</th>
+                                        <th rowspan="1" colspan="1">Salary</th>
+                                    </tr>
+                                    -->
+                                    </tfoot>
+                                    <tbody>
+                                    <tr role="row" class="odd">
+                                        <td class="sorting_1">于学忠</td>
+                                        <td>北京</td>
+                                        <td>合肥</td>
+                                        <td>2019/6/28</td>
+                                        <td>G23</td>
+                                        <td>待处理</td>
+                                        <td>二等座</td>
+                                        <td>¥436.0</td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+{% endblock %}
+{% block js %}
+{% endblock %}

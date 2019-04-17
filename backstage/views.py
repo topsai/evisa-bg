@@ -26,6 +26,8 @@ headers = {
 
 import base64
 import json
+
+
 # from Crypto.Cipher import AES
 
 
@@ -318,6 +320,14 @@ def trainticket_refund(request):
     return render(request, 'sb2/trainticket_refund.html')
 
 
+def trainticket_report(request):
+    return render(request, 'sb2/trainticket_report.html')
+
+
+def trainticket_search(request):
+    return render(request, 'sb2/trainticket_search.html')
+
+
 wxloginapi = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code"
 
 
@@ -351,6 +361,7 @@ def wx_auth(func):
             return Http404('no login')
 
     return weaper
+
 
 # appid string  是   小程序 appId
 # secret    string  是   小程序 appSecret
