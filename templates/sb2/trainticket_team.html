@@ -28,9 +28,12 @@
                 <div class="row col-center">
                     <div class="col-1"></div>
                     <div class="col-4">
-                        <label for="upload" class="btn btn-success btn-lg btn-block">上传</label>
-                        <input id="upload" style="display: none" type="file" class="btn btn-success btn-lg btn-block" onchange="alert('chenge')">
-{#                        <button class="btn btn-success btn-lg btn-block">上传</button>#}
+                        <label for="upload" class="btn btn-success btn-lg btn-block"
+                               onclick="label_click(this)">上传</label>
+                        <input id="upload" style="display: none" type="file" class="btn btn-success btn-lg btn-block"
+                               onchange="resolve_excel(this)"
+                               accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                        {#                        <button class="btn btn-success btn-lg btn-block">上传</button>#}
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4">
@@ -107,107 +110,108 @@
                                     </tfoot>
                                     <tbody>
 
-
-                                    <tr role="row">
-                                        <td class="sorting_1">于学忠</td>
-                                        <td>北京</td>
-                                        <td>合肥</td>
-                                        <td>2019/6/28</td>
-                                        <td>G23</td>
-                                        <td>待处理</td>
-                                        <td>二等座</td>
-                                        <td>¥436.0</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">陈明</td>
-                                        <td>上海</td>
-                                        <td>青岛</td>
-                                        <td>2019/6/09</td>
-                                        <td>G226</td>
-                                        <td>待处理</td>
-                                        <td>二等座</td>
-                                        <td>¥518.0</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">李厚福</td>
-                                        <td>深圳</td>
-                                        <td>济南</td>
-                                        <td>2019/6/12</td>
-                                        <td>G280</td>
-                                        <td>待处理</td>
-                                        <td>二等座</td>
-                                        <td>¥975.5</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">唐杰</td>
-                                        <td>上海</td>
-                                        <td>郑州</td>
-                                        <td>2019/6/13</td>
-                                        <td>G1810</td>
-                                        <td>待处理</td>
-                                        <td>二等座</td>
-                                        <td>¥453.0</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">张志远</td>
-                                        <td>北京</td>
-                                        <td>深圳</td>
-                                        <td>2019/6/07</td>
-                                        <td>G79</td>
-                                        <td>已出票</td>
-                                        <td>二等座</td>
-                                        <td>¥936.5</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">刘洁</td>
-                                        <td>北京</td>
-                                        <td>西安</td>
-                                        <td>2019/6/02</td>
-                                        <td>G673</td>
-                                        <td>待处理</td>
-                                        <td>二等座</td>
-                                        <td>¥515.5</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">王海</td>
-                                        <td>上海</td>
-                                        <td>南京</td>
-                                        <td>2019/6/03</td>
-                                        <td>G126</td>
-                                        <td>待处理</td>
-                                        <td>二等座</td>
-                                        <td>¥134.5</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">孙宇峰</td>
-                                        <td>北京</td>
-                                        <td>苏州</td>
-                                        <td>2019/6/12</td>
-                                        <td>G141</td>
-                                        <td>已出票</td>
-                                        <td>二等座</td>
-                                        <td>¥523.5</td>
-                                    </tr>
-                                    <tr role="row" class="odd">
-                                        <td class="sorting_1">刘明</td>
-                                        <td>北京</td>
-                                        <td>香港</td>
-                                        <td>2019/6/06</td>
-                                        <td>G79</td>
-                                        <td>已出票</td>
-                                        <td>二等座</td>
-                                        <td>¥1107</td>
-                                    </tr>
-                                    <tr role="row" class="even">
-                                        <td class="sorting_1">高洁</td>
-                                        <td>北京</td>
-                                        <td>杭州</td>
-                                        <td>2019/6/29</td>
-                                        <td>G39</td>
-                                        <td>已出票</td>
-                                        <td>二等座</td>
-                                        <td>¥538.5</td>
-                                    </tr>
+                                    <!--
+                                                                        <tr role="row">
+                                                                            <td class="sorting_1">于学忠</td>
+                                                                            <td>北京</td>
+                                                                            <td>合肥</td>
+                                                                            <td>2019/6/28</td>
+                                                                            <td>G23</td>
+                                                                            <td>待处理</td>
+                                                                            <td>二等座</td>
+                                                                            <td>¥436.0</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">陈明</td>
+                                                                            <td>上海</td>
+                                                                            <td>青岛</td>
+                                                                            <td>2019/6/09</td>
+                                                                            <td>G226</td>
+                                                                            <td>待处理</td>
+                                                                            <td>二等座</td>
+                                                                            <td>¥518.0</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">李厚福</td>
+                                                                            <td>深圳</td>
+                                                                            <td>济南</td>
+                                                                            <td>2019/6/12</td>
+                                                                            <td>G280</td>
+                                                                            <td>待处理</td>
+                                                                            <td>二等座</td>
+                                                                            <td>¥975.5</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">唐杰</td>
+                                                                            <td>上海</td>
+                                                                            <td>郑州</td>
+                                                                            <td>2019/6/13</td>
+                                                                            <td>G1810</td>
+                                                                            <td>待处理</td>
+                                                                            <td>二等座</td>
+                                                                            <td>¥453.0</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">张志远</td>
+                                                                            <td>北京</td>
+                                                                            <td>深圳</td>
+                                                                            <td>2019/6/07</td>
+                                                                            <td>G79</td>
+                                                                            <td>已出票</td>
+                                                                            <td>二等座</td>
+                                                                            <td>¥936.5</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">刘洁</td>
+                                                                            <td>北京</td>
+                                                                            <td>西安</td>
+                                                                            <td>2019/6/02</td>
+                                                                            <td>G673</td>
+                                                                            <td>待处理</td>
+                                                                            <td>二等座</td>
+                                                                            <td>¥515.5</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">王海</td>
+                                                                            <td>上海</td>
+                                                                            <td>南京</td>
+                                                                            <td>2019/6/03</td>
+                                                                            <td>G126</td>
+                                                                            <td>待处理</td>
+                                                                            <td>二等座</td>
+                                                                            <td>¥134.5</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">孙宇峰</td>
+                                                                            <td>北京</td>
+                                                                            <td>苏州</td>
+                                                                            <td>2019/6/12</td>
+                                                                            <td>G141</td>
+                                                                            <td>已出票</td>
+                                                                            <td>二等座</td>
+                                                                            <td>¥523.5</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="odd">
+                                                                            <td class="sorting_1">刘明</td>
+                                                                            <td>北京</td>
+                                                                            <td>香港</td>
+                                                                            <td>2019/6/06</td>
+                                                                            <td>G79</td>
+                                                                            <td>已出票</td>
+                                                                            <td>二等座</td>
+                                                                            <td>¥1107</td>
+                                                                        </tr>
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">高洁</td>
+                                                                            <td>北京</td>
+                                                                            <td>杭州</td>
+                                                                            <td>2019/6/29</td>
+                                                                            <td>G39</td>
+                                                                            <td>已出票</td>
+                                                                            <td>二等座</td>
+                                                                            <td>¥538.5</td>
+                                                                        </tr>
+                                                                        -->
                                     </tbody>
                                 </table>
                             </div>
@@ -282,6 +286,77 @@
             for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
             o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
             return o;
+        }
+
+        function label_click(that) {
+            // 点击label后，清空 input，以修正 input 上传文件只能上传一次的问题。
+            $(that).next().empty();
+        }
+
+        function resolve_excel(that) {
+            // 解析 excel
+            if (!that.files) {
+                return;
+            }
+            var f = that.files[0];
+            let f_suffix = f.name.split('.').pop();
+
+            // 检测文件格式
+            if (f_suffix != "xls" && f_suffix != "xlsx") {
+                alert("文件格式错误");
+                return
+            }
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var data = e.target.result;
+                if (rABS) {
+                    wb = XLSX.read(btoa(fixdata(data)), {//手动转化
+                        type: 'base64'
+                    });
+                } else {
+                    wb = XLSX.read(data, {
+                        type: 'binary'
+                    });
+                }
+                var data_json = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+                // 清空当前表格
+                $("#dataTable tr:gt(0)").remove();
+
+                for (let i in data_json) {
+                    let name = data_json[i]["姓名"];
+                    let departure_station = data_json[i]["出发站"];
+                    let arrival_station = data_json[i]["到达站"];
+                    let date = data_json[i]["乘车日期"];
+                    let train_number = data_json[i]["车次"];
+                    let seat_number = data_json[i]["座次"];
+                    // 校验数据是否正确
+                    if (name && departure_station && arrival_station && date && train_number && seat_number) {
+                        $("#dataTable").append(
+                            "<tr role=\"row\" class=\"odd\">\n" +
+                            "<td class=\"sorting_1\">" + name + "</td>\n" +
+                            "<td>" + departure_station + "</td>\n" +
+                            "<td>" + arrival_station + "</td>\n" +
+                            "<td>" + date + "</td>\n" +
+                            "<td>" + train_number + "</td>\n" +
+                            "<td>已出票</td>\n" +
+                            "<td>" + seat_number + "</td>\n" +
+                            "<td>¥1107</td>\n" +
+                            "</tr>"
+                        )
+                    }else {
+                        alert(" 数据错误 ");
+                        break;
+                    }
+
+                }
+
+            };
+
+            if (rABS) {
+                reader.readAsArrayBuffer(f);
+            } else {
+                reader.readAsBinaryString(f);
+            }
         }
 
     </script>

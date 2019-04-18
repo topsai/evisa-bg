@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" class="newlayout">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script>
+        var $CONFIG = {
+            'monitorHost': '//train.qunar.com',
+            'startTime': new Date(),
+            'recordMonitor': 1,
+            'pageId': 'trainBooking',
+            'firstPayIsCheckInsurance': '',
+            'sendPaperIsCheckInsurance': '',
+            'isCheckInsurance': 'false',
+            'paperTypeList': '',
+            'seatCodeList': '',
+            'specifySeatCodeSwitch': true,
+            'permitOtherSeat': 0,
+            'candidateSeatWarningToastTip': '当前席位余票紧张，选择备选席位更易出票',
+            'isSupportTicketToStation': false,
+            'ticketToStationAddressUrl': '',
+            'ticketToStationAddress': '',
+            'pickupTimeRange': '',
+            'login12306Show': '12306账号购票，出票特权，支持改签',
+            'loginQunarShow': '',
+            'user12306Name': '',
+            'canLogin12306': true,
+            'forcedPopLogin12306Window': true,
+            'forceLogin12306': false,
+            'robForceLogin12306': false,
+            'robForceBuyInsurance': false,
+            'robBuyInsurance': false,
+            'firstPayForceBuyInsurance': false,
+            'sendPaperForceBuyInsurance': false,
+            'robLoginForFreeInsurance': false,
+            'firstPayLoginForFreeInsurance': false,
+            'sendPaperLoginForFreeInsurance': false,
+            'robAlertForceBindingInsurance': false,
+            'firstAlertForceBindingInsurance': false,
+            'sendPaperAlertForceBindingInsurance': false,
+            'alertForceBindingInsuranceDesc': '铁路非工作时间暂停售票，购保畅享出票无忧',
+            'alertForceBindingInsuranceTitle': '温馨提示',
+            'alertForceBindingInsuranceButtonName': '确定'
+        }
+    </script>
+    <script src="//qreport.qunar.com/s2/js/qreport.js"></script>
+    <link type="text/css" rel="stylesheet"
+          href="//q.qunarzz.com/train_tts/prd/styles/paying@8cfa3f61fa1c315e474eef1baecdcf97.css"/>
+    <title>订单填写页</title>
+</head>
+<body>
+<form id="frm" action="purchaseCheck.jsp" method="post" autocomplete="off">
+    <input name="insuranceCorpCode" type="hidden" value="TK">
+    <!-- {顶部导航 -->
+    <div id="top" class="g-nav">
+        <div class="nav-bd">
+            <!--logo-->
+            <div class="icons logoIcon"><a href="//www.qunar.com"></a></div>
+            <!-- 导航内容 -->
+            <div class="nav-info">
+                <i><a href="http://user.qunar.com/passport/login.jsp?ret=http%3A%2F%2Ftieyo.trade.qunar.com%2Fsite%2Fbooking%2Fpurchase.jsp%3Ftrain%3DZ175%26dptHm%3D00%253A03%26fromstation%3D%25E5%258D%2597%25E4%25BA%25AC%26tostation%3D%25E6%259D%25AD%25E5%25B7%259E%26starttime%3D20190419%26seat%3D%25E6%2597%25A0%25E5%25BA%25A7"
+                      title="">登录</a></i>
+                <i class="split">|</i>
+                <a href="//user.qunar.com/passport/register.jsp">注册</a>
+                <i class="split">|</i>
+                <a href="//user.qunar.com/order/query.jsp?ret=http%3A%2F%2Forder.qunar.com%2Ftrain">我的订单</a>
+                <i class="split">|</i>
+                <a href="//help.qunar.com/category.html?id=26">服务中心</a>
+
+            </div>
+            <!-- 道上 -->
+            <!-- <span class="cust">铁友网：<i>95117</i>&nbsp;&nbsp;&nbsp;&nbsp;出票时间：<i>06:00-23:00</i></span> -->
+        </div>
+    </div>
+    <!-- 顶部导航} -->
+    <div id="doc">
+        <div id="hd" style="display:none;">
+            <div class="m-head">
+                <!-- 消息
+                <div class="msg">
+                    客服电话：95117 <br />
+                    出票时间：06:00~23:00
+                </div>-->
+                <!-- 商家logo -->
+                <div class="logo direct">
+                    <img src="//source.qunarzz.com/common/hf/logo.png" alt=""/>
+                </div>
+                <!-- 查看全部代理商 -->
+                <!--
+                <div class="all-dls">
+                    <a href="http://train.qunar.com/book.htm?_from=南京&_to=杭州&date=2019-04-19&checi=Z175&seatType=无座&dptHm=00:03">查看全部代理商&raquo;</a>
+                </div>
+                -->
+                <!-- 去哪保证 -->
+                <div class="letter fright direct" title="已加入去哪儿网担保通计划">已加入去哪儿网担保通计划</div>
+            </div>
+        </div>
+        <div id="bd">
+            <!-- {车次信息 -->
+            <div id="fillOrder_trainInfo" class="m-traininfo">
+                <h3 class="traininfo-hd">
+                    车次信息
+                    <a href="//train.qunar.com/stationToStation.htm?fromStation=南京&amp;toStation=杭州&amp;date=2019-04-19">[返回修改车次]</a>
+                </h3>
+                <div class="traininfo-bd">
+                    <div class="g-table">
+                        <ul class="tbody">
+                            <!-- {抢票才显示 -->
+                            <!-- 抢票才显示} -->
+                            <li class="trainNum">
+                                Z175
+                            </li>
+                            <li class="trainStation">
+                                <div>
+                                    <i>始</i>
+                                    <span>00:03</span>
+                                    <span class="trainFrom">南京</span>
+                                </div>
+                                <div>
+                                    <i class="end">终</i>
+                                    <span>05:54</span>
+                                    <span class="trainTo">杭州</span>
+                                </div>
+                            </li>
+                            <li class="trainDate">
+                                <p>2019/04/19 周五</p>
+                                <p>2019/04/19 周五</p>
+                            </li>
+                            <li class="trainDuration">
+                                <p><em class="icons durationIcon"></em>5小时51分</p>
+                            </li>
+
+                            <li class="seatPrice">
+                                <p>
+                                    无座&nbsp;
+                                    <i class="color01 rmb">&yen;</i><i class="color01">69</i>
+                                </p>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!-- {备选车次 -->
+                    <!-- 备选车次} -->
+                    <!-- {备选坐席 -->
+                    <!-- 备选坐席} -->
+                    <!-- {价格信息 -->
+                    <div class="g-table" style="display: none;">
+                        <table class="table-original">
+                            <colgroup>
+                                <col class="cell06">
+                                <col class="cell07">
+                                <col class="cell08">
+                                <col class="cell09">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>首选坐席</th>
+                                <th class="plus-td orangebg" node-type="second-seat-class">备选坐席预收费用</th>
+                                <th>车票预收总价</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <!--首选坐席费用信息-->
+                                <td node-type="first-seat">无座<span class="num pl01"><i
+                                        class="rmb">&yen;</i>69 X 1</span></td>
+                                <!--备选坐席费用信息-->
+                                <td class="plus-td orangebg" node-type="second-seat">
+                                    <div class="candidate">
+                                        <span class="num" node-type="explain-price"><i class="rmb">&yen;</i>0</span>
+
+                                        <a href="javascript:;" node-type="explain" action-type="explain">说明</a>
+                                        <!-- 提示 -->
+                                        <div class="g-tips tips-top" node-type="second-seat-tip" style="display: none">
+                                            <span class="arrow-out"></span>
+                                            <span class="arrow-in"></span>
+                                            预收费用为最贵的备选坐席和首选坐席的差价。实际出票后，多余预收款将全额退还您。
+                                        </div>
+                                    </div>
+                                </td>
+                                <!--预收总额信息-->
+                                <td node-type="total-price">
+                                    <span class="num color01 fz01"><i class="rmb">&yen;</i> 109</span>
+                                    共1人（车票价格：<span class="num color01"><i class="rmb">&yen;</i>69</span>
+                                    ）
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 价格信息} -->
+                    <!-- {挑选座位 -->
+
+                    <!-- 挑选座位} -->
+
+                    <!--后台需要的隐藏的字段-->
+                    <div>
+                        <input type="hidden" name="trainSeat" value="无座" price="69"/>
+                        <input type="hidden" name="ticketCount" value="1" node-type="ticketCount"/>
+                        <input type="hidden" name="trainFrom" value="南京" node-type="trainFrom"/>
+                        <input type="hidden" name="trainTo" value="杭州" node-type="trainTo"/>
+                        <input type="hidden" name="trainStartTime" value="201904190003" node-type="trainStartTime"/>
+                        <input type="hidden" name="trainEndTime" value="201904190554" node-type="trainEndTime"/>
+                        <input type="hidden" name="trainDistance" value="936" node-type="trainDistance"/>
+                        <input type="hidden" name="trainDuration" value="351" node-type="trainDuration"/>
+                        <input type="hidden" name="fromCity" value="" node-type="fromCity"/>
+                        <input type="hidden" name="toCity" value="" node-type="toCity"/>
+                        <!-- <input type="hidden" name="trainSeat" value="1" node-type="trainSeat"/> -->
+                        <input type="hidden" name="trainNo" value="Z175" node-type="trainNo"/>
+                        <!--add for monitor-->
+                        <input type="hidden" name="ex_track" value="noextrack" node-type="exTrack"/>
+                        <span></span>
+                        <input type="hidden" name="pricesInformation" value="" id="pricesInformation"/>
+                        <input type="hidden" name="isCheckPrice" value="1" id="isCheckPrice"/>
+                        <input type="hidden" name="needCheckHistoryOrder" value="true" id="needCheckHistoryOrder"/>
+                        <input type="hidden" name="refuseAir" value="" id="refuseAir"/>
+                    </div>
+                </div>
+            </div>
+            <!-- 文字描述 -->
+            <div class="color01 keynote">
+                温馨提示：卧铺上\中\下铺随机分配，暂收下铺价格，出票后根据实际票价退差价。
+            </div>
+            <!-- 车次信息} -->
+            <!-- {订票信息 -->
+            <div class="m-msg">
+
+                <div class="msg-bd">
+                    <!-- {乘客信息 -->
+                    <div class="bd-item">
+                        <h3 class="msg-hd">乘客信息</h3>
+                        <div id="fillOrder_passengerInfo" class="passenger-info">
+
+                        </div>
+                    </div>
+                    <!-- 乘客信息} -->
+                    <!-- {优惠券套餐信息 -->
+                    <div class="bd-item">
+                        <h3 class="msg-hd">优惠券套餐</h3>
+                        <div id="fillOrder_packageInfo" class="package-info">
+
+                        </div>
+                    </div>
+                    <!-- 优惠券套餐信息} -->
+                    <!-- {抢票设置 -->
+                    <!-- 抢票设置} -->
+                    <!-- {座席选择 -->
+                    <!-- 坐席选择} -->
+                    <!-- {联系人信息 -->
+                    <div class="bd-item" id="get-ticket-type">
+                        <h3 class="msg-hd">取票方式</h3>
+                        <ul class="get-ticket-type">
+                            <li class="item eTicket active" data-index="0">
+                                <div class="g-tips tips-top"></div>
+                                <span>自取票<i class="icons questionIcon contactQuestionIcon js-ticket-tip"></i></span>
+                                <em class="icons contactActiveIcon"></em>
+                            </li>
+                            <li class="item paper" data-paper="paper" data-index="1" data-station="0">
+                                <div class="g-tips tips-top"></div>
+                                <span>送票上门<i class="icons questionIcon contactQuestionIcon js-ticket-tip"></i></span>
+                                <em class="icons contactActiveIcon"></em>
+                            </li>
+                            <li class="item station" data-paper="station" data-index="2" data-station="1">
+                                <div class="g-tips tips-top"></div>
+                                <span>车站VIP取票<i class="icons questionIcon contactQuestionIcon js-ticket-tip"></i></span>
+                                <em class="icons contactActiveIcon"></em>
+                            </li>
+                        </ul>
+                        <div>
+                            <div class="stationAdr"></div>
+                            <div id="fillOrder_contactInfo" class="contact-info">
+                            </div>
+                            <div class="deliverAdr deliver"></div>
+                        </div>
+                    </div>
+
+                    <!-- 联系人信息} -->
+                    <!-- {报销信息 -->
+                    <div class="bd-item">
+                        <h3 class="msg-hd receiptInfo-hd">报销凭证</h3>
+                        <div id="fillOrder_receiptInfo" class="expend-info">
+                        </div>
+                    </div>
+
+                    <!-- 报销信息} -->
+                    <!--无用代码-->
+
+
+                </div>
+
+
+                <div id="fillOrder_submit" class="msg-ft">
+                    <p class="protocol">
+                        <label for="agree">
+                            <input type="checkbox" name="license" class="g-ipt" id="agree" checked="checked"
+                                   node-type="license">我已阅读并同意
+                            <a href="//touch.train.qunar.com/trainAgreement.html" target="_blank" title="火车票信息服务协议">《火车票信息服务协议》</a>
+                            <cite usage="insurance_doc"></cite>
+                        </label>
+                    </p>
+                    <!-- {车票购提示 -->
+                    <div id="fillOrder_remindInfo" class="ticketshop-info">
+                        <div class="g-tips" node-type="total">
+                            您实际要支付的车次为 D319
+                            订单总额：
+                            <span class="num color01 fz01"><i class="rmb">&yen;</i></span>
+                            共2人（车票价格：<span class="num color01"><i class="rmb">&yen;</i></span>，预收车票：
+                            <span class="num color01"><i class="rmb">&yen;</i></span>，
+                            配送费： <span class="num color01"><i class="rmb">&yen;</i></span>）
+
+                        </div>
+                    </div>
+                    <!-- 车票购提示} -->
+                    <div class="submit-box" style="display:none">
+                        <button node-type="submlt" type="button" class="g-btn02 g-blue02">提交订单</button>
+                    </div>
+                    <!---->
+                    <div class="submit-box">
+                        <button class="g-btn02 g-blue02" type="submit" node-type='submit'>提交订单</button>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <!-- 订票信息} -->
+        </div>
+
+
+        <div id="ft" class="g-footer">
+            <p class="txt_center">去哪儿网 版权所有 &copy; </p>
+        </div>
+    </div>
+</form>
+<!-- 过去的js定义  -->
+<script type="text/javascript">
+    var SERVER_TIME = new Date(1555575894521);
+
+    var AGENT = {
+        siteName: '铁友网'
+    };
+
+    var SEAT_INFO = {
+        seatname: '无座',
+        fee: 0,
+        seatprice: 69,
+        seatcount: 1,
+        freight: 0
+    };
+
+    var TRAIN_INFO = {
+        "certTypes": [
+            {"title": "身份证", "value": 0, "selected": true},
+            {"title": "护照", "value": 4},
+            {"title": "台湾通行证", "value": 6},
+            {"title": "港澳通行证", "value": 7}
+        ],
+        "no": "Z175",
+        "typeCode": "Z",
+        "typeName": "直达特快",
+        "from": "南京",
+        "to": "杭州",
+        "startTime": "201904190003",
+        "startDateText": "2019/04/19",
+        "startTimeText": "00:03",
+        "endTime": "201904190554",
+        "endDateText": "2019/04/19",
+        "endTimeText": "05:54",
+        "duration": 351,
+        "durationText": "5小时51分",
+        "distance": 936,
+        "seat": "无座",
+        "seats": "2019-04-19",
+        "insurUrl": "http://www.kdlins.com.cn/jsp/web/kd_category/kd2_product/Qunar-Train09.html",
+        "isNewInsure": 1,
+        "price": 0,
+        "upperLimit": 90,
+        "floorlimit": 0,
+        "benefit": "200",
+        "seats": "2019-04-19"
+    };
+
+    var DELIVERY_INFO = {
+        "isSupportPaper": false,
+        "servicePrice": 5.00,
+        "topAlertMsg": "纸质票上角标提示",
+        "bottomAlertMsg": "购买纸质票温馨提示",
+
+        "expressName": "shunfeng",
+        "expressCode": "顺丰",
+        "ticketToStationExpressPrice": 20.00,
+        "expressPrice": 20.00
+
+    };
+
+    TRAIN_INFO.insurances = [{
+        "isNewInsure": 1,
+        "descUrl": "http://www.kdlins.com.cn/jsp/web/kd_category/kd2_product/Qunar-Train09.html",
+        "benefit": 200,
+        "productCode": "1002009,JL",
+        "agentProfitSite": 39.000000,
+        "agentProfitWire": 39.000000,
+        "companyCode": "JL",
+        "floorLimit": 0,
+        "price": "40",
+        "upperLimit": 90,
+        "amountLimit": 1,
+        "addedPrice": 0,
+        "productName": "君龙列车乘客意外伤害保险组合计划六"
+    }, {
+        "isNewInsure": 1,
+        "descUrl": "http://www.kdlins.com.cn/jsp/web/kd_category/kd2_product/Qunar-CATrain03.html",
+        "benefit": 150,
+        "productCode": "1002103,YD",
+        "agentProfitSite": 29.100000,
+        "agentProfitWire": 29.100000,
+        "companyCode": "YD",
+        "floorLimit": 0,
+        "price": "30",
+        "upperLimit": 90,
+        "amountLimit": 1,
+        "addedPrice": 0,
+        "productName": "君龙列车乘客意外伤害保险组合计划三"
+    }, {
+        "isNewInsure": 1,
+        "descUrl": "http://www.kdlins.com.cn/jsp/web/kd_category/kd2_product/Qunar-CATrain02.html",
+        "benefit": 80,
+        "productCode": "1002102,YD",
+        "agentProfitSite": 19.400000,
+        "agentProfitWire": 19.400000,
+        "companyCode": "YD",
+        "floorLimit": 0,
+        "price": "20",
+        "upperLimit": 90,
+        "amountLimit": 1,
+        "addedPrice": 0,
+        "productName": "君龙列车乘客意外伤害保险组合计划二"
+    }, {
+        "isNewInsure": 1,
+        "descUrl": "http://www.sinosig.com/clause/train_basic.html",
+        "benefit": 60,
+        "productCode": "QP010902,YG",
+        "agentProfitSite": 4.600000,
+        "agentProfitWire": 4.600000,
+        "companyCode": "YG",
+        "floorLimit": 18,
+        "price": "5",
+        "upperLimit": 100,
+        "amountLimit": 1,
+        "addedPrice": 0,
+        "productName": "阳光火车意外险基础款"
+    }, {
+        "isNewInsure": 1,
+        "descUrl": "http://www.kdlins.com.cn/jsp/web/kd_category/kd2_product/Qunar-Train05.html",
+        "benefit": 50,
+        "productCode": "1002005,JL",
+        "agentProfitSite": 2.500000,
+        "agentProfitWire": 2.500000,
+        "companyCode": "JL",
+        "floorLimit": 0,
+        "price": "10",
+        "upperLimit": 90,
+        "amountLimit": 1,
+        "addedPrice": 0,
+        "productName": "君龙列车乘客意外伤害保险组合计划五"
+    }];
+    TRAIN_INFO.packageServiceProds = [{
+        "id": 88,
+        "detail": {
+            "title": "快速出票",
+            "desc": "快速出票套餐10元份1.尊享短信提醒服务2.含价值35元租车券",
+            "couponDesc": "含35元优惠券",
+            "bottomBtnDesc": "赠送35元租车券"
+        },
+        "price": "10",
+        "default": false,
+        "createdTs": null,
+        "status": 0,
+        "updateTs": null,
+        "name": "pc35元车车券包新",
+        "faq": {
+            "content": "1.包含35元接送站优惠券出票成功后下发至您的联系人手机号账户中|2.适用超巴新客和专车接送站产品|3.可在去哪儿专车-租车频道中使用|4.优惠券有效期为一个月",
+            "title": "快速出票套餐服务说明"
+        }
+    }, {
+        "id": 91,
+        "detail": {
+            "title": "优先出票",
+            "desc": "优先出票套餐20元份1.尊享短信提醒服务2.含价值50元租车券",
+            "couponDesc": "含50元优惠券",
+            "bottomBtnDesc": "赠送60元租车券"
+        },
+        "price": "20",
+        "default": true,
+        "createdTs": null,
+        "status": 0,
+        "updateTs": null,
+        "name": "pc60元车车券包新",
+        "faq": {
+            "content": "1.包含50元接送站优惠券出票成功后下发至您的联系人手机号账户中|2.适用超巴新客和专车接送站产品|3.可在去哪儿专车-租车频道中使用|4.优惠券有效期为一个月",
+            "title": "优先出票套餐服务说明"
+        }
+    }, {
+        "id": 94,
+        "detail": {
+            "title": "高速出票",
+            "desc": "高速出票套餐30元份1.尊享快速退改签服务2.含价值60元租车券",
+            "couponDesc": "含60元优惠券",
+            "bottomBtnDesc": "赠送60元租车券"
+        },
+        "price": "30",
+        "default": false,
+        "createdTs": null,
+        "status": 0,
+        "updateTs": null,
+        "name": "pc60元车车券包c新",
+        "faq": {
+            "content": "1.包含60元接送站优惠券出票成功后下发至您的联系人手机号账户中|2.适用超巴新客和专车接送站产品|3.可在去哪儿专车-租车频道中使用|4.优惠券有效期为一个月",
+            "title": "高速出票套餐服务说明"
+        }
+    }];
+    //产品名称 productName  价格 price   产品说明urldescUrl  产品编码productCode
+    var username = ' ';
+</script>
+
+
+<script src="//q.qunarzz.com/jquery/prd/jquery-1.7.2.min.js"></script>
+
+<script type="text/javascript"
+        src="//q.qunarzz.com/train_tts/prd/scripts/v3/page/fillOrder@c5a26d2ce05b8a4b5ee9424ae855025b.js"></script>
+
+</body>
+</html>
