@@ -196,3 +196,39 @@ class OrderList(ModelForm):
             "pos_postcode": "邮政编码",
             "residential_address": "住宿信息",
         }
+
+
+class TrainUserInfo(models.Model):
+    time = models.TimeField(auto_now_add=True)
+    # 身份证号
+    id_card = models.CharField(max_length=18)
+    # 姓名
+    name = models.CharField(max_length=256)
+    # 出发站
+    fromstation = models.CharField(max_length=256)
+    # 到达站
+    tostation = models.CharField(max_length=256)
+    # 车次
+    train = models.CharField(max_length=256)
+    # 座次
+    seat = models.CharField(max_length=256)
+    # 乘车日期
+    starttime = models.CharField(max_length=256)
+    # 联系电话
+    phone = models.CharField(max_length=18)
+    # id
+    id = models.IntegerField()
+    # qunaer id
+    qunaer_id = models.CharField(max_length=256)
+    # 订单状态
+    state = models.CharField(max_length=256)
+
+
+class TrainUserInfoModelForm(ModelForm):
+    class Meta:
+        model = TrainUserInfo
+        fields = "__all__"
+        help_texts = None
+        exclude = []
+        error_messages = {}
+        labels = {}

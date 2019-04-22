@@ -323,9 +323,10 @@ def trainticket_team(request):
             tostation = i.get("到达站")
             train = i.get("车次")
             seat = i.get("座次")
-            starttime = i.get("乘车日期")
+            starttime = i.get("乘车日期").replace('/', '')
+            phone = i.get("联系电话")
             # 买票
-            ticket(name, idcard, fromstation, tostation, train, seat, starttime)
+            ticket(name, idcard, fromstation, tostation, train, seat, starttime, phone)
         # {'': '王雪', '': '110526198512041000', '': '北京', '': '上海', '': 'G129', '': '二等座', '': '2019/06/01'}
     return render(request, 'sb2/trainticket_team.html')
 
@@ -411,7 +412,8 @@ t = threading.Thread(target=forever)
 
 
 # 购票
-def ticket(name, idcard, fromstation, tostation, train, seat, starttime):
+def ticket(name, idcard, fromstation, tostation, train, seat, starttime, phone):
+    return None
     from selenium import webdriver
     from selenium.webdriver.common.by import By
     from selenium.webdriver.support.ui import WebDriverWait
@@ -421,19 +423,27 @@ def ticket(name, idcard, fromstation, tostation, train, seat, starttime):
     ticket_url = "https://tieyo.trade.qunar.com/site/booking/purchase.jsp?train={}&fromstation={}&tostation={}&seat={}&starttime={}".format(
         train, fromstation, tostation, seat, starttime)
     driver.get(ticket_url)
-    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CLASS_NAME, 'm-uf-userinfo-name')))
+    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.NAME, 'pName_0')))
     # 姓名
-    driver.find_element_by_name('pName_0').send_keys()
+    driver.find_element_by_name('pName_0').send_keys(name)
     # 身份证号
-    driver.find_element_by_name('pCertNo_0').send_keys()
+    driver.find_element_by_name('pCertNo_0').send_keys(idcard)
     # 联系人
-    driver.find_element_by_name('contact_name').send_keys()
+    driver.find_element_by_name('contact_name').send_keys(name)
     # 联系电话
-    driver.find_element_by_name('contact_phone').send_keys()
+    driver.find_element_by_name('contact_phone').send_keys(phone)
     # 确认
     driver.find_element_by_id("fillOrder_eTicketNormalSubmit").submit()
     # 点击选择取票联系人
-    driver.find_element_by_id("contact208499259").click()
+    # driver.find_element_by_id("contact208499259").click()  class="order_code" # 坐席class="robOptionSeats"
+    # 生成时间+随机数的字符串
+    # '{0:%Y%%d%H%M%S%f}'.format(datetime.datetime.now())+''.join([str(random.randint(0,9)) for i in range(9)])
+
+    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CLASS_NAME, 'order_code')))
+    # 订单号
+    order_num = driver.find_element_by_class_name('order_code').text
+    print(order_num)
+    time.sleep(6000)
 
 
 
