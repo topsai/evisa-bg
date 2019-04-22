@@ -313,6 +313,20 @@ def trainticket(request):
 
 
 def trainticket_team(request):
+    if request.method == "POST":
+        info = json.loads(request.POST.get('info'))
+        for i in info:
+            print(i)
+            name = i.get("姓名")
+            idcard = i.get("身份证号")
+            fromstation = i.get("出发站")
+            tostation = i.get("到达站")
+            train = i.get("车次")
+            seat = i.get("座次")
+            starttime = i.get("乘车日期")
+            # 买票
+            ticket(name, idcard, fromstation, tostation, train, seat, starttime)
+        # {'': '王雪', '': '110526198512041000', '': '北京', '': '上海', '': 'G129', '': '二等座', '': '2019/06/01'}
     return render(request, 'sb2/trainticket_team.html')
 
 
@@ -394,3 +408,38 @@ def forever():
 
 t = threading.Thread(target=forever)
 # t.start()
+
+
+# 购票
+def ticket(name, idcard, fromstation, tostation, train, seat, starttime):
+    from selenium import webdriver
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    opt = webdriver.ChromeOptions()
+    driver = webdriver.Chrome(chrome_options=opt)
+    ticket_url = "https://tieyo.trade.qunar.com/site/booking/purchase.jsp?train={}&fromstation={}&tostation={}&seat={}&starttime={}".format(
+        train, fromstation, tostation, seat, starttime)
+    driver.get(ticket_url)
+    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CLASS_NAME, 'm-uf-userinfo-name')))
+    # 姓名
+    driver.find_element_by_name('pName_0').send_keys()
+    # 身份证号
+    driver.find_element_by_name('pCertNo_0').send_keys()
+    # 联系人
+    driver.find_element_by_name('contact_name').send_keys()
+    # 联系电话
+    driver.find_element_by_name('contact_phone').send_keys()
+    # 确认
+    driver.find_element_by_id("fillOrder_eTicketNormalSubmit").submit()
+    # 点击选择取票联系人
+    driver.find_element_by_id("contact208499259").click()
+
+
+
+
+
+
+
+
+

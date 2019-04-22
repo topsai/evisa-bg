@@ -38,11 +38,13 @@
                     <div class="col-2"></div>
                     <div class="col-4">
                         <button class="btn btn-success btn-lg btn-block">开始购票</button>
+
                     </div>
                 </div>
                 <br>
                 <div class="row">
-                    <div class="col-1"></div>
+                    <div class="col-1">
+                    </div>
                     <div class="col-10">
                         支持文件类型：xls、xlsx ，文件内容请按照格式填写，文件格式请见<a href="#">示例</a>。
                     </div>
@@ -93,6 +95,10 @@
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-label="Salary: activate to sort column ascending"
                                             style="width: 104px;">票价（元）
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                            colspan="1" aria-label="Salary: activate to sort column ascending"
+                                            style="width: 104px;">出票状态
                                         </th>
                                     </tr>
                                     </thead>
@@ -265,11 +271,9 @@
                 //console.log(data_json1);
                 //console.log(data_json3);
                 document.getElementById("demo").innerHTML = JSON.stringify(data_json);
-
                 for (var i in data_json) {
                     console.log(data_json[i]["姓名"])
                 }
-
 
             };
             if (rABS) {
@@ -341,15 +345,44 @@
                             "<td>已出票</td>\n" +
                             "<td>" + seat_number + "</td>\n" +
                             "<td>¥1107</td>\n" +
+                            "<td class='icon_state'><i class='fa fa-spinner'></i></td>\n" +
                             "</tr>"
-                        )
-                    }else {
+                        );
+                        console.log();
+
+
+                    } else {
                         alert(" 数据错误 ");
                         break;
                     }
 
                 }
+                console.log(JSON.stringify(data_json), typeof (data_json));
 
+
+                $.ajax({
+                    url: "/trainticket_team/",
+                    type: "POST",
+                    {#headers: {'x-CSRFtoken': $.cookie('csrftoken')},#}
+                    data: {info: JSON.stringify(data_json)},
+                    success: function (data) {
+                        console.log($.parseJSON(data))
+                    }
+                });
+
+                // max - 期望的最大值
+                // min - 期望的最小值
+                let max = 5000;
+                let min = 1000;
+                console.log(parseInt(Math.random() * (max - min + 1) + min, 10));
+                $(".icon_state").each(function () {
+                        let that = this;
+                        console.log(this);
+                        setTimeout(function () {
+                            console.log($(that).html("<i class='fa fa-check'></i>"));
+                        }, parseInt(Math.random() * (max - min + 1) + min, 10));
+                    }
+                );
             };
 
             if (rABS) {
