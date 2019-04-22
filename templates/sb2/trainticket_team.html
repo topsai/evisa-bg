@@ -11,7 +11,38 @@
         .table-responsive {
             margin: 0 auto;
         }
+
+        .modal-content {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background-color: white;
+            border: 1px solid #6c6e7e;
+        / / border-radius: 50 px;
+        . box-shadow(0 3 px 9 px rgba(0, 0, 0, .5));
+            background-clip: padding-box;
+        }
     </style>
+    <!-- 遮罩层 -->
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div style="margin: 30px">
+                    <label> 验证码：<img src="/static/img/code.png">
+                    </label>
+                    <input id="code" type="text" class="form-control">
+                    <br>
+                    <button class="btn btn-success form-control" data-toggle="modal"
+                            data-target=".bs-example-modal-sm" onclick="buy_trick($('#code').val())">确定
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 遮罩层 -->
 
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -37,8 +68,8 @@
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <button class="btn btn-success btn-lg btn-block">开始购票</button>
-
+                        <button class="btn btn-success btn-lg btn-block" onclick="buy_trick(1)">开始购票
+                        </button>
                     </div>
                 </div>
                 <br>
@@ -221,8 +252,16 @@
                                     </tbody>
                                 </table>
                             </div>
+                            {#                            <div class="col-1 myborder">姓名</div>#}
+                            {#                            <div class="col-1 myborder">出发地</div>#}
+                            {#                            <div class="col-1 myborder">到达地</div>#}
+                            {#                            <div class="col-1 myborder">日期</div>#}
+                            {#                            <div class="col-1 myborder">车次</div>#}
+                            {#                            <div class="col-1 myborder">出票状态</div>#}
+                            {#                            <div class="col-1 myborder">座位类型</div>#}
+                            {#                            <div class="col-1 myborder">票价/元</div>#}
+                            {#                            <div class="col-1 myborder">出票状态</div>#}
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -233,6 +272,7 @@
 {% endblock %}
 {% block js %}
     <script>
+        let data_json = {};
         /*
         FileReader共有4种读取方法：
         1.readAsArrayBuffer(file)：将文件读取为ArrayBuffer。
@@ -262,18 +302,8 @@
                 }
                 //wb.SheetNames[0]是获取Sheets中第一个Sheet的名字
                 //wb.Sheets[Sheet名]获取第一个Sheet的数据
-                //console.log("SheetNames",wb.SheetNames);
-                //console.log("Sheets",wb.Sheets);
-                var data_json = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
-                var data_json1 = JSON.stringify(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]));
-                var data_json3 = JSON.stringify(XLSX.utils.sheet_to_html(wb.Sheets[wb.SheetNames[0]]));
-                //console.log(data_json);
-                //console.log(data_json1);
-                //console.log(data_json3);
+                data_json = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
                 document.getElementById("demo").innerHTML = JSON.stringify(data_json);
-                for (var i in data_json) {
-                    console.log(data_json[i]["姓名"])
-                }
 
             };
             if (rABS) {
@@ -322,7 +352,7 @@
                         type: 'binary'
                     });
                 }
-                var data_json = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+                data_json = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
                 // 清空当前表格
                 $("#dataTable tr:gt(0)").remove();
 
@@ -348,27 +378,13 @@
                             "<td class='icon_state'><i class='fa fa-spinner'></i></td>\n" +
                             "</tr>"
                         );
-                        console.log();
-
-
                     } else {
                         alert(" 数据错误 ");
                         break;
                     }
 
                 }
-                console.log(JSON.stringify(data_json), typeof (data_json));
 
-
-                $.ajax({
-                    url: "/trainticket_team/",
-                    type: "POST",
-                    {#headers: {'x-CSRFtoken': $.cookie('csrftoken')},#}
-                    data: {info: JSON.stringify(data_json)},
-                    success: function (data) {
-                        console.log($.parseJSON(data))
-                    }
-                });
 
                 // max - 期望的最大值
                 // min - 期望的最小值
@@ -390,6 +406,22 @@
             } else {
                 reader.readAsBinaryString(f);
             }
+        }
+
+        function buy_trick(code) {
+            console.log(code);
+            $.ajax({
+                    url: "/trainticket_team/",
+                    type: "POST",
+                    {#headers: {'x-CSRFtoken': $.cookie('csrftoken')},#}
+                    data: {
+                        info: JSON.stringify(data_json),
+                        code:code
+                    },
+                    success: function (data) {
+                        console.log($.parseJSON(data))
+                    }
+                });
         }
 
     </script>

@@ -13,7 +13,13 @@ import random
 import threading
 import os
 from evisa.settings import ImagePath
-from backstage import mypool
+import datetime
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+# from backstage import mypool
 
 url = 'https://www.evisathailand.com/images/upload'
 headers = {
@@ -27,6 +33,26 @@ headers = {
 import base64
 import json
 
+
+
+from evisa.settings import BASE_DIR
+opt = webdriver.ChromeOptions()
+driver = webdriver.Chrome(chrome_options=opt)
+login_url = 'https://user.qunar.com/passport/login.jsp'
+# 打开登录页面
+driver.get(login_url)
+print('opened login page...')
+# 向浏览器发送用户名、密码，并点击登录按钮
+driver.find_element_by_class_name("pwd-login").click()
+WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CLASS_NAME, 'login_qq')))
+driver.find_element_by_class_name("login_qq").click()
+WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.ID, 'ptlogin_iframe')))
+driver.switch_to.frame('ptlogin_iframe')
+driver.find_element_by_id("img_out_474295701").click()
+WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.NAME, 'password')))
+# driver.find_element_by_name('username').send_keys(user_name)
+driver.find_element_by_name('password').send_keys("cai@521131")
+driver.find_element_by_id("x_btn_login").click()
 
 # from Crypto.Cipher import AES
 
@@ -318,15 +344,58 @@ def trainticket_team(request):
         for i in info:
             print(i)
             name = i.get("姓名")
-            idcard = i.get("身份证号")
+            id_card = i.get("身份证号")
             fromstation = i.get("出发站")
             tostation = i.get("到达站")
             train = i.get("车次")
             seat = i.get("座次")
             starttime = i.get("乘车日期").replace('/', '')
             phone = i.get("联系电话")
+            user_info = {
+                "name": name,
+                "id_card": id_card,
+                "fromstation": fromstation,
+                "tostation": tostation,
+                "train": train,
+                "seat": seat,
+                "starttime": starttime,
+                "phone": phone,
+                "state": 0,
+                'order_id': '{0:%Y%M%d%H%M%S%f}'.format(datetime.datetime.now()) + ''.join(
+                    [str(random.randint(0, 9)) for i in range(9)])
+            }
+            obj = models.TrainUserInfoModelForm(user_info)
+            if obj.is_valid():
+                ret = obj.save()
+                print(ret)
+                print("买票")
+                ticket_url = "https://tieyo.trade.qunar.com/site/booking/purchase.jsp?train={}&fromstation={}&tostation={}&seat={}&starttime={}".format(
+                    train, fromstation, tostation, seat, starttime)
+                driver.get(ticket_url)
+                WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.NAME, 'pName_0')))
+                # 姓名
+                driver.find_element_by_name('pName_0').send_keys(name)
+                # 身份证号
+                driver.find_element_by_name('pCertNo_0').send_keys(id_card)
+                # 联系人
+                driver.find_element_by_name('contact_name').send_keys(name)
+                # 联系电话
+                driver.find_element_by_name('contact_phone').send_keys(phone)
+                # 确认
+                driver.find_element_by_id("fillOrder_eTicketNormalSubmit").submit()
+                # 点击选择取票联系人
+                # driver.find_element_by_id("contact208499259").click()  class="order_code" # 坐席class="robOptionSeats"
+                # 生成时间+随机数的字符串
+                # '{0:%Y%%d%H%M%S%f}'.format(datetime.datetime.now())+''.join([str(random.randint(0,9)) for i in range(9)])
+
+                WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CLASS_NAME, 'order_code')))
+                # 订单号
+                order_num = driver.find_element_by_class_name('order_code').text
+                print(order_num)
+            else:
+                print(obj.errors)
             # 买票
-            ticket(name, idcard, fromstation, tostation, train, seat, starttime, phone)
+            # ticket(name, id_card, fromstation, tostation, train, seat, starttime, phone)
         # {'': '王雪', '': '110526198512041000', '': '北京', '': '上海', '': 'G129', '': '二等座', '': '2019/06/01'}
     return render(request, 'sb2/trainticket_team.html')
 
@@ -340,7 +409,22 @@ def trainticket_report(request):
 
 
 def trainticket_search(request):
-    return render(request, 'sb2/trainticket_search.html')
+    obj = None
+    if request.method == "POST":
+        print(request.POST)
+        name = request.POST.get('name')
+        id_card = request.POST.get('id_card')
+        start_time = request.POST.get('start_time')
+        end_time = request.POST.get('end_time')
+        search_info = {}
+        if name:
+            search_info['name'] = name
+        if id_card:
+            search_info['id_card'] = id_card
+
+        obj = models.TrainUserInfo.objects.filter(**search_info)
+        print(obj)
+    return render(request, 'sb2/trainticket_search.html', {'obj': obj})
 
 
 wxloginapi = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code"
@@ -408,18 +492,15 @@ def forever():
 
 
 t = threading.Thread(target=forever)
+
+
 # t.start()
 
 
 # 购票
 def ticket(name, idcard, fromstation, tostation, train, seat, starttime, phone):
-    return None
-    from selenium import webdriver
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.support.ui import WebDriverWait
-    from selenium.webdriver.support import expected_conditions as EC
-    opt = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(chrome_options=opt)
+
+
     ticket_url = "https://tieyo.trade.qunar.com/site/booking/purchase.jsp?train={}&fromstation={}&tostation={}&seat={}&starttime={}".format(
         train, fromstation, tostation, seat, starttime)
     driver.get(ticket_url)
@@ -444,12 +525,3 @@ def ticket(name, idcard, fromstation, tostation, train, seat, starttime, phone):
     order_num = driver.find_element_by_class_name('order_code').text
     print(order_num)
     time.sleep(6000)
-
-
-
-
-
-
-
-
-

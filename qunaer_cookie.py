@@ -44,8 +44,14 @@ def main():
     # 向浏览器发送用户名、密码，并点击登录按钮
     driver.find_element_by_class_name("pwd-login").click()
     time.sleep(1)
-    driver.find_element_by_name('username').send_keys(user_name)
+    driver.find_element_by_class_name("login_qq").click()
+    time.sleep(1)
+    driver.switch_to.frame('ptlogin_iframe')
+    driver.find_element_by_id("img_out_474295701").click()
+
+    # driver.find_element_by_name('username').send_keys(user_name)
     driver.find_element_by_name('password').send_keys(password)
+    driver.find_element_by_id("x_btn_login").click()
     # 获取验证码焦点，且对本元素截图
     ele = driver.find_element_by_id("vcodeImg")
     ele.screenshot("C:\\Users\\Public\\ele.png")

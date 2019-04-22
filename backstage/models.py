@@ -10,7 +10,7 @@ state_choise = (
     (3, "待上传"),
     (4, "待审核"),
     (5, "成功"),
-    (4, "失败"),
+    (6, "失败"),
 )
 order_method_choise = {
     (0, "小程序"),
@@ -198,6 +198,15 @@ class OrderList(ModelForm):
         }
 
 
+train_state_choise = (
+    (0, "未处理"),
+    (1, "待支付"),
+    (2, "已支付"),
+    (3, "成功"),
+    (4, "失败"),
+)
+
+
 class TrainUserInfo(models.Model):
     time = models.TimeField(auto_now_add=True)
     # 身份证号
@@ -216,12 +225,14 @@ class TrainUserInfo(models.Model):
     starttime = models.CharField(max_length=256)
     # 联系电话
     phone = models.CharField(max_length=18)
-    # id
-    id = models.IntegerField()
+    # 我自定义的id
+    order_id = models.CharField(max_length=256)
     # qunaer id
-    qunaer_id = models.CharField(max_length=256)
+    qunaer_id = models.CharField(max_length=256, blank=True)
+    # 12306 id
+    real_id = models.CharField(max_length=256, blank=True)
     # 订单状态
-    state = models.CharField(max_length=256)
+    state = models.SmallIntegerField(choices=train_state_choise, default=0, blank=False)
 
 
 class TrainUserInfoModelForm(ModelForm):
