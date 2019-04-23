@@ -4,12 +4,12 @@ from backstage import models
 from django.contrib.auth import authenticate
 import requests
 # 导入requests_toolbelt库使用MultipartEncoder
-from requests_toolbelt import MultipartEncoder
-import json
-import base64
+# from requests_toolbelt import MultipartEncoder
 import requests
 import time
 import random
+import base64
+import json
 import threading
 import os
 from evisa.settings import ImagePath
@@ -18,6 +18,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from evisa.settings import BASE_DIR
 
 # from backstage import mypool
 
@@ -29,30 +30,32 @@ headers = {
     'Referer': 'https://www.evisathailand.com/ft',
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.16 Safari/537.36'
 }
-
-import base64
-import json
-
+driver = None
+chrome_state = 0
 
 
-from evisa.settings import BASE_DIR
-opt = webdriver.ChromeOptions()
-driver = webdriver.Chrome(chrome_options=opt)
-login_url = 'https://user.qunar.com/passport/login.jsp'
-# 打开登录页面
-driver.get(login_url)
-print('opened login page...')
-# 向浏览器发送用户名、密码，并点击登录按钮
-driver.find_element_by_class_name("pwd-login").click()
-WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CLASS_NAME, 'login_qq')))
-driver.find_element_by_class_name("login_qq").click()
-WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.ID, 'ptlogin_iframe')))
-driver.switch_to.frame('ptlogin_iframe')
-driver.find_element_by_id("img_out_474295701").click()
-WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.NAME, 'password')))
-# driver.find_element_by_name('username').send_keys(user_name)
-driver.find_element_by_name('password').send_keys("cai@521131")
-driver.find_element_by_id("x_btn_login").click()
+def open_chrome():
+    opt = webdriver.ChromeOptions()
+    driver = webdriver.Chrome(chrome_options=opt)
+    login_url = 'https://user.qunar.com/passport/login.jsp'
+    # 打开登录页面
+    driver.get(login_url)
+    print('opened login page...')
+    # 向浏览器发送用户名、密码，并点击登录按钮
+    driver.find_element_by_class_name("pwd-login").click()
+    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CLASS_NAME, 'login_qq')))
+    driver.find_element_by_class_name("login_qq").click()
+    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.ID, 'ptlogin_iframe')))
+    driver.switch_to.frame('ptlogin_iframe')
+    driver.find_element_by_id("img_out_474295701").click()
+    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.NAME, 'password')))
+    # driver.find_element_by_name('username').send_keys(user_name)
+    driver.find_element_by_name('password').send_keys("cai@521131")
+    driver.find_element_by_id("x_btn_login").click()
+
+
+# open_chrome()
+
 
 # from Crypto.Cipher import AES
 
@@ -341,6 +344,7 @@ def trainticket(request):
 def trainticket_team(request):
     if request.method == "POST":
         info = json.loads(request.POST.get('info'))
+        ret_list = []
         for i in info:
             print(i)
             name = i.get("姓名")
@@ -389,9 +393,27 @@ def trainticket_team(request):
                 # '{0:%Y%%d%H%M%S%f}'.format(datetime.datetime.now())+''.join([str(random.randint(0,9)) for i in range(9)])
 
                 WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CLASS_NAME, 'order_code')))
-                # 订单号
-                order_num = driver.find_element_by_class_name('order_code').text
+                # qunaer订单号
+                order_num = driver.find_element_by_name("orderNo").get_attribute("value").rstrip("PAY1_multiPay")
                 print(order_num)
+                # 价格
+                price = float(driver.find_element_by_class_name("js-reduce-orderAmount").text)
+                print(price)
+                ret.qunaer_id = order_num
+                ret.price = price
+
+                # pay
+                driver.find_element_by_name('balance').click()
+                # pwdpay
+                if driver.find_element_by_class_name('use_which').text == '使用交易密码':
+                    driver.find_element_by_class_name('use_which').click()
+                    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.NAME, 'payPwd')))
+                    # TODO 交易密码
+                    driver.find_element_by_name('payPwd').send_keys('*')
+                    driver.find_element_by_class_name("js_pay_amount_full_dlg_btn").submit()
+                # 支付完成
+                ret.state = 2
+                ret.save()
             else:
                 print(obj.errors)
             # 买票
@@ -499,8 +521,6 @@ t = threading.Thread(target=forever)
 
 # 购票
 def ticket(name, idcard, fromstation, tostation, train, seat, starttime, phone):
-
-
     ticket_url = "https://tieyo.trade.qunar.com/site/booking/purchase.jsp?train={}&fromstation={}&tostation={}&seat={}&starttime={}".format(
         train, fromstation, tostation, seat, starttime)
     driver.get(ticket_url)

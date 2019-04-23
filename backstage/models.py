@@ -233,6 +233,8 @@ class TrainUserInfo(models.Model):
     real_id = models.CharField(max_length=256, blank=True)
     # 订单状态
     state = models.SmallIntegerField(choices=train_state_choise, default=0, blank=False)
+    # 价格
+    price = models.IntegerField(blank=True, default=0)
 
 
 class TrainUserInfoModelForm(ModelForm):
