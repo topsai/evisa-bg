@@ -80,6 +80,17 @@
                         支持文件类型：xls、xlsx ，文件内容请按照格式填写，文件格式请见<a href="#">示例</a>。
                     </div>
                 </div>
+                <!-- Progress Small -->
+                <div class="card mb-4 hid">
+                    <div class="card-body">
+                        <div class="mb-1 small">购票进度</div>
+                        <div class="progress mb-4">
+                            <div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                    </div>
+                </div>
 
             </div>
 
@@ -123,10 +134,10 @@
                                             colspan="1" aria-label="Start date: activate to sort column ascending"
                                             style="width: 114px;">座位类型
                                         </th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                            colspan="1" aria-label="Salary: activate to sort column ascending"
-                                            style="width: 104px;">票价（元）
-                                        </th>
+                                        {#                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"#}
+                                        {#                                            colspan="1" aria-label="Salary: activate to sort column ascending"#}
+                                        {#                                            style="width: 104px;">票价（元）#}
+                                        {#                                        </th>#}
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                             colspan="1" aria-label="Salary: activate to sort column ascending"
                                             style="width: 104px;">出票状态
@@ -374,7 +385,7 @@
                             "<td>" + train_number + "</td>\n" +
                             "<td>已出票</td>\n" +
                             "<td>" + seat_number + "</td>\n" +
-                            "<td>¥1107</td>\n" +
+                            //"<td>¥1107</td>\n" +
                             "<td class='icon_state'><i class='fa fa-spinner'></i></td>\n" +
                             "</tr>"
                         );
@@ -386,19 +397,6 @@
                 }
 
 
-                // max - 期望的最大值
-                // min - 期望的最小值
-                let max = 5000;
-                let min = 1000;
-                console.log(parseInt(Math.random() * (max - min + 1) + min, 10));
-                $(".icon_state").each(function () {
-                        let that = this;
-                        console.log(this);
-                        setTimeout(function () {
-                            console.log($(that).html("<i class='fa fa-check'></i>"));
-                        }, parseInt(Math.random() * (max - min + 1) + min, 10));
-                    }
-                );
             };
 
             if (rABS) {
@@ -409,19 +407,36 @@
         }
 
         function buy_trick(code) {
+
+
+            // max - 期望的最大值
+            // min - 期望的最小值
+            let max = 8000;
+            let min = 2000;
+            console.log(parseInt(Math.random() * (max - min + 1) + min, 10));
+            $(".icon_state").each(function () {
+                    let that = this;
+                    console.log(this);
+                    setTimeout(function () {
+                        console.log($(that).html("<i class='fa fa-check'></i>"));
+                    }, parseInt(Math.random() * (max - min + 1) + min, 10));
+                }
+            );
+
+
             console.log(code);
             $.ajax({
-                    url: "/trainticket_team/",
-                    type: "POST",
-                    {#headers: {'x-CSRFtoken': $.cookie('csrftoken')},#}
-                    data: {
-                        info: JSON.stringify(data_json),
-                        code:code
-                    },
-                    success: function (data) {
-                        console.log($.parseJSON(data))
-                    }
-                });
+                url: "/trainticket_team/",
+                type: "POST",
+                {#headers: {'x-CSRFtoken': $.cookie('csrftoken')},#}
+                data: {
+                    info: JSON.stringify(data_json),
+                    code: code
+                },
+                success: function (data) {
+                    console.log($.parseJSON(data))
+                }
+            });
         }
 
     </script>

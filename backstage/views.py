@@ -338,7 +338,51 @@ def shapcar(request):
 
 
 def trainticket(request):
-    return render(request, 'sb2/trainticket.html')
+    return render(request, 'sb2/trainticket.html', {'show': "show"})
+
+
+def buy_ticket(train, fromstation, tostation, seat, starttime, name, id_card, phone, ret):
+    ticket_url = "https://tieyo.trade.qunar.com/site/booking/purchase.jsp?train={}&fromstation={}&tostation={}&seat={}&starttime={}".format(
+        train, fromstation, tostation, seat, starttime)
+    driver.get(ticket_url)
+    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.NAME, 'pName_0')))
+    # 姓名
+    driver.find_element_by_name('pName_0').send_keys(name)
+    # 身份证号
+    driver.find_element_by_name('pCertNo_0').send_keys(id_card)
+    # 联系人
+    driver.find_element_by_name('contact_name').send_keys(name)
+    # 联系电话
+    driver.find_element_by_name('contact_phone').send_keys(phone)
+    # 确认
+    driver.find_element_by_id("fillOrder_eTicketNormalSubmit").submit()
+    # 点击选择取票联系人
+    # driver.find_element_by_id("contact208499259").click()  class="order_code" # 坐席class="robOptionSeats"
+    # 生成时间+随机数的字符串
+    # '{0:%Y%%d%H%M%S%f}'.format(datetime.datetime.now())+''.join([str(random.randint(0,9)) for i in range(9)])
+
+    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CLASS_NAME, 'order_code')))
+    # qunaer订单号
+    order_num = driver.find_element_by_name("orderNo").get_attribute("value").rstrip("PAY1_multiPay")
+    print(order_num)
+    # 价格
+    price = float(driver.find_element_by_class_name("js-reduce-orderAmount").text)
+    print(price)
+    ret.qunaer_id = order_num
+    ret.price = price
+
+    # pay
+    driver.find_element_by_name('balance').click()
+    # pwdpay
+    if driver.find_element_by_class_name('use_which').text == '使用交易密码':
+        driver.find_element_by_class_name('use_which').click()
+        WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.NAME, 'payPwd')))
+        # TODO 交易密码
+        driver.find_element_by_name('payPwd').send_keys('*')
+        driver.find_element_by_class_name("js_pay_amount_full_dlg_btn").submit()
+    # 支付完成
+    ret.state = 2
+    ret.save()
 
 
 def trainticket_team(request):
@@ -373,61 +417,22 @@ def trainticket_team(request):
                 ret = obj.save()
                 print(ret)
                 print("买票")
-                ticket_url = "https://tieyo.trade.qunar.com/site/booking/purchase.jsp?train={}&fromstation={}&tostation={}&seat={}&starttime={}".format(
-                    train, fromstation, tostation, seat, starttime)
-                driver.get(ticket_url)
-                WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.NAME, 'pName_0')))
-                # 姓名
-                driver.find_element_by_name('pName_0').send_keys(name)
-                # 身份证号
-                driver.find_element_by_name('pCertNo_0').send_keys(id_card)
-                # 联系人
-                driver.find_element_by_name('contact_name').send_keys(name)
-                # 联系电话
-                driver.find_element_by_name('contact_phone').send_keys(phone)
-                # 确认
-                driver.find_element_by_id("fillOrder_eTicketNormalSubmit").submit()
-                # 点击选择取票联系人
-                # driver.find_element_by_id("contact208499259").click()  class="order_code" # 坐席class="robOptionSeats"
-                # 生成时间+随机数的字符串
-                # '{0:%Y%%d%H%M%S%f}'.format(datetime.datetime.now())+''.join([str(random.randint(0,9)) for i in range(9)])
+                # buy_ticket(train, fromstation, tostation, seat, starttime, name, id_card, phone, ret)
 
-                WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CLASS_NAME, 'order_code')))
-                # qunaer订单号
-                order_num = driver.find_element_by_name("orderNo").get_attribute("value").rstrip("PAY1_multiPay")
-                print(order_num)
-                # 价格
-                price = float(driver.find_element_by_class_name("js-reduce-orderAmount").text)
-                print(price)
-                ret.qunaer_id = order_num
-                ret.price = price
-
-                # pay
-                driver.find_element_by_name('balance').click()
-                # pwdpay
-                if driver.find_element_by_class_name('use_which').text == '使用交易密码':
-                    driver.find_element_by_class_name('use_which').click()
-                    WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.NAME, 'payPwd')))
-                    # TODO 交易密码
-                    driver.find_element_by_name('payPwd').send_keys('*')
-                    driver.find_element_by_class_name("js_pay_amount_full_dlg_btn").submit()
-                # 支付完成
-                ret.state = 2
-                ret.save()
             else:
                 print(obj.errors)
             # 买票
             # ticket(name, id_card, fromstation, tostation, train, seat, starttime, phone)
         # {'': '王雪', '': '110526198512041000', '': '北京', '': '上海', '': 'G129', '': '二等座', '': '2019/06/01'}
-    return render(request, 'sb2/trainticket_team.html')
+    return render(request, 'sb2/trainticket_team.html', {'show': "show"})
 
 
 def trainticket_refund(request):
-    return render(request, 'sb2/trainticket_refund.html')
+    return render(request, 'sb2/trainticket_refund.html', {'show': "show"})
 
 
 def trainticket_report(request):
-    return render(request, 'sb2/trainticket_report.html')
+    return render(request, 'sb2/trainticket_report.html', {'show': "show"})
 
 
 def trainticket_search(request):
@@ -446,7 +451,7 @@ def trainticket_search(request):
 
         obj = models.TrainUserInfo.objects.filter(**search_info)
         print(obj)
-    return render(request, 'sb2/trainticket_search.html', {'obj': obj})
+    return render(request, 'sb2/trainticket_search.html', {'obj': obj, 'show': "show"})
 
 
 wxloginapi = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code"

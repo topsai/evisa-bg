@@ -18,6 +18,8 @@
 
     <!-- Custom styles for this template-->
     <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-datepicker.min.css" rel="stylesheet" media="screen">
+    <link href="/static/css/bootstrap-datepicker3.min.css" rel="stylesheet" media="screen">
     <style>
         .col-center {
 
@@ -32,7 +34,11 @@
             background-color: #eee;
             background-color: rgba(86, 61, 124, .15);
             border: 1px solid #ddd;
-            {#border: 1px solid rgba(86, 61, 124, .2);#}
+        {#border: 1px solid rgba(86, 61, 124, .2);#}
+        }
+
+        .hid {
+            display: none;
         }
     </style>
     {% block css %} {% endblock %}
@@ -58,18 +64,23 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
+
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
+
             <a class="nav-link" href="/process/">
                 <i class="fas fa fa-id-card"></i>
                 <span>护照办理</span></a>
         </li>
+
+
         <li class="nav-item">
-            <a class="nav-link" href="/trainticket/">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa fa-subway"></i>
                 <span>火车票办理</span>
             </a>
-            <div id="collapseUtilities" class="collapse show" aria-labelledby="headingUtilities"
+            <div id="collapsePages" class="collapse {{ show }}" aria-labelledby="headingPages"
                  data-parent="#accordionSidebar" style="">
                 <div class="bg-white py-2 collapse-inner rounded">
                     {#                    <h6 class="collapse-header">Custom Utilities:</h6>#}
@@ -379,7 +390,30 @@
 <script src="/static/js/demo/chart-area-demo.js"></script>
 <script src="/static/js/demo/chart-pie-demo.js"></script>
 <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap-datepicker.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/static/js/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
 <script type="text/javascript">
+
+
+    //$("input[type='file']").each(function () {
+    //   let that = this;
+    //    $(that).attr("onchange", "changepic(this)")
+    //});
+
+
+    $(function () {
+        $(".datepicker").datepicker({
+            language: "zh-CN",
+            autoclose: true,//选中之后自动隐藏日期选择框
+            //clearBtn: true,//清除按钮
+            //todayBtn: true,//今日按钮
+            //format: "yyyy-mm-dd"//日期格式，详见 http://bootstrap-datepicker.readthedocs.org/en/release/options.html#format
+            format: "dd/mm/yyyy",
+            timeFormat: 'HH:mm:ss',//时间显示格式
+            minView: 0,
+            minuteStep: 1
+        });
+    });
     // 激活菜单
     $(".nav-link").each(function () {
         if (window.location.pathname == $(this).attr("href")) {
