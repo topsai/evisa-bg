@@ -648,7 +648,7 @@ def getIDCard():
     area_code = int(list(sorted(area_dict.keys()))[rad])
     day = (time.strftime("%d"))
     # 年龄(85-90)
-    ageArg = random.randint(85, 90)
+    ageArg = random.randint(26, 40)
     print(ageArg, "岁")
     # area_code = (area_dict.keys()
     id_number = getAutoSGZHM(area_code, ageArg)
