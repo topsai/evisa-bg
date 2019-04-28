@@ -6,9 +6,18 @@
 </head>
 <body>
 <script src="/static/js/sheetjs/xlsx.full.min.js"></script>
+<script src='/static/js/nprogress.js'></script>
+<link rel='stylesheet' href='/static/css/nprogress.css'/>
 <input type="file" onchange="importf(this)"/>
 <div id="demo"></div>
 <script>
+    $(document).on('turbolinks:click', function () {
+        NProgress.start();
+    });
+    $(document).on('turbolinks:render', function () {
+        NProgress.done();
+        NProgress.remove();
+    });
     /*
     FileReader共有4种读取方法：
     1.readAsArrayBuffer(file)：将文件读取为ArrayBuffer。

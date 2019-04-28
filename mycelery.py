@@ -133,7 +133,7 @@ def login():
     # 隐藏滚动条, 应对一些特殊页面
     chrome_options.add_argument('--hide-scrollbars')
     # 不加载图片, 提升速度
-    # chrome_options.add_argument('blink-settings=imagesEnabled=false')
+    chrome_options.add_argument('blink-settings=imagesEnabled=false')
     # 浏览器不提供可视化页面. linux下如果系统不支持可视化不加这条会启动失败
     # chrome_options.add_argument('--headless')
     # chrome_options.binary_location = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
@@ -148,12 +148,14 @@ def login():
     WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.ID, 'showName')))
     uname = driver.find_element_by_id("showName").text
     ###
-    driver.find_elements_by_class_name()
+    # driver.find_elements_by_class_name()
     ###
     if uname == "范斯特罗夫斯基":
         print("登陆成功")
-        return "ok"
-    return "err"
+        print("ok")
+    else:
+        print("err")
+    return driver
     # WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.CLASS_NAME, 'member-id')))
     # uname = driver.find_element_by_class_name("member-id").text
     # print(uname)
@@ -163,16 +165,27 @@ def login():
     # return "err"
 
 
-def tongcheng(driver, name, id_card, fromstation, tostation, train, seat, starttime, phone):
+driv = login()
+
+
+# name, id_card, train, seat, starttime, phone
+def tongcheng(driver, fromstation, tostation, ):
     url = "https://www.ly.com/huochepiao/"
+    driver.get(url)
     # 出发站
-    driver.find_element_by_id("txtLeaveCity").send_keys(fromstation)
+    driver.execute_script('document.getElementById("txtLeaveCity").value ="{}"'.format(fromstation))
+    # driver.find_element_by_id("txtLeaveCity").send_keys(fromstation)
     # 到达站
-    driver.find_element_by_id("txtArriveCity").send_keys(tostation)
+    driver.execute_script('document.getElementById("txtArriveCity").value ="{}"'.format(tostation))
+    # driver.find_element_by_id("txtArriveCity").send_keys(tostation)
+    # driver.execute_script('document.getElementsByClassName("calendar-panel")[0].style.display="none"')
+    # 关闭所有弹出框
+    driver.find_element_by_id("seach_title").click()
     # 搜索
     driver.find_element_by_id("trainSearchSubmit").click()
+    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.CLASS_NAME, 'list_item')))
     # 定位车次
-    train_info = driver.find_element_by_xpath("//*[text()='T298']/../..")
+    train_info = driver.find_element_by_xpath("//*[text()='2601']/../..")
     train_info = train_info.find_elements_by_tag_name("td")
     # 车次
     # train_info[0].text
@@ -214,6 +227,7 @@ def tongcheng(driver, name, id_card, fromstation, tostation, train, seat, startt
         ticket_dict.update(dic)
         i += 1
     print(ticket_dict)
+    return ticket_dict, driver
 
     # for i in train_info:
     #     print(i)
@@ -221,6 +235,21 @@ def tongcheng(driver, name, id_card, fromstation, tostation, train, seat, startt
     # 余票
 
 
+ticket_dict, dri = tongcheng(driv, "北京", "天津")
+
+
+def buy_ticket(seat, data, driver):
+    price, balance, btn = data.get(seat)
+    print(seat, price, balance)
+    btn.click()
+    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.CLASS_NAME, 'nameValue')))
+    driver.find_element_by_class_name("nameValue").send_keys("xingming")
+    driver.find_element_by_class_name("cardNoValue").send_keys("130102199105139235")
+    driver.find_element_by_class_name("phoneNum").send_keys("18612345678")
+    driver.find_element_by_class_name("post_order_btn").click()
+
+
+buy_ticket("硬卧", ticket_dict, dri)
 from celery import Celery
 
 app = Celery('hello', broker='redis://10.0.0.14', backend='redis://10.0.0.14')
