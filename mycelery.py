@@ -165,7 +165,7 @@ def login():
     # return "err"
 
 
-driv = login()
+# driv = login()
 
 
 # name, id_card, train, seat, starttime, phone
@@ -235,7 +235,7 @@ def tongcheng(driver, fromstation, tostation, ):
     # 余票
 
 
-ticket_dict, dri = tongcheng(driv, "北京", "天津")
+# ticket_dict, dri = tongcheng(driv, "北京", "天津")
 
 
 def buy_ticket(seat, data, driver):
@@ -249,7 +249,7 @@ def buy_ticket(seat, data, driver):
     driver.find_element_by_class_name("post_order_btn").click()
 
 
-buy_ticket("硬卧", ticket_dict, dri)
+# buy_ticket("硬卧", ticket_dict, dri)
 from celery import Celery
 
 app = Celery('hello', broker='redis://10.0.0.14', backend='redis://10.0.0.14')
