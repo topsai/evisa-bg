@@ -316,7 +316,7 @@ def upload(request):
 
 def ttt(request):
     if request.method == "GET":
-        data = models.OrderList()
+        data = models.TrainUserInfoFormSet(queryset=models.TrainUserInfo.objects.none())
         return render(request, "test.html", {"data": data})
 
 
@@ -424,46 +424,111 @@ def buy_ticket(train, fromstation, tostation, seat, starttime, name, id_card, ph
     ret.save()
 
 
-def trainticket_team(request):
-    if request.method == "POST":
-        info = json.loads(request.POST.get('info'))
-        ret_list = []
-        for i in info:
-            print(i)
-            name = i.get("姓名")
-            id_card = i.get("身份证号")
-            fromstation = i.get("出发站")
-            tostation = i.get("到达站")
-            train = i.get("车次")
-            seat = i.get("座次")
-            starttime = i.get("乘车日期").replace('/', '')
-            phone = i.get("联系电话")
-            user_info = {
-                "name": name,
-                "id_card": id_card,
-                "fromstation": fromstation,
-                "tostation": tostation,
-                "train": train,
-                "seat": seat,
-                "starttime": starttime,
-                "phone": phone,
-                "state": 0,
-                'order_id': '{0:%Y%M%d%H%M%S%f}'.format(datetime.datetime.now()) + ''.join(
-                    [str(random.randint(0, 9)) for i in range(9)])
-            }
-            obj = models.TrainUserInfoModelForm(user_info)
-            if obj.is_valid():
-                ret = obj.save()
-                print(ret)
-                print("买票")
-                # buy_ticket(train, fromstation, tostation, seat, starttime, name, id_card, phone, ret)
+# 身份证计算所需list
+id_code_list = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
+check_code_list = [1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2]
 
-            else:
-                print(obj.errors)
-            # 买票
-            # ticket(name, id_card, fromstation, tostation, train, seat, starttime, phone)
+
+# 字符串转为时间
+# date_string = "2016-11-30 13:53:59"
+# print(time.strptime(date_string, "%Y-%m-%d %H:%M:%S"))
+
+
+def trainticket_team(request):
+    if request.method == "GET":
+        # data = models.TrainUserInfoFormSet(models.TrainUserInfo.objects.none())
+        return render(request, 'sb2/trainticket_team.html', {'show': "show"})
+
+    if request.method == "POST":
+        # info = json.loads(request.POST.get('info'))
+        # 订单号
+        train_order_id = 'yidian' + '{0:%Y%M%d%H%M%S%f}'.format(datetime.datetime.now()) + ''.join(
+            [str(random.randint(0, 9)) for i in range(9)])
+        # all_info = []
+        # ret_list = []
+        # 验证信息合法性
+        # for i in info:
+        #     print(i)
+        #     name = i.get("姓名")
+        #     id_card = i.get("身份证号")
+        #     fromstation = i.get("出发站")
+        #     tostation = i.get("到达站")
+        #     train = i.get("车次")
+        #     seat = i.get("座次")
+        #     try:
+        #         time.strptime(i.get("乘车日期"), "%Y/%m/%d")
+        #         starttime = i.get("乘车日期").replace('/', '')
+        #         phone = i.get("联系电话")
+        #         order_id = '{0:%Y%M%d%H%M%S%f}'.format(datetime.datetime.now()) + ''.join(
+        #             [str(random.randint(0, 9)) for i in range(9)])
+        #         # 检测身份证是否合法
+        #         result = id_card[:-1]
+        #         idcard = result + str(
+        #             check_code_list[sum([a * b for a, b in zip(id_code_list, [int(a) for a in result])]) % 11])
+        #         if len(id_card) != 18 or not isinstance(id_card, str) or id_card != idcard:
+        #             raise Exception("身份证格式不正确")
+        #         if not name: raise Exception("没有名字")
+        #         if not id_card: raise Exception("没有身份证")
+        #         if not fromstation: raise Exception("没有始发站")
+        #         if not tostation: raise Exception("没有终点站")
+        #         if not train: raise Exception("没有车次")
+        #         if not seat: raise Exception("没有座次")
+        #         if not starttime: raise Exception("没有出发日期")
+        #         if not phone: raise Exception("没有联系方式")
+        #         user_info = {
+        #             "name": name,
+        #             "id_card": id_card,
+        #             "fromstation": fromstation,
+        #             "tostation": tostation,
+        #             "train": train,
+        #             "seat": seat,
+        #             "starttime": starttime,
+        #             "phone": phone,
+        #             "state": 0,
+        #             'order_id': order_id
+        #         }
+        #         all_info.append(user_info)
+        #     except Exception as e:
+        #         print(str(e))
+        #         return HttpResponse("{},{},{}".format(name, id_card, str(e)))
+        # print(all_info)
+
+        # print(request.POST.get("form-TOTAL_FORMS"))
+
+        data = models.TrainUserInfoFormSet(request.POST)
+        # data.order_id = train_order_id
+        if data.is_valid():
+            a = data.save()
+            user_info_list = []
+            for i in a:
+                user_info_list.append(
+                    models.TrainOrderId(train_order_id=train_order_id, user_info=i)
+                )
+            ret = models.TrainOrderId.objects.bulk_create(user_info_list)
+            print("ok", a, ret)
+            # TODO 这里应该调用celery异步执行任务
+            return HttpResponse(train_order_id)
+        else:
+            print(data.errors)
+            return render(request, 'sb2/trainticket_team.html', {'show': "show", 'obj': data.errors})
+        # BlogList = [Blog(title=line.split('****')[0], content=line.split('****')[1]) for line in f]
+        #
+        # Blog.objects.bulk_create(BlogList)
+        # 信息验证成功 返回订单号
+
+        # obj = models.TrainUserInfoModelForm(user_info)
+        # if obj.is_valid():
+        #     ret = obj.save()
+        #     print(ret)
+        #     print("买票")
+        #     # buy_ticket(train, fromstation, tostation, seat, starttime, name, id_card, phone, ret)
+        #
+        # else:
+        #     print(obj.errors)
+        # 买票
+        # ticket(name, id_card, fromstation, tostation, train, seat, starttime, phone)
         # {'': '王雪', '': '110526198512041000', '': '北京', '': '上海', '': 'G129', '': '二等座', '': '2019/06/01'}
-    return render(request, 'sb2/trainticket_team.html', {'show': "show"})
+    # return render(request, 'sb2/trainticket_team.html', {'show': "show"})
 
 
 def trainticket_refund(request):

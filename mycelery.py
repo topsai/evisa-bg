@@ -116,8 +116,14 @@ xiecheng_cookies = [
     {'domain': '.ly.com', 'httpOnly': False, 'name': '__tctmd', 'path': '/', 'secure': False,
      'value': '144323752.737325'}]
 
+# url 解码
+from urllib.parse import unquote
+
+# text = unquote(text, 'utf-8')
+
 
 def login():
+    # 登陆
     # qunaer
     # url = "https://my.ctrip.com/home/myinfo.aspx"
     # 同程
@@ -141,6 +147,16 @@ def login():
     driver = webdriver.Chrome(chrome_options=chrome_options)
 
     driver.get(url)
+    ret = {"driver": driver, "state": None}
+    uname = driver.find_element_by_id("showName").text
+    if uname == "范斯特罗夫斯基":
+        print("登陆未失效")
+        ret["state"] = "login_ok"
+        return ret
+    else:
+        print("登陆失效")
+        print("继续登陆")
+
     driver.delete_all_cookies()
     for i in xiecheng_cookies:
         driver.add_cookie(i)
@@ -152,10 +168,12 @@ def login():
     ###
     if uname == "范斯特罗夫斯基":
         print("登陆成功")
+        ret["state"] = "login_ok"
         print("ok")
     else:
         print("err")
-    return driver
+        ret["state"] = "login_err"
+    return ret
     # WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.CLASS_NAME, 'member-id')))
     # uname = driver.find_element_by_class_name("member-id").text
     # print(uname)
@@ -170,6 +188,7 @@ def login():
 
 # name, id_card, train, seat, starttime, phone
 def tongcheng(driver, fromstation, tostation, ):
+    # 查询余票及价格
     url = "https://www.ly.com/huochepiao/"
     driver.get(url)
     # 出发站
@@ -257,6 +276,7 @@ app = Celery('hello', broker='redis://10.0.0.14', backend='redis://10.0.0.14')
 
 @app.task
 def hello():
+    # {"driver": driver, "state": None}
     ret = login()
     return ret
 

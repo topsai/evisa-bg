@@ -69,7 +69,7 @@ class OrderInfo(models.Model):
     airimg1 = models.CharField(max_length=256)
     airimg2 = models.CharField(max_length=256)
     hotelimg = models.CharField(max_length=256)
-    userdata = models.ForeignKey("UserData", on_delete=True)
+    userdata = models.ForeignKey("UserData", on_delete=models.CASCADE)
 
 
 class UserData(models.Model):
@@ -207,6 +207,11 @@ train_state_choise = (
 )
 
 
+class TrainOrderId(models.Model):
+    train_order_id = models.CharField(max_length=256)
+    user_info = models.ForeignKey("TrainUserInfo", on_delete=models.CASCADE)
+
+
 class TrainUserInfo(models.Model):
     time = models.TimeField(auto_now_add=True)
     # 身份证号
@@ -226,7 +231,7 @@ class TrainUserInfo(models.Model):
     # 联系电话
     phone = models.CharField(max_length=18)
     # 我自定义的id
-    order_id = models.CharField(max_length=256)
+    order_id = models.AutoField(primary_key=True)
     # qunaer id
     qunaer_id = models.CharField(max_length=256, blank=True)
     # 12306 id
@@ -240,6 +245,47 @@ class TrainUserInfo(models.Model):
 class TrainUserInfoModelForm(ModelForm):
     class Meta:
         model = TrainUserInfo
+        fields = "__all__"
+        help_texts = None
+        exclude = ['order_id', 'qunaer_id', 'real_id', 'state', 'price']
+        error_messages = {}
+        labels = {
+            "id_card": "身份证号",
+            "name": "姓名",
+            "fromstation": "出发站",
+            "tostation": "到达站",
+            "train": "车次",
+            "seat": "座次",
+            "starttime": "乘车日期",
+            "phone": "联系电话",
+            "order_id": "我自定义的id",
+            "车次": "train",
+        }
+        widgets = {
+            "id_card": wid.TextInput(),
+            "name": wid.TextInput(),
+            "fromstation": wid.TextInput(),
+            "tostation": wid.TextInput(),
+            "train": wid.TextInput(),
+            "seat": wid.TextInput(),
+            "starttime": wid.TextInput(),
+            "phone": wid.TextInput(),
+            "order_id": wid.TextInput(),
+            "车次": wid.TextInput(),
+        }
+
+
+from django.forms import modelformset_factory
+
+TrainUserInfoFormSet = modelformset_factory(
+    TrainUserInfo,
+    form=TrainUserInfoModelForm,
+)
+
+
+class TrainOrderIdModelForm(ModelForm):
+    class Meta:
+        model = TrainOrderId
         fields = "__all__"
         help_texts = None
         exclude = []

@@ -48,237 +48,148 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">批量购票</h1>
         <p class="mb-4"></p>
-
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                {#                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>#}
-            </div>
-
-            <div style="background: #f6f6f6; width: 100%; padding:30px; border-bottom: 1px solid #ccc;">
-                <div class="row col-center">
-                    <div class="col-1"></div>
-                    <div class="col-4">
-                        <label for="upload" class="btn btn-success btn-lg btn-block"
-                               onclick="label_click(this)">上传</label>
-                        <input id="upload" style="display: none" type="file" class="btn btn-success btn-lg btn-block"
-                               onchange="resolve_excel(this)"
-                               accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-                        {#                        <button class="btn btn-success btn-lg btn-block">上传</button>#}
-                    </div>
-                    <div class="col-2"></div>
-                    <div class="col-4">
-                        <button class="btn btn-success btn-lg btn-block" onclick="buy_trick(1)">开始购票
-                        </button>
-                    </div>
+        <form method="post" action="/trainticket_team/">
+            <input type="hidden" name="form-TOTAL_FORMS" value="1" id="id_form-TOTAL_FORMS">
+            <input type="hidden" name="form-INITIAL_FORMS" value="0" id="id_form-INITIAL_FORMS">
+            <input type="hidden" name="form-MIN_NUM_FORMS" value="0" id="id_form-MIN_NUM_FORMS">
+            <input type="hidden" name="form-MAX_NUM_FORMS" value="1000">
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    {#                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>#}
                 </div>
-                <br>
-                <div class="row">
-                    <div class="col-1">
-                    </div>
-                    <div class="col-10">
-                        支持文件类型：xls、xlsx ，文件内容请按照格式填写，文件格式请见<a href="#">示例</a>。
-                    </div>
-                </div>
-                <!-- Progress Small -->
-                <div class="card mb-4 hid">
-                    <div class="card-body">
-                        <div class="mb-1 small">购票进度</div>
-                        <div class="progress mb-4">
-                            <div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95"
-                                 aria-valuemin="0" aria-valuemax="100"></div>
+
+                <div style="background: #f6f6f6; width: 100%; padding:30px; border-bottom: 1px solid #ccc;">
+                    <div class="row col-center">
+                        <div class="col-1"></div>
+                        <div class="col-4">
+                            <label for="upload" class="btn btn-success btn-lg btn-block"
+                                   onclick="label_click(this)">上传</label>
+                            <input id="upload" style="display: none" type="file"
+                                   class="btn btn-success btn-lg btn-block"
+                                   onchange="resolve_excel(this)"
+                                   accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                            {#                        <button class="btn btn-success btn-lg btn-block">上传</button>#}
                         </div>
-
+                        <div class="col-2"></div>
+                        <div class="col-4">
+                            <button class="btn btn-success btn-lg btn-block" onclick="submit()">开始购票
+                            </button>
+                        </div>
                     </div>
-                </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-1">
+                        </div>
+                        <div class="col-10">
+                            支持文件类型：xls、xlsx ，文件内容请按照格式填写，文件格式请见<a href="#">示例</a>。<br>
 
-            </div>
-
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4" style="margin: 0 auto;">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
-                                       cellspacing="0" role="grid" aria-describedby="dataTable_info"
-                                       style="width: 100%;">
-                                    <thead>
-                                    <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                            colspan="1" aria-sort="ascending"
-                                            aria-label="Name: activate to sort column descending" style="width: 120px;">
-                                            姓名
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                            colspan="1" aria-label="Position: activate to sort column ascending"
-                                            style="width: 120px;">出发地
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                            colspan="1" aria-label="Office: activate to sort column ascending"
-                                            style="width: 120px;">到达地
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                            colspan="1" aria-label="Age: activate to sort column ascending"
-                                            style="width: 55px;">日期
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                            colspan="1" aria-label="Age: activate to sort column ascending"
-                                            style="width: 55px;">车次
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                            colspan="1" aria-label="Start date: activate to sort column ascending"
-                                            style="width: 114px;">出票状态
-                                        </th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                            colspan="1" aria-label="Start date: activate to sort column ascending"
-                                            style="width: 114px;">座位类型
-                                        </th>
-                                        {#                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"#}
-                                        {#                                            colspan="1" aria-label="Salary: activate to sort column ascending"#}
-                                        {#                                            style="width: 104px;">票价（元）#}
-                                        {#                                        </th>#}
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                            colspan="1" aria-label="Salary: activate to sort column ascending"
-                                            style="width: 104px;">出票状态
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <!--
-                                    <tr>
-                                        <th rowspan="1" colspan="1">姓名</th>
-                                        <th rowspan="1" colspan="1">出发地</th>
-                                        <th rowspan="1" colspan="1">到达地</th>
-                                        <th rowspan="1" colspan="1">日期</th>
-                                        <th rowspan="1" colspan="1">出票状态</th>
-                                        <th rowspan="1" colspan="1">Salary</th>
-                                    </tr>
-                                    -->
-                                    </tfoot>
-                                    <tbody>
-
-                                    <!--
-                                                                        <tr role="row">
-                                                                            <td class="sorting_1">于学忠</td>
-                                                                            <td>北京</td>
-                                                                            <td>合肥</td>
-                                                                            <td>2019/6/28</td>
-                                                                            <td>G23</td>
-                                                                            <td>待处理</td>
-                                                                            <td>二等座</td>
-                                                                            <td>¥436.0</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">陈明</td>
-                                                                            <td>上海</td>
-                                                                            <td>青岛</td>
-                                                                            <td>2019/6/09</td>
-                                                                            <td>G226</td>
-                                                                            <td>待处理</td>
-                                                                            <td>二等座</td>
-                                                                            <td>¥518.0</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">李厚福</td>
-                                                                            <td>深圳</td>
-                                                                            <td>济南</td>
-                                                                            <td>2019/6/12</td>
-                                                                            <td>G280</td>
-                                                                            <td>待处理</td>
-                                                                            <td>二等座</td>
-                                                                            <td>¥975.5</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">唐杰</td>
-                                                                            <td>上海</td>
-                                                                            <td>郑州</td>
-                                                                            <td>2019/6/13</td>
-                                                                            <td>G1810</td>
-                                                                            <td>待处理</td>
-                                                                            <td>二等座</td>
-                                                                            <td>¥453.0</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">张志远</td>
-                                                                            <td>北京</td>
-                                                                            <td>深圳</td>
-                                                                            <td>2019/6/07</td>
-                                                                            <td>G79</td>
-                                                                            <td>已出票</td>
-                                                                            <td>二等座</td>
-                                                                            <td>¥936.5</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">刘洁</td>
-                                                                            <td>北京</td>
-                                                                            <td>西安</td>
-                                                                            <td>2019/6/02</td>
-                                                                            <td>G673</td>
-                                                                            <td>待处理</td>
-                                                                            <td>二等座</td>
-                                                                            <td>¥515.5</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">王海</td>
-                                                                            <td>上海</td>
-                                                                            <td>南京</td>
-                                                                            <td>2019/6/03</td>
-                                                                            <td>G126</td>
-                                                                            <td>待处理</td>
-                                                                            <td>二等座</td>
-                                                                            <td>¥134.5</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">孙宇峰</td>
-                                                                            <td>北京</td>
-                                                                            <td>苏州</td>
-                                                                            <td>2019/6/12</td>
-                                                                            <td>G141</td>
-                                                                            <td>已出票</td>
-                                                                            <td>二等座</td>
-                                                                            <td>¥523.5</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="odd">
-                                                                            <td class="sorting_1">刘明</td>
-                                                                            <td>北京</td>
-                                                                            <td>香港</td>
-                                                                            <td>2019/6/06</td>
-                                                                            <td>G79</td>
-                                                                            <td>已出票</td>
-                                                                            <td>二等座</td>
-                                                                            <td>¥1107</td>
-                                                                        </tr>
-                                                                        <tr role="row" class="even">
-                                                                            <td class="sorting_1">高洁</td>
-                                                                            <td>北京</td>
-                                                                            <td>杭州</td>
-                                                                            <td>2019/6/29</td>
-                                                                            <td>G39</td>
-                                                                            <td>已出票</td>
-                                                                            <td>二等座</td>
-                                                                            <td>¥538.5</td>
-                                                                        </tr>
-                                                                        -->
-                                    </tbody>
-                                </table>
+                        </div>
+                    </div>
+                    <!-- Progress Small -->
+                    <div class="card mb-4 hid">
+                        <div class="card-body">
+                            <div class="mb-1 small">购票进度</div>
+                            <div class="progress mb-4">
+                                <div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95"
+                                     aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            {#                            <div class="col-1 myborder">姓名</div>#}
-                            {#                            <div class="col-1 myborder">出发地</div>#}
-                            {#                            <div class="col-1 myborder">到达地</div>#}
-                            {#                            <div class="col-1 myborder">日期</div>#}
-                            {#                            <div class="col-1 myborder">车次</div>#}
-                            {#                            <div class="col-1 myborder">出票状态</div>#}
-                            {#                            <div class="col-1 myborder">座位类型</div>#}
-                            {#                            <div class="col-1 myborder">票价/元</div>#}
-                            {#                            <div class="col-1 myborder">出票状态</div>#}
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4" style="margin: 0 auto;">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered dataTable text-center" id="dataTable"
+                                           width="100%"
+                                           cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                           style="width: 100%;">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending"
+                                                style="width: 80px;">
+                                                姓名
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Position: activate to sort column ascending"
+                                                style="width: 80px;">出发地
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Office: activate to sort column ascending"
+                                                style="width: 80px;">到达地
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Age: activate to sort column ascending"
+                                                style="width: 120px;">日期
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Age: activate to sort column ascending"
+                                                style="width: 55px;">车次
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Start date: activate to sort column ascending"
+                                                style="width: 55px;">状态
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Start date: activate to sort column ascending"
+                                                style="width: 55px;">座次
+                                            </th>
+                                            {#                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"#}
+                                            {#                                            colspan="1" aria-label="Salary: activate to sort column ascending"#}
+                                            {#                                            style="width: 104px;">票价（元）#}
+                                            {#                                        </th>#}
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Salary: activate to sort column ascending"
+                                                style="width: 55px;">状态
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        </tfoot>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+                                <!--
+                                <div class="col-12">
+
+                                    <input type="hidden" name="form-TOTAL_FORMS" value="1" id="id_form-TOTAL_FORMS">
+                                    <input type="hidden" name="form-INITIAL_FORMS" value="0" id="id_form-INITIAL_FORMS">
+                                    <input type="hidden" name="form-MIN_NUM_FORMS" value="0" id="id_form-MIN_NUM_FORMS">
+                                    <input type="hidden" name="form-MAX_NUM_FORMS" value="1000"
+                                           id="id_form-MAX_NUM_FORMS">
+                                    <input type="text" name="form-0-id_card" class="col-1 form-control d-inline">
+                                    <input type="text" name="form-0-name" class="col-1 form-control d-inline">
+                                    <input type="text" name="form-0-fromstation" class="col-1 form-control d-inline">
+                                    <input type="text" name="form-0-tostation" class="col-1 form-control d-inline">
+                                    <input type="text" name="form-0-train" class="col-1 form-control d-inline">
+                                    <input type="text" name="form-0-seat" class="col-1 form-control d-inline">
+                                    <input type="text" name="form-0-starttime" class="col-1 form-control d-inline">
+                                    <input type="text" name="form-0-phone" class="col-1 form-control d-inline">
+                                    <input type="hidden" name="form-0-id" id="id_form-0-id">
+
+                                </div>
+                                -->
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
 
     </div>
+    {{ data }}
     <!-- /.container-fluid -->
 {% endblock %}
 {% block js %}
@@ -366,6 +277,7 @@
                 data_json = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
                 // 清空当前表格
                 $("#dataTable tr:gt(0)").remove();
+                $("#id_form-TOTAL_FORMS").val(data_json.length);
 
                 for (let i in data_json) {
                     let name = data_json[i]["姓名"];
@@ -374,17 +286,21 @@
                     let date = data_json[i]["乘车日期"];
                     let train_number = data_json[i]["车次"];
                     let seat_number = data_json[i]["座次"];
+                    let phone = data_json[i]["联系电话"];
+                    let id_card = data_json[i]["身份证号"];
                     // 校验数据是否正确
                     if (name && departure_station && arrival_station && date && train_number && seat_number) {
                         $("#dataTable").append(
-                            "<tr role=\"row\" class=\"odd\">\n" +
-                            "<td class=\"sorting_1\">" + name + "</td>\n" +
-                            "<td>" + departure_station + "</td>\n" +
-                            "<td>" + arrival_station + "</td>\n" +
-                            "<td>" + date + "</td>\n" +
-                            "<td>" + train_number + "</td>\n" +
+                            "<tr role='row' class='odd'>\n" +
+                            "<td><input  class='form-control d-inline' type='text' name='form-" + i + "-name' value=" + name + "></td>\n" +
+                            "<td><input class='form-control d-inline' type='text' name='form-" + i + "-fromstation' value=" + departure_station + "></td>\n" +
+                            "<td><input class='form-control d-inline' type='text' name='form-" + i + "-tostation' value=" + arrival_station + "></td>\n" +
+                            "<td><input class='form-control d-inline' type='text'  name='form-" + i + "-starttime' value=" + date + "></td>\n" +
+                            "<td><input class='form-control d-inline' type='text' name='form-" + i + "-train' value=" + train_number + "></td>\n" +
                             "<td>已出票</td>\n" +
-                            "<td>" + seat_number + "</td>\n" +
+                            "<td><input class='form-control d-inline' type='text' name='form-" + i + "-seat' value=" + seat_number + "></td>\n" +
+                            "<td class='hid'><input class='form-control d-inline hid' type='text' name='form-" + i + "-phone' value=" + phone + "></td>\n" +
+                            "<td class='hid'><input class='form-control d-inline hid' type='text' name='form-" + i + "-id_card' value=" + id_card + "></td>\n" +
                             //"<td>¥1107</td>\n" +
                             "<td class='icon_state'><i class='fa fa-spinner'></i></td>\n" +
                             "</tr>"
@@ -434,7 +350,8 @@
                     code: code
                 },
                 success: function (data) {
-                    console.log($.parseJSON(data))
+                    console.log(data);
+                    alert(data);
                 }
             });
         }
