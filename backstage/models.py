@@ -208,6 +208,8 @@ train_state_choise = (
 
 
 class TrainOrderId(models.Model):
+    # 订单创建时间
+    time = models.TimeField(auto_now_add=True)
     train_order_id = models.CharField(max_length=256)
     user_info = models.ForeignKey("TrainUserInfo", on_delete=models.CASCADE)
 

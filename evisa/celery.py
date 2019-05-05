@@ -30,4 +30,6 @@ def debug_task(self):
 
 @app.task(bind=True)
 def add1(self):
+    print("aaa")
     print('Request: {0!r}'.format(self.request))
+    return 1

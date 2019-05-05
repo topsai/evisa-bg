@@ -18,6 +18,10 @@ import os
 CELERY_BROKER_URL = 'redis://127.0.0.1'
 CELERY_RESULT_BACKEND = "redis://127.0.0.1"
 
+from celery import current_app
+current_app.conf.CELERY_ALWAYS_EAGER = True
+current_app.conf.CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
+
 #: Only add pickle to this list if your broker is secured
 #: from unwanted access (see userguide/security.html)
 # CELERY_ACCEPT_CONTENT = ['json']
