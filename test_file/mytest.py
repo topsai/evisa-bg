@@ -10,7 +10,7 @@ url = "http://cn.evisathailand.com/ft"
 # driver.get(url)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 print(BASE_DIR)
-jquery = open(os.path.join(BASE_DIR, "static/vendor/jquery/jquery.js"), "r").read()
+jquery = open(os.path.join(BASE_DIR, "static/vendor/jquery/../static/vendor/jquery/jquery.js"), "r").read()
 
 driver.execute_script(jquery)
 request_type = "post"

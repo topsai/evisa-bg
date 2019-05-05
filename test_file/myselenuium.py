@@ -39,8 +39,8 @@ time.sleep(1)
 
 # 上传图片
 file = driver.find_element_by_name("passportphoto[]")
-f1 = os.path.join(BASE_DIR, "id.jpg")
-f2 = os.path.join(BASE_DIR, "pass.jpg")
+f1 = os.path.join(BASE_DIR, "test_file/id.jpg")
+f2 = os.path.join(BASE_DIR, "test_file/pass.jpg")
 files = """{}
 {}""".format(f1, f2)
 file.send_keys(files)

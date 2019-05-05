@@ -12,6 +12,25 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
+# import djcelery
+# djcelery.setup_loader()
+
+CELERY_BROKER_URL = 'redis://127.0.0.1'
+CELERY_RESULT_BACKEND = "redis://127.0.0.1"
+
+#: Only add pickle to this list if your broker is secured
+#: from unwanted access (see userguide/security.html)
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_RESULT_BACKEND = 'db+sqlite:///results.sqlite'
+# CELERY_TASK_SERIALIZER = 'json'
+#
+# BROKER_URL = "redis://127.0.0.1"
+# BROKER = "redis://127.0.0.1"
+# CELERY_RESULT_BACKEND = "redis://127.0.0.1"
+# # broker='amqp://'
+# # backend='amqp://'
+# BACKEND = "redis://127.0.0.1"
+# C_FORCE_ROOT='true'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 图片储存位置
@@ -27,7 +46,6 @@ SECRET_KEY = '!fv^61a$qdmwbv&ka87q1(9&s8f2jq)5x8f8lz%smlq$1d!pmf'
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -72,7 +90,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'evisa.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -82,7 +99,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -102,7 +118,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -115,7 +130,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

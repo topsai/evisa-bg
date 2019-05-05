@@ -314,7 +314,13 @@ def upload(request):
     return HttpResponse(json.dumps(data))
 
 
+from backstage.tasks import add
+from evisa.celery import add1
+
+
 def ttt(request):
+    res = add1.delay()
+    print(res.state)
     if request.method == "GET":
         data = models.TrainUserInfoFormSet(queryset=models.TrainUserInfo.objects.none())
         return render(request, "test.html", {"data": data})

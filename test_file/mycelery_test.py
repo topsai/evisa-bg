@@ -5,8 +5,8 @@
 # Date: 2019/4/28
 
 from celery import Celery
-import time
-import mycelery
+from test_file import mycelery
+
 app = Celery('hello', broker="redis://192.168.89.128", backend="redis://192.168.89.128")
 
 

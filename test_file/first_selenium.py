@@ -173,7 +173,7 @@ driver.find_element_by_name("residential_address").send_keys("residential_addres
 # 上传图片
 file = driver.find_element_by_name("passportphoto[]")
 f1 = os.path.join(BASE_DIR, "id.jpg")
-f2 = os.path.join(BASE_DIR, "pass.jpg")
+f2 = os.path.join(BASE_DIR, "test_file/pass.jpg")
 files = """{}
 {}""".format(f1, f2)
 file.send_keys(files)
