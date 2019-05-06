@@ -28,8 +28,12 @@ def debug_task(self):
     print('Request: {0!r}'.format(self.request))
 
 
+import time
+
+
 @app.task(bind=True)
 def add1(self):
     print("aaa")
+    time.sleep(5)
     print('Request: {0!r}'.format(self.request))
-    return 1
+    return "okok"

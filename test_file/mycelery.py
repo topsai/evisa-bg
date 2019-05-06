@@ -270,16 +270,16 @@ def buy_ticket(seat, data, driver):
 
 
 # buy_ticket("硬卧", ticket_dict, dri)
-from celery import Celery
-
-app = Celery('hello', broker='redis://10.0.0.14', backend='redis://10.0.0.14')
-
-
-@app.task
-def hello():
-    # {"driver": driver, "state": None}
-    ret = login()
-    return ret
+# from celery import Celery
+#
+# app = Celery('hello', broker='redis://10.0.0.14', backend='redis://10.0.0.14')
+#
+#
+# @app.task
+# def hello():
+#     # {"driver": driver, "state": None}
+#     ret = login()
+#     return ret
 
 
 "https://www.ly.com/huochepiao/Pages/Order.aspx?trainType=Z&TrainNo=Z157&SeatType=hardseat&FromCity=%E5%8C%97%E4%BA%AC&ToCity=%E9%95%BF%E6%98%A5"
