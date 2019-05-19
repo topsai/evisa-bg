@@ -126,7 +126,8 @@
         label {
             margin-top: 0.5rem;
         }
-        .errorlist{
+
+        .errorlist {
             font-size: 0.5rem;
             color: red;
             float: right;
@@ -328,6 +329,77 @@
                         <div class="row">
                             <!-- Grow In Utility -->
                             <div class="col-lg-12">
+
+                                <div class="card position-relative">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">确认个人信息</h6>
+                                    </div>
+                                    <div class="card-body row">
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.last_name.label_tag }}
+                                            {{ obj.last_name }}
+                                            {{ obj.last_name.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.first_name.label_tag }}
+                                            {{ obj.first_name }}
+                                            {{ obj.first_name.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.salutation.label_tag }}
+                                            {{ obj.salutation }}
+                                            {{ obj.salutation.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.gender.label_tag }}
+                                            {{ obj.gender }}
+                                            {{ obj.gender.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.birth_date.label_tag }}
+                                            {{ obj.birth_date }}
+                                            {{ obj.birth_date.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.nationality.label_tag }}
+                                            {{ obj.nationality }}
+                                            {{ obj.nationality.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.passport_number.label_tag }}
+                                            {{ obj.passport_number }}
+                                            {{ obj.passport_number.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.passport_type.label_tag }}
+                                            {{ obj.passport_type }}
+                                            {{ obj.passport_type.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.passport_issue.label_tag }}
+                                            {{ obj.passport_issue }}
+                                            {{ obj.passport_issue.errors }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                            {{ obj.passport_expiry.label_tag }}
+                                            {{ obj.passport_expiry }}
+                                            {{ obj.passport_expiry.errors }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- 确认信息 end -->
+
+
+                    <div class="card-body">
+
+                        <div class="row">
+                            <!-- Grow In Utility -->
+                            <div class="col-lg-12">
                                 <div class="card position-relative">
                                     <div class="card-header py-3">
                                         <h6 class="m-0 font-weight-bold text-primary">签证信息</h6>
@@ -448,84 +520,17 @@
 
                             </div>
                         </div>
+                        <div style=" float: right; margin-top:1rem;">
+                        <button onclick="submit()" class="btn btn-success btn-icon-split"><span
+                                class="icon text-white-50"> <i
+                                class="fas fa-check"></i> </span>
+                            <span class="text">确认提交</span>
+                        </button>
+                    </div>
                     </div>
                     <!-- 住宿信息 end -->
 
-                    <div class="card-body">
 
-                        <div class="row">
-                            <!-- Grow In Utility -->
-                            <div class="col-lg-12">
-
-                                <div class="card position-relative">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">确认个人信息</h6>
-                                    </div>
-                                    <div class="card-body row">
-                                        <div class="col-sm-12 col-md-6 col-lg-3">
-                                            {{ obj.last_name.label_tag }}
-                                            {{ obj.last_name }}
-                                            {{ obj.last_name.errors }}
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-3">
-                                            {{ obj.first_name.label_tag }}
-                                            {{ obj.first_name }}
-                                            {{ obj.first_name.errors }}
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-3">
-                                            {{ obj.salutation.label_tag }}
-                                            {{ obj.salutation }}
-                                            {{ obj.salutation.errors }}
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-3">
-                                            {{ obj.gender.label_tag }}
-                                            {{ obj.gender }}
-                                            {{ obj.gender.errors }}
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-3">
-                                            {{ obj.birth_date.label_tag }}
-                                            {{ obj.birth_date }}
-                                            {{ obj.birth_date.errors }}
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-3">
-                                            {{ obj.nationality.label_tag }}
-                                            {{ obj.nationality }}
-                                            {{ obj.nationality.errors }}
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-3">
-                                            {{ obj.passport_number.label_tag }}
-                                            {{ obj.passport_number }}
-                                            {{ obj.passport_number.errors }}
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-3">
-                                            {{ obj.passport_type.label_tag }}
-                                            {{ obj.passport_type }}
-                                            {{ obj.passport_type.errors }}
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-3">
-                                            {{ obj.passport_issue.label_tag }}
-                                            {{ obj.passport_issue }}
-                                            {{ obj.passport_issue.errors }}
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-3">
-                                            {{ obj.passport_expiry.label_tag }}
-                                            {{ obj.passport_expiry }}
-                                            {{ obj.passport_expiry.errors }}
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div style=" float: right; margin-top:1rem;">
-                            <button onclick="submit()" class="btn btn-success btn-icon-split"><span
-                                    class="icon text-white-50"> <i
-                                    class="fas fa-check"></i> </span>
-                                <span class="text">确认提交</span>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- 确认信息 end -->
                 </div>
                 <!-- End of Main Content -->
             </form>
